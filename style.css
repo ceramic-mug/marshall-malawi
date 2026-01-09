@@ -259,15 +259,42 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
+    .border-md-last-0 {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
+}
 
-    .section-padding {
-        padding: 60px 0;
-    }
+/* FAQ Styling */
+.faq-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
 
-    .donate-section {
-        padding: 40px 20px;
-    }
+.faq-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.bg-primary-subtle {
+    background-color: rgba(0, 109, 119, 0.1) !important;
+}
+
+.bg-secondary-subtle {
+    background-color: rgba(100, 157, 151, 0.1) !important;
+}
+
+.bg-accent-subtle {
+    background-color: rgba(178, 107, 80, 0.1) !important;
+}
+
+.text-accent {
+    color: var(--accent-color) !important;
+}
+
+.divider-top {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
