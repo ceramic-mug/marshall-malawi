@@ -1,7 +1,9 @@
 :root {
     --primary-color: #006D77;
-    --secondary-color: #83C5BE;
-    --accent-color: #E29578;
+    --secondary-color: #649D97;
+    /* Darkened from #83C5BE for contrast (AA) */
+    --accent-color: #B26B50;
+    /* Darkened from #E29578 for contrast (AA) */
     --bg-color: #EDF6F9;
     --text-dark: #264653;
     --text-light: #ffffff;
@@ -16,6 +18,11 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+*:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 4px;
 }
 
 /* Glassmorphism Navigation */
@@ -39,11 +46,24 @@ body {
     color: var(--text-dark) !important;
     font-weight: 500;
     margin: 0 10px;
-    transition: 0.3s;
+    transition: color 0.3s ease;
+    position: relative;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
     color: var(--primary-color) !important;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 2px;
 }
 
 /* Hero Section */
@@ -96,9 +116,11 @@ body {
     padding: 12px 30px;
     border-radius: 50px;
     font-weight: 600;
-    transition: 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
     box-shadow: 0 4px 15px rgba(0, 109, 119, 0.3);
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-custom-primary:hover {
@@ -115,13 +137,16 @@ body {
     padding: 10px 28px;
     border-radius: 50px;
     font-weight: 600;
-    transition: 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-custom-outline:hover {
     background: white;
     color: var(--primary-color);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 }
 
 /* Cards */
