@@ -262,6 +262,45 @@ footer {
         border-right: none !important;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
+
+    /* Condense vertical space for mobile */
+    .hero-section {
+        padding: 100px 0 60px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-lead {
+        margin-bottom: 1.5rem;
+    }
+
+    .section-padding {
+        padding: 60px 0;
+    }
+
+    .custom-card {
+        padding: 24px;
+    }
+
+    .donate-section {
+        padding: 40px;
+        margin-bottom: 60px;
+    }
+
+    footer {
+        padding: 40px 0 20px;
+    }
+
+    .faq-item {
+        padding: 1.25rem;
+    }
+
+    /* Adjust section title spacing for mobile */
+    .section-title {
+        margin-bottom: 0.75rem;
+    }
 }
 
 /* FAQ Styling */
