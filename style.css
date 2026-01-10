@@ -1,16 +1,107 @@
 :root {
-    --primary-color: #006D77;
-    --secondary-color: #649D97;
-    /* Darkened from #83C5BE for contrast (AA) */
-    --accent-color: #B26B50;
-    /* Darkened from #E29578 for contrast (AA) */
-    --bg-color: #EDF6F9;
-    --text-dark: #264653;
+    /* Marshall Green */
+    --primary-color: #00592D;
+    --primary-light: #008141;
+    --primary-lighter: #00A956;
+    --primary-subtle: rgba(0, 89, 45, 0.1);
+    --primary-dark: #003D1F;
+
+    /* Malawi Flag Green - Softer Emerald */
+    --secondary-color: #1E824C;
+    --secondary-light: #2ECC71;
+    --secondary-subtle: rgba(30, 130, 76, 0.1);
+
+    /* Malawi Flag Red */
+    --accent-color: #CE1126;
+    --accent-light: #EA1F34;
+    --accent-subtle: rgba(206, 17, 38, 0.1);
+
+    /* Neutrals */
+    --bg-color: #FCFDFD;
+    --bg-white: #ffffff;
+    --text-dark: #2D3436;
+    --text-muted: #636E72;
     --text-light: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.3);
+    --border-color: rgba(0, 0, 0, 0.05);
+
+    /* Layout Constants */
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(0, 0, 0, 0.05);
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s ease-in-out;
+    --radius-lg: 24px;
+    --radius-md: 16px;
 }
+
+/* Bootstrap Overrides & Utilities */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+.text-accent {
+    color: var(--accent-color) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+.bg-light {
+    background-color: var(--bg-color) !important;
+}
+
+.bg-primary-subtle {
+    background-color: var(--primary-subtle) !important;
+}
+
+.bg-secondary-subtle {
+    background-color: var(--secondary-subtle) !important;
+}
+
+.bg-accent-subtle {
+    background-color: var(--accent-subtle) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light) !important;
+    border-color: var(--primary-light) !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.badge.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -69,7 +160,7 @@ body {
 /* Hero Section */
 .hero-section {
     padding: 160px 0 120px;
-    background: linear-gradient(135deg, #006D77 0%, #83C5BE 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
     text-align: center;
     position: relative;
@@ -118,15 +209,15 @@ body {
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
-    box-shadow: 0 4px 15px rgba(0, 109, 119, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 89, 45, 0.3);
     text-decoration: none;
     display: inline-block;
 }
 
 .btn-custom-primary:hover {
-    background-color: var(--text-dark);
+    background-color: var(--primary-light);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 109, 119, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 89, 45, 0.2);
     color: white;
 }
 
@@ -160,22 +251,99 @@ body {
 }
 
 .custom-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
+/* Photo Placeholders */
+.photo-placeholder {
+    background-color: var(--primary-subtle);
+    border: 2px dashed var(--primary-lighter);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-base);
+}
+
+.photo-placeholder i {
+    font-size: 3rem;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+.photo-placeholder::after {
+    content: 'Photo Template';
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+}
+
+.aspect-ratio-16-9 {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+}
+
+.aspect-ratio-3-2 {
+    aspect-ratio: 3 / 2;
+    width: 100%;
+}
+
+/* Feature Grid for Hero */
+.hero-feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--primary-color);
+    transition: var(--transition-base);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-left-color: var(--secondary-color);
+}
+
+.hero-feature-card:hover .icon-box {
+    background: var(--secondary-subtle);
+    color: var(--secondary-color);
+    transform: scale(1.1) rotate(-5deg);
+}
+
+
 .icon-box {
-    width: 60px;
-    height: 60px;
-    background: var(--bg-color);
-    border-radius: 15px;
+    width: 64px;
+    height: 64px;
+    background: var(--primary-subtle);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: var(--primary-color);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    transition: var(--transition-base);
+    flex-shrink: 0;
 }
+
+.mx-auto .icon-box,
+.text-center .icon-box {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 
 /* Section Styling */
 .section-padding {
@@ -203,7 +371,8 @@ body {
 
 /* Donate Section */
 .donate-section {
-    background-color: var(--text-dark);
+    background-color: #1A3026;
+    /* Soft Deep Emerald instead of Black */
     color: white;
     border-radius: 30px;
     padding: 60px;
@@ -317,16 +486,17 @@ footer {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+/* Subtitle Backgrounds - Already covered in utilities but keeping for specificity if needed */
 .bg-primary-subtle {
-    background-color: rgba(0, 109, 119, 0.1) !important;
+    background-color: var(--primary-subtle) !important;
 }
 
 .bg-secondary-subtle {
-    background-color: rgba(100, 157, 151, 0.1) !important;
+    background-color: var(--secondary-subtle) !important;
 }
 
 .bg-accent-subtle {
-    background-color: rgba(178, 107, 80, 0.1) !important;
+    background-color: var(--accent-subtle) !important;
 }
 
 .text-accent {
