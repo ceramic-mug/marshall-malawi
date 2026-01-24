@@ -181,7 +181,7 @@ a:hover {
 /* Hero Section */
 .hero-section {
     padding: 120px 0 80px;
-    background: linear-gradient(135deg, rgba(0, 89, 45, 0.85) 0%, rgba(30, 130, 76, 0.8) 100%), url('assets/malawi_sunset.jpg');
+    background: linear-gradient(135deg, rgba(0, 89, 45, 0.85) 0%, rgba(30, 130, 76, 0.8) 100%), url('assets/compressed/malawi_sunset.jpg');
     background-size: cover;
     background-position: center;
     color: white;
@@ -415,6 +415,10 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+    .waterfall-hero {
+        height: 400px;
+        /* Reduced from 600px for better mobile fit */
+    }
 
     .waterfall-col:nth-child(3),
     .waterfall-col:nth-child(4) {
