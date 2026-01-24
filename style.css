@@ -414,6 +414,19 @@ a:hover {
     }
 }
 
+@media (max-width: 768px) {
+
+    .waterfall-col:nth-child(3),
+    .waterfall-col:nth-child(4) {
+        display: none;
+    }
+
+    .waterfall-container {
+        width: 150%;
+        /* Wider container to compensate for fewer columns filling width */
+    }
+}
+
 .hero-overlay {
     position: absolute;
     inset: 0;
