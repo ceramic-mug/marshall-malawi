@@ -1,0 +1,53 @@
+###################################
+index.html
+
+Goals:
+1. Help visitors understand the purpose and scale of the trip
+2. Connect them to other pages of the website
+3. Guide and encourage them to donate
+4. Connect to a blog stream for trip updates from participants
+
+Content:
+1. Hero:
+"Marshall for Malawi"
+"Creating sustainable healthcare parnerships and community connections between Appalachia and the Warm Heart of Africa"
+Contains four buttons:
+- "Learn More" -> /about.html
+- "Meet the Team" -> /team.html
+- "Donate" -> /donate.html
+- "Blog" -> /blog.html
+
+2. About the upcoming trip
+By the Numbers: 17 Marshall medical students
+Partner community: Ekwendeni, Malawi; Ekwendeni Mission Hospital
+Partner organization: Soil, Food and Healthy Communities, Malawi
+Dates: April 1 - 23, 2026
+Funding: Self-funded and fundraised
+Cost per person: $2,500 (see donattion page for breakdown)
+Also bringing: $10,000 worth of medical supplies and equipment to donate to local hospital
+
+2. Local Healthcare partnerships
+"Our initiative focuses on building long-term, collaborative relationships between healthcare students and professions in Malawi and West Virginia. We work together to enhance clinical services, share medical knowledge, and support local community health goals."
+"Key components include:
+    1. Clinical experiences
+    2. Preventive health education
+    3. Cultural immersion
+    4. Translational research
+    5. Collaborative projects"
+
+3. Donate
+Support the trip and receive benefactor updates by email
+Options:
+- $5
+- $10
+- $25
+- $50
+- $100
+- $500
+- $2,500 Support one student's trip, recieve personal updates from that student
+- $10,000 Support the donation of medical supplies
+- Other: [text field]
+
+4. Blog feed
+[ connect to list of blog posts]
+
