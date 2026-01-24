@@ -102,6 +102,14 @@
     background-color: var(--secondary-color) !important;
 }
 
+.border-primary {
+    border-color: var(--secondary-color) !important;
+}
+
+.border-accent {
+    border-color: var(--accent-color) !important;
+}
+
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -110,6 +118,25 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
 }
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+a[href*="globalmededfoundation.com"] {
+    color: var(--secondary-color) !important;
+}
+
+a[href*="globalmededfoundation.com"]:hover {
+    color: var(--primary-color) !important;
+}
+
 
 *:focus-visible {
     outline: 3px solid var(--accent-color);
@@ -196,6 +223,48 @@ body {
 @media (min-width: 992px) {
     .hero-section {
         text-align: left;
+    }
+}
+
+/* Hero Stats */
+.stat-card {
+    transition: var(--transition-base);
+    backdrop-filter: blur(8px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.stat-card i {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    opacity: 0.8;
+}
+
+.stat-card.as-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-hero-grid {
+    max-width: 800px;
+    margin-left: 0;
+}
+
+@media (max-width: 992px) {
+    .stats-hero-grid {
+        margin: 0 auto;
     }
 }
 
@@ -434,7 +503,7 @@ footer {
 
     /* Condense vertical space for mobile */
     .hero-section {
-        padding: 100px 0 40px;
+        padding: 100px 0 140px;
     }
 
     .hero-title {
@@ -535,4 +604,152 @@ footer {
 
 .divider-top {
     border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Donation Interactive Components */
+.btn-amount {
+    border: 2px solid var(--border-color);
+    background: white;
+    color: var(--text-dark);
+    font-weight: 600;
+    border-radius: 50px;
+    padding: 8px 20px;
+    transition: all 0.2s ease;
+}
+
+.btn-amount:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: var(--primary-subtle);
+}
+
+.btn-amount.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 89, 45, 0.2);
+}
+
+.btn-venmo {
+    background-color: #3D95CE;
+    color: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-venmo:hover {
+    background-color: #2a7db3;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(61, 149, 206, 0.3);
+}
+
+.btn-paypal {
+    background-color: #FFC439;
+    color: #003087;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-paypal:hover {
+    background-color: #f2ba32;
+    color: #003087;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 196, 57, 0.3);
+}
+
+.form-select,
+.form-control {
+    border-radius: 12px;
+    padding: 12px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem var(--primary-subtle);
+}
+
+#googleFormLink:hover {
+    text-decoration: underline !important;
+}
+
+.btn-sponsorship {
+    text-align: left;
+    transition: var(--transition-base);
+    border-radius: 12px !important;
+    margin-bottom: 8px;
+    border: 1px solid transparent !important;
+}
+
+.btn-sponsorship:hover {
+    background-color: var(--primary-subtle) !important;
+    border-color: var(--primary-color) !important;
+    transform: translateX(5px);
+}
+
+.btn-sponsorship h6 {
+    transition: var(--transition-base);
+}
+
+.btn-sponsorship:hover h6 {
+    color: var(--secondary-color) !important;
+}
+
+
+/* Minimal Hero Header for Subpages */
+.hero-header-minimal {
+    padding: 60px 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    position: relative;
+}
+
+.hero-header-minimal h1 {
+    font-size: 2.5rem;
+}
+
+.address-block {
+    background: #f8f9fa;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.btn-sponsorship {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+    padding: 1.5rem !important;
+    border-radius: 20px !important;
+    background-color: white !important;
+    border: 1px solid var(--border-color) !important;
+    margin-bottom: 0.75rem;
+}
+
+.btn-sponsorship:hover {
+    transform: scale(1.02) translateX(5px);
+    border-color: var(--primary-color) !important;
+    background-color: var(--primary-subtle) !important;
+    box-shadow: 0 10px 25px rgba(0, 89, 45, 0.1);
+    z-index: 1;
+}
+
+.btn-sponsorship .badge {
+    transition: all 0.2s ease;
+}
+
+.btn-sponsorship:hover .badge {
+    transform: scale(1.1);
+}
+
+
+@media (max-width: 768px) {
+    .hero-header-minimal {
+        padding: 40px 0;
+    }
+
+    .hero-header-minimal h1 {
+        font-size: 2rem;
+    }
 }

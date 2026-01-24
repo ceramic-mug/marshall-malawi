@@ -52,39 +52,437 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="section-padding text-center bg-white border-bottom" style="margin-top: 80px;">
+    <header class="hero-header-minimal text-center text-white" style="margin-top: 80px; padding: 50px 0;">
         <div class="container">
-            <h1 class="fw-bold">Support the Initiative</h1>
-            <p class="text-muted lead">Your gift makes a direct impact on healthcare in Malawi.</p>
+            <h1 class="fw-bold mb-2">Support the Initiative</h1>
+            <p class="lead mb-0 opacity-75">Your gift makes a direct impact on healthcare in Ekwendini, Malawi and the
+                medical experiences of Marshall medical students.</p>
         </div>
     </header>
 
-    <!-- Donation Section -->
-    <section class="section-padding">
+    <section style="padding: 40px 0;">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="donate-section text-center py-5 px-4 mb-4">
-                        <h2 class="mb-4 text-white">Join the Partnership</h2>
-                        <p class="mb-5 opacity-75">Your contribution makes a direct impact. To integrate your official
-                            GoFundMe, simply replace the placeholder below with your campaign's embed code.</p>
+            <div class="alert alert-info border-0 rounded-3 shadow-sm mb-4">
+                <h5 class="fw-bold text-info-emphasis mb-2"><i class="bi bi-info-circle-fill me-2"></i>How to Donate
+                    & Get a Receipt</h5>
+                <ol class="mb-0 small text-muted ps-3">
+                    <li class="mb-1"><strong>Choose your gift</strong> below and make a payment via Venmo, PayPal,
+                        or Check.
+                    </li>
+                    <li class="mb-0"><strong>Share your details</strong> in the "Share Your Details" section to
+                        ensure you receive a tax-deductible receipt from the Global Medical Education Foundation
+                        (501c3).</li>
+                </ol>
+            </div>
+            <div>
+                <div>
+                    <h2 class="fw-bold mb-4 text-center text-primary">Ways to Give</h2>
+                    <div class="row g-5">
+                        <div class="col-lg-7 order-2 order-lg-1">
+                            <!-- Interactive Giving Form -->
+                            <div class="custom-card p-4 border-start border-primary border-4 shadow-sm mb-4">
+                                <h5 class="fw-bold mb-4"><i class="bi bi-heart-fill me-2 text-primary"></i>1. Choose
+                                    Your
+                                    Support</h5>
 
-                        <div class="card p-4 text-dark border-0 rounded-4 shadow-lg mx-auto" style="max-width: 600px;">
-                            <div class="gofundme-placeholder p-5 border border-2 border-dashed rounded-3">
-                                <i class="bi bi-code-slash fs-1 text-muted mb-3 d-block"></i>
-                                <h5 class="fw-bold">GoFundMe Widget Placeholder</h5>
-                                <p class="text-muted small">Paste your GoFundMe embed code here to display your active
-                                    fundraiser widget.</p>
+                                <!-- Amount Selection -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold small text-muted text-uppercase mb-3">Select
+                                        Amount</label>
+                                    <div class="amount-pills d-flex flex-wrap gap-2 mb-3">
+                                        <button type="button" class="btn btn-amount" data-amount="50">$50</button>
+                                        <button type="button" class="btn btn-amount" data-amount="100">$100</button>
+                                        <button type="button" class="btn btn-amount" data-amount="250">$250</button>
+                                        <button type="button" class="btn btn-amount" data-amount="500">$500</button>
+                                        <button type="button" class="btn btn-amount" data-amount="1000">$1,000</button>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" id="customAmount" class="form-control"
+                                            placeholder="Custom amount" aria-label="Custom amount">
+                                    </div>
+                                </div>
+
+                                <!-- Donation For / Cause -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold small text-muted text-uppercase mb-3">Donation
+                                        For</label>
+                                    <select class="form-select" id="donationCause">
+                                        <option value="General Support" selected>General Support (Area of Greatest Need)
+                                        </option>
+                                        <optgroup label="Community Projects">
+                                            <option value="Surgical Center Renovation">Surgical Center Renovation
+                                            </option>
+                                            <option value="Portable Ultrasound Machine">Portable Ultrasound Machine
+                                            </option>
+                                            <option value="Pediatric Ward Paint & Renovation">Pediatric Ward Paint &
+                                                Renovation
+                                            </option>
+                                            <option value="Mosquito Bed Nets & Malaria Education">Mosquito Bed Nets &
+                                                Malaria
+                                                Education
+                                            </option>
+                                            <option value="School for the Blind Support">School for the Blind, Deaf, &
+                                                Albinism
+                                                Support
+                                            </option>
+                                            <option value="Sports Equipment & School Supplies">Sports Equipment & School
+                                                Supplies
+                                            </option>
+                                            <option value="Medical Supplies">Medical Supplies (BP cuffs, oximeters,
+                                                etc.)
+                                            </option>
+                                            <option value="Porridge Business / Nutrition Support">Porridge Business /
+                                                Nutrition
+                                                Support
+                                            </option>
+                                        </optgroup>
+                                        <optgroup label="Student Support">
+                                            <option value="Student trip sponsorship">Student trip sponsorship</option>
+                                            <option value="In-Country Transportation">In-Country Transportation (Rental
+                                                &
+                                                Fuel)
+                                            </option>
+                                            <option value="Required Student Vaccines">Required Student Vaccines</option>
+                                            <option value="Group Dinners & Reflection Meals">Group Dinners & Reflection
+                                                Meals
+                                            </option>
+                                        </optgroup>
+                                        <option value="Other">Other (please specify below)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Custom Cause Field (Hidden by default) -->
+                                <div class="mb-4 d-none" id="customCauseContainer">
+                                    <label class="form-label fw-bold small text-muted text-uppercase mb-3">Please
+                                        Specify</label>
+                                    <input type="text" id="customCauseInput" class="form-control"
+                                        placeholder="What is this gift for?">
+                                </div>
+
+                                <hr class="my-4">
+
+                                <!-- Payment Buttons -->
+                                <div class="d-grid gap-3">
+                                    <a href="javascript:void(0)" id="venmoButton" target="_blank"
+                                        class="btn btn-venmo py-3 fw-bold">
+                                        <i class="bi bi-phone me-2"></i>Give with Venmo
+                                    </a>
+                                    <a href="javascript:void(0)" id="paypalButton" class="btn btn-paypal py-3 fw-bold">
+                                        <i class="bi bi-paypal me-2"></i>Give with PayPal
+                                    </a>
+                                </div>
+
+                                <!-- Enhanced Donor Information Section (Form) -->
+                                <form
+                                    action="https://docs.google.com/forms/d/e/1FAIpQLScgbPNajDR1dYgygmgePLa0522yKMUTj5PRwNegRABQ9KcKtg/formResponse"
+                                    method="POST" target="_blank" id="donationForm">
+
+                                    <!-- Hidden Inputs for JS-managed data -->
+                                    <input type="hidden" name="entry.2067264305" id="hiddenAmount">
+                                    <input type="hidden" name="entry.1036226002" id="hiddenCause">
+                                    <input type="hidden" name="entry.1930345241" id="hiddenDate">
+
+                                    <div class="card bg-light border-0 rounded-3 mt-4 mb-4">
+                                        <div class="card-body p-4">
+                                            <h5 class="card-title fw-bold text-primary mb-3">
+                                                <i class="bi bi-person-lines-fill me-2"></i>(Optional) Share Your
+                                                Details
+                                            </h5>
+                                            <p class="small text-muted mb-4">
+                                                Enter your details below to auto-fill the official donation record.
+                                                Please complete this form to ensure receipt of your donation and for tax
+                                                purposes.
+                                            </p>
+
+                                            <!-- Donation Method Selection -->
+                                            <div class="mb-4 p-3 bg-light-subtle border rounded-3">
+                                                <label
+                                                    class="form-label small fw-bold text-muted text-uppercase mb-2">How
+                                                    did you make your donation?</label>
+                                                <div class="d-flex flex-column gap-2">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="entry.216028403" id="methodOnline" value="Venmo"
+                                                            required>
+                                                        <label class="form-check-label" for="methodOnline">
+                                                            Gave online (Venmo or PayPal)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="entry.216028403" id="methodCheck" value="Check">
+                                                        <label class="form-check-label" for="methodCheck">
+                                                            Sending check by mail (instructions below)
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="donorName"
+                                                        class="form-label small fw-bold text-muted">Full
+                                                        Name</label>
+                                                    <input type="text" class="form-control" name="entry.1427993857"
+                                                        id="donorName" placeholder="">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="donorEmail"
+                                                        class="form-label small fw-bold text-muted">Email
+                                                        Address</label>
+                                                    <input type="email" class="form-control" name="entry.1834235210"
+                                                        id="donorEmail" placeholder="">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="donorPhone"
+                                                        class="form-label small fw-bold text-muted">Phone
+                                                        Number</label>
+                                                    <input type="tel" class="form-control" name="entry.2046253527"
+                                                        id="donorPhone" placeholder="">
+                                                </div>
+                                                <div class="col-12 mt-4">
+                                                    <h6
+                                                        class="fw-bold small text-muted text-uppercase border-bottom pb-2 mb-3">
+                                                        <i class="bi bi-geo-alt me-1"></i>Mailing Address (Optional)
+                                                    </h6>
+                                                </div>
+
+                                                <div id="addressFields" class="row g-3 mt-0">
+                                                    <div class="col-12">
+                                                        <label class="form-label small fw-bold text-muted">Street
+                                                            Address</label>
+                                                        <input type="text" class="form-control mb-2"
+                                                            name="entry.501171702" id="donorAddress1" placeholder="">
+                                                        <input type="text" class="form-control" name="entry.1320162944"
+                                                            id="donorAddress2" placeholder="">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label small fw-bold text-muted">City</label>
+                                                        <input type="text" class="form-control" name="entry.49851083"
+                                                            id="donorCity" placeholder="">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label class="form-label small fw-bold text-muted">State</label>
+                                                        <input type="text" class="form-control" name="entry.589550358"
+                                                            id="donorState" placeholder="">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label class="form-label small fw-bold text-muted">Zip</label>
+                                                        <input type="text" class="form-control" name="entry.873845806"
+                                                            id="donorZip" placeholder="">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label
+                                                            class="form-label small fw-bold text-muted">Country</label>
+                                                        <input type="text" class="form-control" name="entry.819445994"
+                                                            id="donorCountry" placeholder="" value="USA">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-grid gap-2 mt-4">
+                                                <button type="submit" id="submitFormButton"
+                                                    class="btn btn-primary fw-bold py-3 shadow-sm scale-on-hover">
+                                                    Submit Donation Record <i class="bi bi-arrow-right-circle ms-2"></i>
+                                                </button>
+                                            </div>
+                                            <div class="text-center mt-2">
+                                                <small class="text-muted fst-italic">Opens the official confirmation
+                                                    page in a new tab.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="custom-card p-4 border-start border-primary border-4 shadow-sm">
+                                <h5 class="fw-bold mb-4"><i class="bi bi-mailbox me-2 text-primary"></i>2. Check by Mail
+                                </h5>
+                                <p class="small text-muted mb-4">Please address checks to the following address:</p>
+
+                                <div class="address-block p-3">
+                                    <p class="mb-0 fw-bold text-dark">Marshall for Malawi</p>
+                                    <p class="mb-0 text-muted small">21 Sunwatch Dr.</p>
+                                    <p class="mb-0 text-muted small">Huntington, WV 25705</p>
+                                </div>
+                                <br>
+                                <p class="small text-muted mb-4">Make checks payable to: <strong>Global Medical
+                                        Education
+                                        Foundation</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 order-1 order-lg-2">
+                            <div class="bg-light p-4 rounded-4 shadow-sm border" id="sponsorships">
+                                <h4 class="fw-bold mb-4 text-center">Suggested Donations</h4>
+
+                                <h6 class="text-uppercase small fw-bold text-muted mb-3">Community Projects</h6>
+                                <div class="list-group list-group-flush bg-transparent mb-4">
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="1500" data-cause="Surgical Center Renovation">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Surgical Center Renovation</h6>
+                                            <span class="badge bg-primary">$1,500</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Supports infrastructure at Dr. Chirwa’s rural
+                                            surgical
+                                            clinic.</p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="5000" data-cause="Portable Ultrasound Machine">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Portable Ultrasound Machine</h6>
+                                            <span class="badge bg-primary">$5,000</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Critical diagnostic tool for obstetric and
+                                            emergency
+                                            care.</p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="2000" data-cause="Pediatric Ward Paint & Renovation">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Pediatric Ward Paint</h6>
+                                            <span class="badge bg-primary">$2,000</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Improving the environment for hospitalized
+                                            children.
+                                        </p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="1000" data-cause="Mosquito Bed Nets & Malaria Education">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Mosquito Bed Nets</h6>
+                                            <span class="badge bg-primary">$1,000</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Prevention and education where malaria is
+                                            prevalent.
+                                        </p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="1000" data-cause="School for the Blind Support">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">School for the Blind, Deaf & Albinism
+                                            </h6>
+                                            <span class="badge bg-primary">$1,000</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Infrastructure and supplies for specialized
+                                            education.
+                                        </p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="500" data-cause="Sports Equipment & School Supplies">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Sports & School Supplies</h6>
+                                            <span class="badge bg-primary">$500</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Recreational and educational resources for
+                                            local
+                                            children.</p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="250" data-cause="Medical Supplies">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Medical Supplies</h6>
+                                            <span class="badge bg-primary">$250</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">BP cuffs, pulse oximeters, NICU support, etc.
+                                        </p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="100" data-cause="Porridge Business / Nutrition Support">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Porridge Business / Nutrition</h6>
+                                            <span class="badge bg-primary">$100</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Nutrition support initiative for local
+                                            families.
+                                        </p>
+                                    </button>
+                                </div>
+
+                                <h6 class="text-uppercase small fw-bold text-muted mb-3">Student Support</h6>
+                                <div class="list-group list-group-flush bg-transparent">
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="3067" data-cause="Student trip sponsorship">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Full Student Trip Sponsorship</h6>
+                                            <span class="badge bg-primary">$3,067</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Covers the complete logistics and costs for one
+                                            student.</p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="435" data-cause="In-Country Transportation">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">In-Country Transportation</h6>
+                                            <span class="badge bg-primary">$435</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Vehicle rental and fuel for program operations.
+                                        </p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="150" data-cause="Required Student Vaccines">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Required Student Vaccines</h6>
+                                            <span class="badge bg-primary">$150</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Typhoid and Yellow Fever vaccinations.</p>
+                                    </button>
+                                    <button
+                                        class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
+                                        data-amount="50" data-cause="Group Dinners & Reflection Meals">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold mb-0 text-primary">Group & Reflection Meals</h6>
+                                            <span class="badge bg-primary">$50</span>
+                                        </div>
+                                        <p class="small text-muted mb-0">Essential program dinners and reflection
+                                            sessions.
+                                        </p>
+                                    </button>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <p class="small text-muted mb-0"><em>Click an objective to auto-fill the donation
+                                            form.</em>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <p class="text-muted small">Marshall University School of Medicine | 501(c)(3) Placeholder Info
-                        </p>
+                </div>
+
+                <!-- Transparency Section -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="p-5 bg-white border rounded-4 shadow-sm">
+                            <h4 class="fw-bold mb-4">Cost Transparency</h4>
+                            <p class="text-muted mb-4">Our medical students are personally covering the majority of
+                                their
+                                travel and participation costs (approximately $3,067 per student). Your support helps
+                                offset
+                                essential community projects and critical student needs like in-country transportation
+                                and
+                                required vaccines ($435/student).</p>
+                            <div class="text-center">
+                                <a href="about.html" class="btn btn-custom-primary">Learn more about our program
+                                    philosophy</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Footer -->
@@ -97,15 +495,14 @@
                             class="me-2">
                         <span>Marshall for Malawi</span>
                     </a>
-                    <p class="text-muted small">A student-led initiative from Marshall University<br>School of Medicine
-                    </p>
+                    <p class="text-muted small">Marshall for Malawi is a program of the <a
+                            href="https://www.globalmededfoundation.com/" target="_blank"
+                            class="text-decoration-none text-muted fw-bold">Global Medical Education Foundation</a>
+                        501(c)(3).<br>A student-led initiative from the Marshall University Joan C. Edwards
+                        School of Medicine.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <div class="social-links mb-3">
-                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-                    </div>
+
                     <p class="text-muted small mb-0">&copy; 2026 Marshall for Malawi. All rights reserved.</p>
                 </div>
             </div>
@@ -125,6 +522,187 @@
                 });
             });
         });
+
+        // Donation Interaction Logic
+        document.addEventListener('DOMContentLoaded', function () {
+            const amountPills = document.querySelectorAll('.btn-amount');
+            const customAmountInput = document.getElementById('customAmount');
+            const causeSelect = document.getElementById('donationCause');
+            const customCauseInput = document.getElementById('customCauseInput');
+            const customCauseContainer = document.getElementById('customCauseContainer');
+            const venmoButton = document.getElementById('venmoButton');
+            const paypalButton = document.getElementById('paypalButton');
+            const methodOnline = document.getElementById('methodOnline');
+            const methodCheck = document.getElementById('methodCheck');
+            const sponsorships = document.querySelectorAll('.btn-sponsorship');
+
+            // Hidden Form Inputs
+            const hiddenAmount = document.getElementById('hiddenAmount');
+            const hiddenCause = document.getElementById('hiddenCause');
+            const hiddenDate = document.getElementById('hiddenDate');
+
+            // Set today's date
+            const today = new Date().toISOString().split('T')[0];
+            if (hiddenDate) {
+                hiddenDate.value = today;
+            }
+
+            // Sync values to hidden inputs
+            function updateHiddenFormFields() {
+                // Determine active amount
+                let amount = customAmountInput.value;
+                document.querySelectorAll('.btn-amount.active').forEach(btn => {
+                    amount = btn.getAttribute('data-amount');
+                });
+
+                // Determine active cause
+                let cause = causeSelect.value;
+                if (cause === 'Other') {
+                    cause = customCauseInput.value || 'Other';
+                }
+
+                // Update hidden inputs
+                if (hiddenAmount) hiddenAmount.value = amount || '';
+                if (hiddenCause) hiddenCause.value = cause || '';
+
+                // Also update Payment Links (Venmo) to keep them working
+                updatePaymentLinks(amount, cause);
+            }
+
+            function updatePaymentLinks(amount, cause) {
+                // Venmo Universal Link
+                const VENMO_USER = 'GlobalMedEdFoundation';
+                const noteEncoded = encodeURIComponent(`Donation for ${cause} - Marshall for Malawi`);
+                let venmoUrl = `https://venmo.com/?txn=pay&recipients=${VENMO_USER}&note=${noteEncoded}`;
+                if (amount) {
+                    venmoUrl += `&amount=${amount}`;
+                }
+                if (venmoButton) venmoButton.setAttribute('href', venmoUrl);
+
+                // Paypal Link (Standard Donation)
+                const PAYPAL_EMAIL = 'globalmededfoundation@gmail.com';
+                let paypalUrl = `https://www.paypal.com/donate/?business=${PAYPAL_EMAIL}&item_name=${encodeURIComponent('Donation - ' + cause)}&currency_code=USD`;
+                if (amount) {
+                    paypalUrl += `&amount=${amount}`;
+                }
+                if (paypalButton) paypalButton.setAttribute('href', paypalUrl);
+            }
+
+            // Amount Selection
+            amountPills.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        customAmountInput.value = '';
+                    } else {
+                        amountPills.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        customAmountInput.value = this.getAttribute('data-amount');
+                    }
+                    updateHiddenFormFields();
+                });
+            });
+
+            customAmountInput.addEventListener('input', function () {
+                const val = this.value;
+                let matchFound = false;
+                amountPills.forEach(btn => {
+                    if (btn.getAttribute('data-amount') === val) {
+                        btn.classList.add('active');
+                        matchFound = true;
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                updateHiddenFormFields();
+            });
+
+            // Cause Selection
+            causeSelect.addEventListener('change', function () {
+                if (this.value === 'Other') {
+                    customCauseContainer.classList.remove('d-none');
+                    customCauseInput.focus();
+                } else {
+                    customCauseContainer.classList.add('d-none');
+                }
+                updateHiddenFormFields();
+            });
+
+            customCauseInput.addEventListener('input', updateHiddenFormFields);
+
+            // Sponsorship Click Handler
+            sponsorships.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const amount = this.getAttribute('data-amount');
+                    const cause = this.getAttribute('data-cause');
+
+                    // Set Amount
+                    customAmountInput.value = amount;
+                    amountPills.forEach(b => {
+                        if (b.getAttribute('data-amount') === amount) {
+                            b.classList.add('active');
+                        } else {
+                            b.classList.remove('active');
+                        }
+                    });
+
+                    // Set Cause
+                    let optionFound = false;
+                    Array.from(causeSelect.options).forEach(opt => {
+                        if (opt.value === cause) {
+                            causeSelect.value = cause;
+                            optionFound = true;
+                        }
+                    });
+
+                    if (!optionFound) {
+                        causeSelect.value = 'Other';
+                        customCauseContainer.classList.remove('d-none');
+                        customCauseInput.value = cause;
+                    } else {
+                        customCauseContainer.classList.add('d-none');
+                    }
+
+                    // Scroll to form (top of donation section, effectively)
+                    document.querySelector('.border-start.border-primary').scrollIntoView({ behavior: 'smooth' });
+
+                    updateHiddenFormFields();
+                });
+            });
+
+            // PayPal Alert
+            // PayPal Alert - REMOVED since we are using a real link now
+            // But we keep the click handler to auto-select "Online"
+
+            // Auto-select "Online" when clicking payment buttons
+            function selectOnlineMethod() {
+                if (methodOnline) {
+                    methodOnline.checked = true;
+                    // methodOnline.click(); // Optional: trigger click if needed for other logic
+                }
+            }
+
+            if (venmoButton) {
+                venmoButton.addEventListener('click', selectOnlineMethod);
+            }
+
+            if (paypalButton) {
+                paypalButton.addEventListener('click', function (e) {
+                    selectOnlineMethod();
+                    // No longer preventing default unless href is bad
+                    const href = this.getAttribute('href');
+                    if (!href || href === '#' || href === 'javascript:void(0)') {
+                        // If link logic failed, keep alert
+                        e.preventDefault();
+                        alert('PayPal integration is coming soon. Please use Venmo or Check for now.');
+                    }
+                });
+            }
+
+            // Initial call
+            updateHiddenFormFields();
+        });
+
 
         // Navbar scroll effect
         window.addEventListener('scroll', function () {
