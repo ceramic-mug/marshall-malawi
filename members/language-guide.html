@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tumbuka Language Guide | Marshall for Malawi</title>
+    <!-- Authentication Check -->
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo/favicon-16x16.png">
+    <link rel="shortcut icon" href="../assets/logo/favicon.ico">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --primary-gradient: linear-gradient(135deg, #00592d 0%, #1e824c 100%);
+        }
+
+        html {
+            scroll-padding-top: 100px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 76px;
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+            color: #2d3436;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            height: 76px;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            position: fixed;
+            top: 76px;
+            bottom: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            z-index: 1000;
+            padding: 2rem 0;
+            background: white;
+            border-right: 1px solid var(--glass-border);
+            overflow-y: auto;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #636e72;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(0, 89, 45, 0.05);
+            border-left-color: var(--primary-color);
+        }
+
+        /* Language Card Styling */
+        .language-card {
+            background: white;
+            border-radius: 1.5rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .language-card-header {
+            padding: 1.5rem 2rem;
+            background: #fdfdfd;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .translation-row {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #f1f1f1;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .translation-row:last-child {
+            border-bottom: none;
+        }
+
+        .translation-row:hover {
+            background: #fcfcfc;
+        }
+
+        .english-text {
+            font-weight: 600;
+            width: 40%;
+            color: #2d3436;
+        }
+
+        .tumbuka-text {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .pronunciation-note {
+            font-style: italic;
+            color: #636e72;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .category-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 2rem;
+            background: #f1f2f6;
+            color: #636e72;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        @media (max-width: 991.98px) {
+            .sidebar {
+                display: none;
+            }
+
+            main {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="members.html">
+                <i class="bi bi-arrow-left me-3 text-primary"></i>
+                <img src="../assets/logo_transp.png" alt="Logo" width="35" class="me-2">
+                <span class="fs-6 fw-bold">Language Guide</span>
+            </a>
+            <div class="ms-auto d-flex align-items-center">
+                <a href="members.html" class="btn btn-sm btn-primary rounded-pill me-3 px-3 fw-bold">
+                    <i class="bi bi-grid-fill me-2"></i>Back to Portal
+                </a>
+                <button onclick="logout()" class="btn btn-sm btn-outline-danger rounded-pill">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar col-md-3 col-lg-2 d-none d-md-block">
+                <div class="px-4 mb-4">
+                    <h6 class="text-uppercase small fw-bold text-muted mb-3">Categories</h6>
+                </div>
+                <div class="nav flex-column">
+                    <a class="nav-link" href="#basics">Basics</a>
+                    <a class="nav-link" href="#common">Common Phrases</a>
+                    <a class="nav-link" href="#commands">Commands</a>
+                    <a class="nav-link" href="#questions">Questions</a>
+                    <a class="nav-link" href="#numbers">Numbers</a>
+                    <a class="nav-link" href="#nouns">Nouns & People</a>
+                    <a class="nav-link" href="#food">Animals & Food</a>
+                    <a class="nav-link" href="#nature">Nature & Weather</a>
+                    <a class="nav-link" href="#health">Body & Health</a>
+                    <a class="nav-link" href="#adjectives">Adjectives</a>
+                    <a class="nav-link" href="#times">Time & Location</a>
+                    <a class="nav-link" href="#verbs">Verbs & Grammar</a>
+                    <a class="nav-link text-danger" href="#danger"><i class="bi bi-exclamation-triangle me-2"></i>Safety
+                        & Help</a>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                <div class="container-fluid col-xl-10 mx-auto">
+
+                    <!-- Hero Section -->
+                    <div class="p-4 p-md-5 rounded-4 mb-5 text-white" style="background: var(--primary-gradient);">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <h1 class="display-5 fw-bold mb-3">Language Basics</h1>
+                                <p class="lead mb-0 opacity-90">Chitumbuka Guide by Thomas Mosman</p>
+                            </div>
+                            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                                <div class="rounded-4 p-3 d-inline-flex align-items-center text-start"
+                                    style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2);">
+                                    <div
+                                        class="bg-white rounded-3 p-2 me-3 text-primary d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-translate fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <small class="d-block opacity-75 fw-medium">Primary Dialect</small>
+                                        <span class="fw-bold">Northern Malawi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intro Note -->
+                    <div id="basics" class="language-card p-4 border-start border-4 border-primary">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-info-circle-fill text-primary fs-3 me-3 mt-1"></i>
+                            <div>
+                                <h5 class="fw-bold mb-3">Thomas's Note</h5>
+                                <p class="mb-3 text-muted">
+                                    "Chitumbuka / Tumbuka: Dialect of northern Malawi, parts of Zambia and Tanzania.
+                                    Shares similarities with Chichewa (national language of Malawi)."
+                                </p>
+                                <p class="mb-3 text-muted">
+                                    <strong>Pronunciation:</strong> All words pronounced phonetically (except the letter
+                                    L is inconsistently pronounced as R).
+                                </p>
+                                <div class="alert alert-light border mb-0">
+                                    <small class="text-muted d-block mb-2 text-uppercase fw-bold">Disclaimer</small>
+                                    <p class="small mb-0">"This dictionary is limited only in what I was able to obtain
+                                        from locals. I found little pattern in the language, and outside knowledge on
+                                        translation is incredibly limited. This is imperfect but one of the more
+                                        complete English-Chitumbuka dictionaries in the world. Good luck!"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Common Phrases -->
+                    <section id="common" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-chat-text fs-4"></i>
+                            </div>
+                            <h3 class="fw-bold mb-0">Common Phrases</h3>
+                        </div>
+
+                        <div class="language-card">
+                            <div class="translation-row">
+                                <div class="english-text">Yes</div>
+                                <div class="tumbuka-text">Enya</div>
+                            </div>
+                            <div class="translation-row bg-light bg-opacity-50">
+                                <div class="english-text">Note on "Yes"</div>
+                                <div class="small text-muted">Not uncommon for the first syllable “ay” or a simple grunt
+                                    “mm / mhm” to also mean yes</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">No</div>
+                                <div class="tumbuka-text">Yayi</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Please</div>
+                                <div class="tumbuka-text">Chonde</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Thank you</div>
+                                <div class="tumbuka-text">Yewo</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Excuse me / Sorry</div>
+                                <div class="tumbuka-text">Phepani / Phepa</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">How are you</div>
+                                <div class="tumbuka-text">Muli Wuli</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">I am good</div>
+                                <div class="tumbuka-text">Nili Makola</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Good morning <span
+                                        class="badge bg-warning text-dark ms-2">Used Constantly</span></div>
+                                <div class="tumbuka-text">Mauka</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Response to "Mauka"</div>
+                                <div class="tumbuka-text">Nauka makora, kwal imwe?</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Final Response</div>
+                                <div class="tumbuka-text">Nauka, yewo</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Nice to meet you</div>
+                                <div class="tumbuka-text">Chatowa Kuwonana Numwe</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Good afternoon</div>
+                                <div class="tumbuka-text">Mwatandala</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Response to "Mwatandala"</div>
+                                <div class="tumbuka-text">Tatandala makola, kwalimwe</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">What is your name?</div>
+                                <div class="tumbuka-text">Zina lake ndiwe njani</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">My name is...</div>
+                                <div class="tumbuka-text">Zina lane ndine _____.</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">How old are you?</div>
+                                <div class="tumbuka-text">Uli na vyaka vilinga</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">See you tomorrow</div>
+                                <div class="tumbuka-text">Tiwonange Namachero</div>
+                            </div>
+                            <div class="translation-row border-start border-4 border-info">
+                                <div class="english-text">Personal Favorite</div>
+                                <div class="tumbuka-text">Mzungu wakuyowoya Chitumbuka <br><small
+                                        class="text-muted fw-normal">"This whitey speaks chitumbuka"</small></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Commands & Questions -->
+                    <div class="row g-4">
+                        <div class="col-lg-6" id="commands">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="bg-dark text-white rounded-3 p-2 me-3">
+                                    <i class="bi bi-megaphone fs-4"></i>
+                                </div>
+                                <h4 class="fw-bold mb-0">Commands</h4>
+                            </div>
+                            <div class="language-card">
+                                <div class="translation-row">
+                                    <div class="english-text">Help!</div>
+                                    <div class="tumbuka-text">Novwire</div>
+                                </div>
+                                <div class="translation-row">
+                                    <div class="english-text">Stop!</div>
+                                    <div class="tumbuka-text">Leka / Bas / Nitayeni</div>
+                                </div>
+                                <div class="translation-row">
+                                    <div class="english-text">Go away / Stop</div>
+                                    <div class="tumbuka-text text-danger">Choka <br><small
+                                            class="text-muted fw-normal">Rude/Strong</small></div>
+                                </div>
+                                <div class="translation-row">
+                                    <div class="english-text">Teach / Show me</div>
+                                    <div class="tumbuka-text">Sambizgani</div>
+                                </div>
+                                <div class="translation-row">
+                                    <div class="english-text">Hurry up!</div>
+                                    <div class="tumbuka-text">Mwaluwiro</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6" id="questions">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="bg-primary text-white rounded-3 p-2 me-3">
+                                    <i class="bi bi-question-circle fs-4"></i>
+                                </div>
+                                <h4 class="fw-bold mb-0">Questions</h4>
+                            </div>
+                            <div class="language-card">
+                                <div class="translation-row">
+                                    <div class="english-text">Who / What</div>
+                                    <div class="tumbuka-text">Njani / Vichi</div>
+                                </div>
+                                <div class="translation-row">
+                                    <div class="english-text">Where / When</div>
+                                    <div class="tumbuka-text">Nkhuni / Pa uli</div>
+                                </div>
+                                <div class="translation-row">
+                                    <div class="english-text">How / Why</div>
+                                    <div class="tumbuka-text">Uli / Cifukwa nchinchi</div>
+                                </div>
+                                <div class="translation-row">
+                                    <div class="english-text">How much?</div>
+                                    <div class="tumbuka-text">Ziringa?</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Numbers -->
+                    <section id="numbers" class="mb-5 mt-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-info text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-123 fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">Numbers</h4>
+                        </div>
+                        <div class="language-card">
+                            <div class="row g-0">
+                                <div class="col-md-4 border-end border-bottom p-3 text-center">
+                                    <div class="small text-muted mb-1">One</div>
+                                    <div class="fw-bold fs-4">Moza</div>
+                                </div>
+                                <div class="col-md-4 border-end border-bottom p-3 text-center">
+                                    <div class="small text-muted mb-1">Two</div>
+                                    <div class="fw-bold fs-4">Bili</div>
+                                </div>
+                                <div class="col-md-4 border-bottom p-3 text-center">
+                                    <div class="small text-muted mb-1">Three</div>
+                                    <div class="fw-bold fs-4">Tatu</div>
+                                </div>
+                                <div class="col-md-6 border-end p-3 text-center">
+                                    <div class="small text-muted mb-1">Four</div>
+                                    <div class="fw-bold fs-4">Nayi</div>
+                                </div>
+                                <div class="col-md-6 p-3 text-center">
+                                    <div class="small text-muted mb-1">Five</div>
+                                    <div class="fw-bold fs-4">Nkondi</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Nouns & People -->
+                    <section id="nouns" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-people fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">People & Nouns</h4>
+                        </div>
+                        <div class="language-card">
+                            <div class="language-card-header bg-light">
+                                <h6 class="mb-0 fw-bold">People</h6>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Baby / Child</span>
+                                        <span class="text-primary fw-bold">Mwana / Musugwana</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Boy / Girl</span>
+                                        <span class="text-primary fw-bold">Msepuka / Musugwana</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Man / Woman</span>
+                                        <span class="text-primary fw-bold">Munthu / Banakazi</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Doctor / Patient</span>
+                                        <span class="text-primary fw-bold">Dokotola / Mulwani</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">White person</span>
+                                        <span class="text-primary fw-bold">Mzungu</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Friend / Family</span>
+                                        <span class="text-primary fw-bold">Mubwezi / Mbumba</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="language-card-header bg-light border-top">
+                                <h6 class="mb-0 fw-bold">Miscellaneous Nouns</h6>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">Night / Sleep / Bed</div>
+                                    <div class="fw-bold text-primary">Usiki / Tula / Bedi</div>
+                                </div>
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">House / School / Car</div>
+                                    <div class="fw-bold text-primary">Nyumba / Sukulu / Galimoto</div>
+                                </div>
+                                <div class="col-md-4 border-bottom p-3">
+                                    <div class="small text-muted mb-1">Market / Road / Money</div>
+                                    <div class="fw-bold text-primary">Msika / Musewu / Kwacha</div>
+                                </div>
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">Paper / Book / Pen</div>
+                                    <div class="fw-bold text-primary">Mapepala / Buke / Pen</div>
+                                </div>
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">Key / Key / Toilet</div>
+                                    <div class="fw-bold text-primary">Kiyi / Chimbudzi</div>
+                                </div>
+                                <div class="col-md-4 border-bottom p-3">
+                                    <div class="small text-muted mb-1">Soap / Airplane / Gift</div>
+                                    <div class="fw-bold text-primary">Sopo / Ndege / Chawanangwa</div>
+                                </div>
+                            </div>
+
+                            <div class="language-card-header bg-light border-top">
+                                <h6 class="mb-0 fw-bold">Clothing</h6>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-6 border-end p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Shoes / Jacket / Skirt</span>
+                                        <span class="text-primary fw-bold">Nsapato / Jekete / Chitenge</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Hat / Backpack</span>
+                                        <span class="text-primary fw-bold">Vipewa / Chikwana</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Animals & Food -->
+                    <section id="food" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-success text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-egg-fried fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">Animals & Food</h4>
+                        </div>
+                        <div class="language-card">
+                            <div class="row g-0">
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Food / Meat</span>
+                                        <span class="text-primary fw-bold">Vyakurya / Nyama</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Water / Milk</span>
+                                        <span class="text-primary fw-bold">Maji / Mkaka</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Chicken / Cow / Pig</span>
+                                        <span class="text-primary fw-bold">Nkhuku / ng’ombe / Nkhumba</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Fish / Eggs</span>
+                                        <span class="text-primary fw-bold">Somba / Masumbi</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Potato / Peanut / Beans</span>
+                                        <span class="text-primary fw-bold">Mboholi / Syawa / Njunga</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Fruit / Vegetable</span>
+                                        <span class="text-primary fw-bold">Chipambi / Mpangwe</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-end p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Donut / Sugar</span>
+                                        <span class="text-primary fw-bold">Mandazi / Sugar</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">Dog / Cat</span>
+                                        <span class="text-primary fw-bold">Ntchewe / Chona</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="translation-row bg-light bg-opacity-50">
+                                <div class="english-text">I like to eat _____.</div>
+                                <div class="tumbuka-text">Nkhutemwa kurya _______.</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Nature & Weather -->
+                    <section id="nature" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-warning text-dark rounded-3 p-2 me-3">
+                                <i class="bi bi-cloud-sun fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">Nature & Weather</h4>
+                        </div>
+                        <div class="language-card">
+                            <div class="row g-0">
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">Sun / Moon</div>
+                                    <div class="fw-bold text-primary">Zuwa / Mwezi</div>
+                                </div>
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">Stars / Cloud</div>
+                                    <div class="fw-bold text-primary">Nyenyezi / Bingu</div>
+                                </div>
+                                <div class="col-md-4 border-bottom p-3">
+                                    <div class="small text-muted mb-1">Rain / Fire</div>
+                                    <div class="fw-bold text-primary">Nvula / Moto</div>
+                                </div>
+                                <div class="col-md-4 border-end p-3">
+                                    <div class="small text-muted mb-1">Lake / Flower</div>
+                                    <div class="fw-bold text-primary">Nyanja / Maluwa</div>
+                                </div>
+                                <div class="col-md-8 p-3">
+                                    <div class="small text-muted mb-1">Insects</div>
+                                    <div class="fw-bold text-primary">Nyimbu (Mosquito) | Nyerere (Ant) | Titavo
+                                        (Spider)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Body & Health -->
+                    <section id="health" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-danger text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-heart-pulse fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">Body & Health</h4>
+                        </div>
+                        <div class="language-card">
+                            <div class="translation-row">
+                                <div class="english-text">Head / Brain / fever</div>
+                                <div class="tumbuka-text">Wongo / Kwotcha</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Eyes / Ear / Heart</div>
+                                <div class="tumbuka-text">Maso / Makutu / Mtima</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">I am sick</div>
+                                <div class="tumbuka-text">Nkulwara</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Pain (Body / Emotion)</div>
+                                <div class="tumbuka-text">Kupweteka / Wakuava</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Cough / Dizzy / Hungry</div>
+                                <div class="tumbuka-text">Chikoso / Chizgumbu / Njara</div>
+                            </div>
+                            <div class="translation-row">
+                                <div class="english-text">Injection / Scar</div>
+                                <div class="tumbuka-text">Munjilira / Chilonda</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Adjectives -->
+                    <section id="adjectives" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-secondary text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-palette fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">Adjectives & Colors</h4>
+                        </div>
+                        <div class="language-card p-3 bg-light bg-opacity-50 mb-3 border-0">
+                            <p class="small mb-0"><strong>Note:</strong> Add the word "chomene" after the adjective to
+                                indicate "very". Example: <em>Watowa chomene</em> (Very pretty).</p>
+                        </div>
+                        <div class="language-card">
+                            <div class="row g-0">
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">Colors</div>
+                                    <div class="fw-bold text-primary">Ufipa (Black) | Utuwa (White) | Uswesi (Red) |
+                                        Ubidi (Blue)</div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="small text-muted mb-1">Evaluations</div>
+                                    <div class="fw-bold text-primary">Watowa (Pretty) | Wachena (Handsome) | Wakuvunda
+                                        (Ugly)</div>
+                                </div>
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">Condition</div>
+                                    <div class="fw-bold text-primary">Ciphya (New) | Muchukuru (Old) | Nkhongona
+                                        (Strong)</div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="small text-muted mb-1">Temperatures</div>
+                                    <div class="fw-bold text-primary">Kuketcha (Hot) | Kuzizima (Cold)</div>
+                                </div>
+                                <div class="col-md-6 border-end p-3">
+                                    <div class="small text-muted mb-1">Price</div>
+                                    <div class="fw-bold text-primary">Kudula (Expensive) | Ukira (Cheap) | Kufwatuka
+                                        (Free)</div>
+                                </div>
+                                <div class="col-md-6 p-3">
+                                    <div class="small text-muted mb-1">Personal</div>
+                                    <div class="fw-bold text-primary">Wavinjeru (Smart) | Chindere (Dumb) | Wakufunda
+                                        (Crazy)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Time & Location -->
+                    <section id="times" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-dark text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-clock fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">Time & Location</h4>
+                        </div>
+                        <div class="language-card">
+                            <div class="row g-0">
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="small text-muted mb-1">Points in Time</div>
+                                    <div class="fw-bold text-primary">Sono (Now) | Namacher (Tomorrow) | Mayiro
+                                        (Yesterday)</div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="small text-muted mb-1">Relative Time</div>
+                                    <div class="fw-bold text-primary">Sono sono (Soon) | Nyego Nyaki (Later) | Panyuma
+                                        (Before)</div>
+                                </div>
+                                <div class="col-md-6 border-end p-3">
+                                    <div class="small text-muted mb-1">Relative Location</div>
+                                    <div class="fw-bold text-primary">Apa (Here) | Uko (There) | Kutali (Far) | Pafupi
+                                        (Near)</div>
+                                </div>
+                                <div class="col-md-6 p-3">
+                                    <div class="small text-muted mb-1">Direction</div>
+                                    <div class="fw-bold text-primary">Mazele (Left) | Malyelo (Right)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Verbs & Grammar -->
+                    <section id="verbs" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-journal-code fs-4"></i>
+                            </div>
+                            <h3 class="fw-bold mb-0">Verbs & Grammar</h3>
+                        </div>
+
+                        <div class="language-card p-4 border-start border-4 border-primary mb-4">
+                            <h5 class="fw-bold mb-3">Conjugation Basics</h5>
+                            <p class="small text-muted mb-3">Most verb infinitives begin with <strong>ku-</strong>.
+                                Typically the prefix is not dropped and a subject prefix is added.</p>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="p-2 bg-light rounded-3 text-center">
+                                        <small class="d-block text-muted">I</small>
+                                        <span class="fw-bold">N- / Ni-</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-2 bg-light rounded-3 text-center">
+                                        <small class="d-block text-muted">You</small>
+                                        <span class="fw-bold">Mu-</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-2 bg-light rounded-3 text-center">
+                                        <small class="d-block text-muted">We</small>
+                                        <span class="fw-bold">Ti-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="language-card">
+                            <div class="language-card-header bg-light">
+                                <h6 class="mb-0 fw-bold">Common Verb List</h6>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Eat</span>
+                                        <span class="fw-bold text-primary">Kurya</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Sleep</span>
+                                        <span class="fw-bold text-primary">Kugona</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Wait</span>
+                                        <span class="fw-bold text-primary">Kulindilira</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Speak</span>
+                                        <span class="fw-bold text-primary">Kuyowoya</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Learn</span>
+                                        <span class="fw-bold text-primary">Kusambira</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Know</span>
+                                        <span class="fw-bold text-primary">Kumanya</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-end p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Like/Love</span>
+                                        <span class="fw-bold text-primary">Kutemwa</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-end p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Hear</span>
+                                        <span class="fw-bold text-primary">Kupulika</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Go</span>
+                                        <span class="fw-bold text-primary">Kuluta</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Conjunctions & Prepositions -->
+                    <section id="grammar" class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-info text-white rounded-3 p-2 me-3">
+                                <i class="bi bi-link-45deg fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">Conjunctions & Prepositions</h4>
+                        </div>
+                        <div class="language-card">
+                            <div class="row g-0">
+                                <div class="col-md-6 border-end border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">And / Or</span>
+                                        <span class="text-primary fw-bold">Ndipo / Panji</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-bottom p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">With / Because</span>
+                                        <span class="text-primary fw-bold">Na / Chifukwa</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border-end p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">But / For</span>
+                                        <span class="text-primary fw-bold">Kweni / Kwa</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-semibold">From</span>
+                                        <span class="text-primary fw-bold">Wa ku</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Safety Section -->
+                    <section id="danger" class="mb-5">
+                        <div class="alert alert-danger border-0 rounded-4 p-4 shadow-sm">
+                            <div class="d-flex align-items-center mb-4">
+                                <i class="bi bi-exclamation-triangle-fill fs-3 me-3"></i>
+                                <h3 class="fw-bold mb-0">Safety & Critical Phrases</h3>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="bg-white rounded-3 p-3 text-dark">
+                                        <small class="text-danger fw-bold text-uppercase d-block mb-2">Emergency</small>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span>Help!</span>
+                                            <span class="fw-bold">Novwire</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span>I am lost</span>
+                                            <span class="fw-bold">Na sowa</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span>Danger</span>
+                                            <span class="fw-bold">Wakofya</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-white rounded-3 p-3 text-dark">
+                                        <small class="text-danger fw-bold text-uppercase d-block mb-2">Caution</small>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span>Thief / Criminal</span>
+                                            <span class="fw-bold">Mukhungu</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span>Liar</span>
+                                            <span class="fw-bold">Mutesi</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span>Trouble</span>
+                                            <span class="fw-bold">Suzgo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-danger bg-opacity-10 rounded-3">
+                                <small class="fw-bold text-uppercase">Cultural Warning:</small>
+                                <p class="small mb-0">Use insults like "Muzezla" (Idiot) with extreme caution; never
+                                    with elders or in professional settings.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Footer -->
+                    <footer class="mt-5 pt-5 border-top text-center text-muted">
+                        <p class="small">&copy; 2026 Marshall for Malawi | Member Resource</p>
+                    </footer>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'index.html';
+        }
+
+        // Active link highlighting on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            document.querySelectorAll('section, div[id]').forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

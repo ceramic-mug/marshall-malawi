@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trip Members | Marshall for Malawi</title>
+    <title>Marshall for Malawi Manual</title>
     <!-- Authentication Check -->
     <script>
         if (sessionStorage.getItem('isLoggedIn') !== 'true') {
@@ -17,7 +17,6 @@
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Bootstrap Icons -->
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
     <!-- Favicons -->
@@ -29,16 +28,293 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../style.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --hover-shadow: 0 20px 40px -10px rgba(0, 89, 45, 0.1);
+        }
+
+        html {
+            scroll-padding-top: 120px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 76px;
+            background-color: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+        }
+
+        /* Navbar Refinement */
+        .navbar.fixed-top {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            height: 76px;
+        }
+
+        /* Sidebar Glassmorphism */
+        .sidebar {
+            position: fixed;
+            top: 76px;
+            bottom: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            z-index: 1000;
+            padding: 2rem 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-sticky {
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+            padding: 0 1.5rem;
+        }
+
+        .sidebar .nav-link {
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 12px;
+            font-size: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            color: var(--primary-color);
+            background: var(--primary-subtle);
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link.active {
+            color: white;
+            background: var(--primary-color);
+            box-shadow: 0 8px 20px -5px rgba(0, 89, 45, 0.3);
+        }
+
+        .sidebar .nav-link.active i {
+            color: white !important;
+        }
+
+        /* Section Container */
+        .manual-section {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .manual-section:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .manual-title {
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.02em;
+        }
+
+        .manual-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-subtle), transparent);
+            margin-left: 1.5rem;
+        }
+
+        /* Timeline Custom Component */
+        .timeline-container {
+            padding-left: 1rem;
+            border-left: 3px solid var(--primary-subtle);
+            margin-left: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -11px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.urgent::before {
+            border-color: var(--accent-color);
+        }
+
+        .timeline-date {
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 1.25rem;
+            border-radius: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.01);
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Packing Card Components */
+        .packing-card {
+            background: #f8fafe;
+            border-radius: 20px;
+            padding: 1.5rem;
+            height: 100%;
+            border: 1px solid rgba(0, 89, 45, 0.05);
+        }
+
+        .packing-card h5 {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        .packing-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            list-style: none;
+            font-size: 0.95rem;
+        }
+
+        .packing-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Red Flags Polish */
+        .red-flag-box {
+            background: #fffafa;
+            border: 2px solid #fee2e2;
+            border-left: 6px solid var(--accent-color) !important;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .red-flag-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(206, 17, 38, 0.05);
+        }
+
+        /* Dictionary Refinement */
+        .dictionary-table th {
+            background: var(--text-dark) !important;
+            color: white;
+            border: none;
+            padding: 1rem !important;
+        }
+
+        .dictionary-category {
+            background: var(--primary-subtle);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Utility */
+        .shadow-premium {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        }
+
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .sidebar-sticky {
+                height: auto;
+                padding: 1rem;
+            }
+
+            body {
+                padding-top: 0;
+            }
+
+            .navbar {
+                position: relative !important;
+                top: 0 !important;
+            }
+
+            main {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Navigation (Simple version for members) -->
+    <!-- Main Navigation -->
+    <!-- Main Navigation -->
+    <!-- Main Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="../index.html">
-                <img src="../assets/logo_transp.png" alt="Marshall for Malawi logo" width="50" height="auto"
+        <div class="container-fluid px-4">
+            <button class="navbar-toggler p-0 border-0 me-3 d-md-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="bi bi-list fs-2"></i>
+            </button>
+            <a class="navbar-brand d-flex align-items-center" href="members.html">
+                <img src="../assets/logo_transp.png" alt="Marshall for Malawi logo" width="40" height="auto"
                     class="me-2">
-                <span class="fs-5 fw-bold lh-1">Members Portal</span>
+                <span class="fs-6 fw-bold lh-1">Members Portal</span>
             </a>
             <div class="ms-auto">
                 <button onclick="logout()" class="btn btn-sm btn-outline-primary rounded-pill">Logout</button>
@@ -46,155 +322,944 @@
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="hero-section" style="padding: 100px 0 60px;">
-        <div class="container position-relative z-1 text-center text-lg-start">
-            <h1 class="hero-title">Member Resources</h1>
-            <p class="hero-lead">Printable promotional materials for the 2026 initiative.</p>
-        </div>
-    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3 sidebar-sticky">
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted text-uppercase fs-7 fw-bold">
+                        <span>Sections</span>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#timeline">
+                                <i class="bi bi-calendar-check text-primary"></i>
+                                Timeline
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#packing">
+                                <i class="bi bi-bag-check text-primary"></i>
+                                Packing
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#logistics">
+                                <i class="bi bi-geo-alt text-primary"></i>
+                                Logistics
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#clinical">
+                                <i class="bi bi-hospital text-primary"></i>
+                                Clinical Resources
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#language">
+                                <i class="bi bi-chat-dots text-primary"></i>
+                                Language
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#flyers">
+                                <i class="bi bi-file-earmark-richtext text-primary"></i>
+                                Promotional Materials
+                            </a>
+                        </li>
+                        <li class="nav-item border-top mt-2 pt-2">
+                            <a class="nav-link text-danger fw-bold" href="#red-flags">
+                                <i class="bi bi-exclamation-triangle-fill"></i>
+                                Red Flags
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-    <!-- Content -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-10">
-                    <div class="custom-card mb-4" id="resource-library">
-                        <h4 class="fw-bold mb-4"><i class="bi bi-file-earmark-pdf me-2 text-primary"></i>Printable
-                            Flyers</h4>
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-                        <!-- Full Page Flyers -->
-                        <h6 class="text-uppercase small fw-bold mb-3 text-muted letter-spacing-1">Full-Page Flyers (8.5"
-                            x 11")</h6>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-4">
-                                <a href="flyer-impact.html" target="_blank" class="text-decoration-none">
-                                    <div
-                                        class="p-3 border rounded-4 hover-shadow transition-base bg-light text-center h-100">
-                                        <div class="icon-box mx-auto mb-2"
-                                            style="width: 40px; height: 40px; font-size: 1rem; background: var(--primary-color); color: white;">
-                                            1</div>
-                                        <h6 class="fw-bold mb-1 text-dark">Impact First</h6>
-                                        <p class="small text-muted mb-0">Story-driven design</p>
+                <!-- Hero Section (Green Theme) -->
+                <header class="hero-section text-center rounded-3 mb-5 d-flex align-items-center justify-content-center"
+                    style="background: linear-gradient(135deg, rgba(0, 89, 45, 0.85) 0%, rgba(30, 130, 76, 0.8) 100%), url('../assets/compressed/malawi_sunset.jpg'); background-size: cover; background-position: center; color: white; min-height: 400px; padding: 4rem 2rem;">
+                    <div class="container position-relative z-1">
+                        <h1 class="display-4 fw-bold mb-3">Trip Members Portal</h1>
+                        <p class="lead mb-0 opacity-90 fs-4">2026 Trip Guide & Essential Information</p>
+                    </div>
+                </header>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-11">
+
+
+
+                        <!-- Timeline -->
+                        <div id="timeline" class="manual-section">
+                            <h2 class="manual-title"><i class="bi bi-calendar-week section-header-icon"></i>Timeline &
+                                Checklist</h2>
+                            <div class="timeline-container">
+                                <!-- ASAP -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">ASAP</div>
+                                    <div class="timeline-content">
+                                        <p class="mb-0 fw-bold"><i class="bi bi-passport me-2"></i>Obtain Passport</p>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="flyer-clinical.html" target="_blank" class="text-decoration-none">
-                                    <div
-                                        class="p-3 border rounded-4 hover-shadow transition-base bg-light text-center h-100">
-                                        <div class="icon-box mx-auto mb-2"
-                                            style="width: 40px; height: 40px; font-size: 1rem; background: var(--secondary-color); color: white;">
-                                            2</div>
-                                        <h6 class="fw-bold mb-1 text-dark">Clinical Focus</h6>
-                                        <p class="small text-muted mb-0">Student-led mission</p>
+                                </div>
+                                <!-- Week of Jan 19 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Week of Jan 19</div>
+                                    <div class="timeline-content">
+                                        <p class="mb-0 fw-bold"><i class="bi bi-ticket-perforated me-2"></i>Book Plane
+                                            Tickets</p>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="flyer-minimal.html" target="_blank" class="text-decoration-none">
-                                    <div
-                                        class="p-3 border rounded-4 hover-shadow transition-base bg-light text-center h-100">
-                                        <div class="icon-box mx-auto mb-2"
-                                            style="width: 40px; height: 40px; font-size: 1rem; background: var(--text-dark); color: white;">
-                                            3</div>
-                                        <h6 class="fw-bold mb-1 text-dark">Modern Minimal</h6>
-                                        <p class="small text-muted mb-0">Clean & bold</p>
+                                </div>
+                                <!-- Week of Jan 26 -->
+                                <div class="timeline-item urgent">
+                                    <div class="timeline-date">Week of Jan 26</div>
+                                    <div class="timeline-content">
+                                        <p class="mb-3">
+                                            <a href="https://evisa.gov.mw/Account/Login?ReturnUrl=%2FApplyVisa%2FApplication"
+                                                target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 me-2">
+                                                <i class="bi bi-file-earmark-text me-2"></i>Apply for Visa
+                                            </a>
+                                            <a href="https://mytravel.state.gov/s/step" target="_blank"
+                                                class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                                <i class="bi bi-geo-alt me-2"></i>Register STEP
+                                            </a>
+                                        </p>
+                                        <div class="p-3 bg-white border rounded-4 shadow-sm">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-file-earmark-pdf fs-4 text-danger me-3"></i>
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold">STEP Registration Guide</h6>
+                                                    <p class="small text-muted mb-0">Step-by-step instructions for US
+                                                        citizens</p>
+                                                </div>
+                                            </div>
+                                            <a href="resources/STEP_Registration_Guide.pdf" target="_blank"
+                                                class="btn btn-sm btn-link text-decoration-none px-0 mt-1 fw-bold">
+                                                Download PDF <i class="bi bi-chevron-right small"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </a>
+                                </div>
+                                <!-- February -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">February (By March 1st)</div>
+                                    <div class="timeline-content">
+                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                            <h6 class="mb-0 fw-bold text-success"><i
+                                                    class="bi bi-capsule me-2"></i>Medical & Insurance</h6>
+                                            <button class="btn btn-sm btn-link text-decoration-none p-0" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#febDetails">
+                                                <i class="bi bi-plus-circle me-1"></i>Details
+                                            </button>
+                                        </div>
+                                        <div class="collapse show" id="febDetails">
+                                            <p class="small text-muted mb-2">Visit PCP/Travel Clinic to obtain:</p>
+                                            <ul class="mb-3 ps-3 small">
+                                                <li class="mb-1"><strong>Malaria Medication</strong>: Many must be
+                                                    started <em>before</em> leaving the country.</li>
+                                                <li class="mb-1"><strong>Post-Trip Supply</strong>: Ensure prophylaxis
+                                                    coverage for weeks after return.</li>
+                                                <li class="mb-1"><strong>Buffer Supply</strong>: Request 2 extra weeks
+                                                    of coverage in case of delays.</li>
+                                                <li class="mb-1"><strong>PRN Scripts</strong>: Prescriptions for UTI,
+                                                    nausea, and general maintenance.</li>
+                                            </ul>
+                                            <a href="https://bcbsglobalsolutions.com/individuals-and-families/international-medical-insurance/single-trip/"
+                                                target="_blank"
+                                                class="btn btn-sm btn-outline-success rounded-pill w-100 fw-bold py-2">
+                                                <i class="bi bi-shield-check me-2"></i>Purchase Travel Health Insurance
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- March -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Month of March</div>
+                                    <div class="timeline-content">
+                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                            <h6 class="mb-0 fw-bold text-primary"><i
+                                                    class="bi bi-check2-circle me-2"></i>Final Prep</h6>
+                                            <button class="btn btn-sm btn-link text-decoration-none p-0" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#marchDetails">
+                                                <i class="bi bi-plus-circle me-1"></i>Details
+                                            </button>
+                                        </div>
+                                        <div class="collapse show" id="marchDetails">
+                                            <ul class="mb-0 ps-3 small">
+                                                <li class="mb-2"><strong>Supplies</strong>: Purchase remaining items
+                                                    from packing list.</li>
+                                                <li class="mb-2"><strong>Documentation</strong>: Print physical copies
+                                                    of all necessary documents.</li>
+                                                <li class="mb-2"><strong>Mobile/Data</strong>: Finalize plan for phone
+                                                    service (see logistics).</li>
+                                                <li class="mb-2"><strong>Bank</strong>: Notify bank of travel to
+                                                    <strong>Ethiopia & Malawi</strong>.
+                                                </li>
+                                                <li class="mb-2"><strong>Permethrin</strong>: Spray gear/clothes with
+                                                    0.5% permethrin spray.</li>
+                                                <li class="mb-2"><strong>CDC Malaria Prep</strong>: <a
+                                                        href="https://www.cdc.gov/malaria/prevention/index.html"
+                                                        target="_blank" class="text-primary">View Guidelines</a>.</li>
+                                                <li class="fw-bold">Start Malaria Prophylaxis (exact date depends on med
+                                                    choice).</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Table Tents -->
-                        <!-- Stable Horizontal Tents -->
-                        <h6 class="text-uppercase small fw-bold mb-3 text-muted letter-spacing-1">Table Tents (11" x
-                            8.5" Landscape)</h6>
-                        <div class="row g-3 mb-5">
-                            <div class="col-md-3">
-                                <a href="tent-stable.html" target="_blank" class="text-decoration-none">
-                                    <div class="p-3 border rounded-4 hover-shadow transition-base bg-white border-primary text-center h-100"
-                                        style="border-width: 2px !important;">
-                                        <div class="icon-box mx-auto mb-2"
-                                            style="width: 40px; height: 40px; font-size: 1rem; background: var(--primary-color); color: white;">
-                                            <i class="bi bi-aspect-ratio"></i>
-                                        </div>
-                                        <h6 class="fw-bold mb-1 text-dark">Default Stable</h6>
-                                        <p class="small text-muted mb-0">Clean & Balanced</p>
+                        <!-- Packing List -->
+                        <div id="packing" class="manual-section">
+                            <h2 class="manual-title"><i class="bi bi-backpack4 section-header-icon"></i>Packing
+                                Essentials</h2>
+
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-4">
+                                    <div class="packing-card h-100 border-top border-primary border-4">
+                                        <h5 class="text-primary d-flex align-items-center mb-3"><i
+                                                class="bi bi-stethoscope me-2"></i>Clinical Rotation</h5>
+                                        <ul class="packing-list mb-0 small">
+                                            <li>3 sets of Scrubs</li>
+                                            <li>Stethoscope & manual BP cuff</li>
+                                            <li>White Coat (cheap/to leave)</li>
+                                            <li>Laptop & Penlight</li>
+                                            <li>Pen, notebook, & paper</li>
+                                            <li>Tennis shoes (old/dedicated)</li>
+                                            <li>Travel hand sanitizer</li>
+                                            <li>Small backpack for daily carry</li>
+                                            <li>Box of Ziplock bags</li>
+                                        </ul>
                                     </div>
-                                </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="packing-card h-100 border-top border-secondary border-4">
+                                        <h5 class="text-secondary d-flex align-items-center mb-3"><i
+                                                class="bi bi-house-heart me-2"></i>SFHC Compound</h5>
+                                        <ul class="packing-list mb-0 small">
+                                            <li>Comfy lounge clothes</li>
+                                            <li>Bed Net (Permethrin treated)</li>
+                                            <li>Outlet Converter (Type G)</li>
+                                            <li>Power Bank (Portable charging)</li>
+                                            <li>Thermos (for coffee/tea)</li>
+                                            <li>Lufa / Washcloth</li>
+                                            <li>Shower Flip-flops</li>
+                                            <li>Personal Toiletries</li>
+                                            <li>Headlamp / Flashlight</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="packing-card h-100 border-top border-success border-4">
+                                        <h5 class="text-success d-flex align-items-center mb-3"><i
+                                                class="bi bi-capsule me-2"></i>Personal Meds</h5>
+                                        <ul class="packing-list mb-0 small">
+                                            <li>Malaria prophylaxis</li>
+                                            <li>Prescriptions (Full duration)</li>
+                                            <li>EpiPen (if needed)</li>
+                                            <li>Anti-nausea / Motion sickness</li>
+                                            <li>Traveler’s diarrhea relief</li>
+                                            <li>Back-up glasses/contacts</li>
+                                            <li>Contact solution</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <a href="tent-stable-identical.html" target="_blank" class="text-decoration-none">
-                                    <div
-                                        class="p-3 border rounded-4 hover-shadow transition-base bg-light text-center h-100">
-                                        <div class="icon-box mx-auto mb-2"
-                                            style="width: 40px; height: 40px; font-size: 1rem; background: var(--accent-color); color: white;">
-                                            <i class="bi bi-arrow-repeat"></i>
+
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="p-4 bg-white border rounded-4 shadow-sm">
+                                        <h6 class="fw-bold mb-3 text-uppercase small text-muted letter-spacing-1">
+                                            Miscellaneous Clothing</h6>
+                                        <div class="row small g-2">
+                                            <div class="col-6"><i class="bi bi-check2 text-success me-1"></i> 5-7
+                                                Underwear/Socks</div>
+                                            <div class="col-6"><i class="bi bi-check2 text-success me-1"></i> Bathing
+                                                Suit</div>
+                                            <div class="col-12"><i class="bi bi-check2 text-success me-1"></i>
+                                                <strong>Church Outfit</strong>: Button-up/Polo & Khakis (Men) |
+                                                Below-knee Dress/Skirt (Women)
+                                            </div>
+                                            <div class="col-6"><i class="bi bi-check2 text-success me-1"></i> 2 Casual
+                                                Outfits</div>
+                                            <div class="col-6"><i class="bi bi-check2 text-success me-1"></i> Light
+                                                Jacket (Air travel)</div>
+                                            <div class="col-6"><i class="bi bi-check2 text-success me-1"></i> Sunhat /
+                                                Sunglasses</div>
+                                            <div class="col-12 mt-2">
+                                                <div
+                                                    class="small p-2 bg-success bg-opacity-10 border border-success border-opacity-25 rounded-3">
+                                                    <strong>Pro Tip:</strong> Apply sunscreen FIRST, let dry, then apply
+                                                    bug spray.
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h6 class="fw-bold mb-1 text-dark">360° Identical</h6>
-                                        <p class="small text-muted mb-0">High Visibility</p>
                                     </div>
-                                </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <div
+                                        class="p-4 bg-danger-subtle border border-danger border-opacity-25 rounded-4 shadow-sm h-100">
+                                        <h6 class="fw-bold mb-3 text-uppercase small text-danger letter-spacing-1">Do
+                                            NOT Pack</h6>
+                                        <ul class="list-unstyled mb-0 small">
+                                            <li class="mb-1"><i class="bi bi-x-circle me-2"></i>Towels, sheets, or
+                                                pillows</li>
+                                            <li class="mb-1"><i class="bi bi-x-circle me-2"></i>Large shampoo/soap (buy
+                                                in city)</li>
+                                            <li class="mb-1"><i class="bi bi-x-circle me-2"></i>Common shareable meds
+                                                (Acetaminophen, etc.)</li>
+                                            <li><i class="bi bi-x-circle me-2"></i>Medical gloves (Provided by leads)
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <a href="tent-stable-info.html" target="_blank" class="text-decoration-none">
-                                    <div
-                                        class="p-3 border rounded-4 hover-shadow transition-base bg-light text-center h-100">
-                                        <div class="icon-box mx-auto mb-2"
-                                            style="width: 40px; height: 40px; font-size: 1rem; background: var(--primary-color); color: white;">
-                                            <i class="bi bi-info-circle"></i>
-                                        </div>
-                                        <h6 class="fw-bold mb-1 text-dark">Info-Rich</h6>
-                                        <p class="small text-muted mb-0">Full Project Details</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-3">
-                                <a href="tent-stable-artistic.html" target="_blank" class="text-decoration-none">
-                                    <div
-                                        class="p-3 border rounded-4 hover-shadow transition-base bg-light text-center h-100">
-                                        <div class="icon-box mx-auto mb-2"
-                                            style="width: 40px; height: 40px; font-size: 1rem; background: var(--secondary-color); color: white;">
-                                            <i class="bi bi-palette"></i>
-                                        </div>
-                                        <h6 class="fw-bold mb-1 text-dark">Vivid Artistic</h6>
-                                        <p class="small text-muted mb-0">Flag-Theme Bold</p>
-                                    </div>
-                                </a>
+
+                            <div class="alert alert-info border-0 rounded-4 p-3 d-flex align-items-center mb-0">
+                                <i class="bi bi-info-circle-fill fs-4 me-3"></i>
+                                <p class="mb-0 small fw-medium"><strong>Where to Pack:</strong> Always keep
+                                    documentation, cash, electronics, and all medications in your <strong>Carry-on
+                                        bag</strong>. Never check these items.</p>
                             </div>
                         </div>
 
-                        <!-- Vertical/Compact Tents -->
-                        <h6 class="text-uppercase small fw-bold mb-3 text-muted letter-spacing-1">Standup Table Tents
-                        </h6>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <a href="table-tent.html" target="_blank" class="text-decoration-none">
-                                    <div class="p-3 border rounded-4 hover-shadow transition-base bg-white text-center">
-                                        <h6 class="fw-bold mb-1 text-dark">Basic Compact</h6>
-                                        <p class="small text-muted mb-0">Vertical Trifold</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="tent-identical.html" target="_blank" class="text-decoration-none">
-                                    <div class="p-3 border rounded-4 hover-shadow transition-base bg-white text-center">
-                                        <h6 class="fw-bold mb-1 text-dark">Identical Compact</h6>
-                                        <p class="small text-muted mb-0">3-Sided Vertical</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        <!-- Logistics (Costs, Docs, Setup) -->
+                        <div id="logistics" class="manual-section">
+                            <h2 class="manual-title"><i class="bi bi-wallet2 section-header-icon"></i>Logistics & Costs
+                            </h2>
 
-                        <div class="mt-4 p-3 rounded-4 bg-primary-subtle border-0">
-                            <p class="small mb-0 text-primary fw-bold"><i class="bi bi-lightbulb me-2"></i>Printing Tip:
-                                Ensure "Background Graphics" is ON in your print settings for full colors.</p>
+                            <div class="row g-4 mb-5">
+                                <div class="col-md-4">
+                                    <div class="p-4 bg-white rounded-4 shadow-sm border border-light h-100">
+                                        <h5 class="fw-bold mb-3 d-flex align-items-center text-dark"><i
+                                                class="bi bi-file-earmark-text text-primary me-2"></i>Documentation</h5>
+                                        <ul class="list-unstyled small mb-0">
+                                            <li class="mb-3"><strong>Passports</strong>: 3 Printed copies (Self, Leader,
+                                                Home) + digital photo on phone.</li>
+                                            <li class="mb-3"><strong>Malawi Visa</strong>: 2 Printed copies (One for
+                                                customs, one for backup).</li>
+                                            <li class="mb-3"><strong>ID Card</strong>: Index card with your name,
+                                                address, and emergency contact.</li>
+                                            <li><strong>Yellow Card</strong>: Physical vaccine record (Required for
+                                                Ethiopia).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-4 bg-white rounded-4 shadow-sm border border-light h-100">
+                                        <h5 class="fw-bold mb-3 d-flex align-items-center text-dark"><i
+                                                class="bi bi-cash-coin text-success me-2"></i>Money & Payments</h5>
+                                        <ul class="list-unstyled small mb-0">
+                                            <li class="mb-3"><strong>US Cash</strong>: ~$800 USD (Clean, crisp bills
+                                                only). Note: ATMs not available after leaving city.</li>
+                                            <li class="mb-3"><strong>Debit/Credit</strong>: Notify bank for
+                                                Ethiopia/Malawi travel dates.</li>
+                                            <li><strong>Exchange</strong>: Available at Lilongwe Airport. (Rate: ~$1 /
+                                                1700 MK).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-4 bg-white rounded-4 shadow-sm border border-light h-100">
+                                        <h5 class="fw-bold mb-3 d-flex align-items-center text-dark"><i
+                                                class="bi bi-reception-4 text-warning me-2"></i>Phone & Connectivity
+                                        </h5>
+                                        <ul class="list-unstyled small mb-0">
+                                            <li class="mb-2"><strong>WhatsApp</strong>: Primary app for all local
+                                                communication. Download & setup before travel.</li>
+                                            <li class="mb-2"><strong>Maps</strong>: Download "Offline Maps" for Malawi
+                                                on Google Maps for active GPS.</li>
+                                            <li class="mb-2"><strong>AT&T</strong>: International plan (Requires
+                                                in-person setup prior to travel).</li>
+                                            <li><strong>Saily App</strong>: Reliable travel eSIM for data.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Compound Setup -->
+                            <div id="compound" class="manual-section">
+                                <h2 class="manual-title"><i class="bi bi-house-door section-header-icon"></i>SFHC
+                                    Compound Setup</h2>
+                                <div class="row g-4">
+                                    <div class="col-md-8">
+                                        <div class="p-4 bg-white border rounded-4 shadow-sm h-100">
+                                            <h5 class="fw-bold mb-4">Living Conditions</h5>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="d-flex mb-3">
+                                                        <div class="bg-primary-subtle text-primary rounded-3 p-2 me-3">
+                                                            <i class="bi bi-door-closed fs-5"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-bold">Rooms</h6>
+                                                            <p class="small text-muted mb-0">Shared with 1-2 roommates.
+                                                                Twin beds with bednets, sheets, and pillows provided.
+                                                                Power outlets available.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="d-flex mb-3">
+                                                        <div class="bg-info-subtle text-info rounded-3 p-2 me-3"><i
+                                                                class="bi bi-droplet fs-5"></i></div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-bold">Hygiene</h6>
+                                                            <p class="small text-muted mb-0">Shared shower/toilet/sink.
+                                                                Warm water usually available. <strong>Use BOTTLED water
+                                                                    for oral hygiene.</strong></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="d-flex mb-3">
+                                                        <div class="bg-success-subtle text-success rounded-3 p-2 me-3">
+                                                            <i class="bi bi-egg-fried fs-5"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-bold">Meals</h6>
+                                                            <p class="small text-muted mb-0">Breakfast/Dinner served in
+                                                                common room. Staples: Meat/eggs, rice/noodles, safe
+                                                                fruits/veg. Coffee/tea safe.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="d-flex">
+                                                        <div class="bg-warning-subtle text-warning rounded-3 p-2 me-3">
+                                                            <i class="bi bi-wifi fs-5"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-bold">Connectivity</h6>
+                                                            <p class="small text-muted mb-0">Wifi reaches all areas.
+                                                                Common room used for work and hanging out.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="alert alert-secondary border-0 rounded-4 p-4 h-100">
+                                            <h6 class="fw-bold mb-3"><i class="bi bi-water me-2"></i>Drinking Water</h6>
+                                            <p class="small mb-3"><strong>ABSOLUTE RULE</strong>: Drink only bottled
+                                                drinks. There is no filtered tap water available at the compound.</p>
+                                            <hr>
+                                            <h6 class="fw-bold mb-2 small text-uppercase">Laundry Service</h6>
+                                            <p class="small mb-0 opacity-75">Dirty laundry is collected ~once per week,
+                                                washed for you, and returned the next day.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Logistics Costs -->
+                            <div class="manual-section p-0 mt-n4">
+                                <div class="table-responsive rounded-4 border overflow-hidden shadow-sm">
+                                    <table class="table table-hover mb-0 border-0">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th class="ps-4 py-3">Expense Item</th>
+                                                <th class="text-end pe-4 py-3">Estimated Cost</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white">
+                                            <tr>
+                                                <td class="ps-4">Plane Ticket (Appx)</td>
+                                                <td class="text-end pe-4 fw-bold">$2,100</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">Visa Application</td>
+                                                <td class="text-end pe-4 fw-bold">$50</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">Required Vaccines</td>
+                                                <td class="text-end pe-4 fw-bold">$435</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">Travel Health Insurance</td>
+                                                <td class="text-end pe-4 fw-bold">$70</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">Lodging (24 nights)</td>
+                                                <td class="text-end pe-4 fw-bold">$600</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">Daily Meals Estimate</td>
+                                                <td class="text-end pe-4 fw-bold">$192</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">In-country Transportation</td>
+                                                <td class="text-end pe-4 fw-bold">$220</td>
+                                            </tr>
+                                            <tr class="table-success border-top-2 border-success">
+                                                <td class="ps-4 fw-bold text-uppercase fs-7">Final Estimated Total</td>
+                                                <td class="text-end pe-4 fw-bold fs-5">$3,667</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Red Flag Rules (Moved to End) -->
+
+
+                            <!-- Clinical -->
+                            <div id="clinical" class="manual-section">
+                                <h2 class="manual-title"><i class="bi bi-hospital section-header-icon"></i>Clinical
+                                    Rotation Structure</h2>
+
+                                <div
+                                    class="p-4 bg-white border border-primary border-opacity-25 rounded-4 shadow-sm mb-4">
+                                    <h5 class="fw-bold mb-3">Rotation Experience</h5>
+                                    <p class="small text-muted mb-4">Structure is dependent on Malawian provider
+                                        availability and schedules. At minimum, rotations include:</p>
+                                    <div class="row g-3">
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="p-3 bg-light rounded-3 text-center h-100">
+                                                <i class="bi bi-hospital fs-4 text-primary d-block mb-2"></i>
+                                                <span class="small fw-bold">Wards</span>
+                                                <p class="x-small text-muted mb-0">Inpatient (Adult Men/Women, Peds)</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="p-3 bg-light rounded-3 text-center h-100">
+                                                <i class="bi bi-scissors fs-4 text-primary d-block mb-2"></i>
+                                                <span class="small fw-bold">Surgical</span>
+                                                <p class="x-small text-muted mb-0">OR & Surgical Experience</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="p-3 bg-light rounded-3 text-center h-100">
+                                                <i class="bi bi-gender-female fs-4 text-primary d-block mb-2"></i>
+                                                <span class="small fw-bold">OB/GYN</span>
+                                                <p class="x-small text-muted mb-0">OB Experience & Outpatient Clinic</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="p-3 bg-light rounded-3 text-center h-100">
+                                                <i class="bi bi-people fs-4 text-primary d-block mb-2"></i>
+                                                <span class="small fw-bold">Education</span>
+                                                <p class="x-small text-muted mb-0">Topic discussions led by US MS4s</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card border-danger border-opacity-50 rounded-4 mb-4 overflow-hidden">
+                                    <div
+                                        class="card-header bg-danger text-white py-2 px-3 fw-bold small text-uppercase letter-spacing-1">
+                                        <i class="bi bi-exclamation-octagon me-2"></i>Scope of Practice
+                                    </div>
+                                    <div class="card-body bg-danger-subtle bg-opacity-10 p-4">
+                                        <p class="small mb-2"><strong>Rule 1</strong>: You should never perform
+                                            procedures or clinical activities you would not otherwise participate in in
+                                            the US for your level of training.</p>
+                                        <p class="small mb-0"><strong>Rule 2</strong>: You can perform/assist/observe
+                                            procedures relative to your training level IF you have explicit Malawi
+                                            provider supervision and permission.</p>
+                                    </div>
+                                </div>
+
+                                <h2 class="manual-title mt-5"><i
+                                        class="bi bi-prescription2 section-header-icon"></i>Clinical Resources</h2>
+                                <div class="row g-4 mb-4">
+                                    <div class="col-md-6">
+                                        <div
+                                            class="p-4 border rounded-4 bg-light h-100 d-flex flex-column justify-content-between">
+                                            <div>
+                                                <h6 class="fw-bold mb-2">Standard Treatment Guidelines</h6>
+                                                <p class="small text-muted mb-3">The MSTG (6th Edition) is the primary
+                                                    clinical manual for Malawi.</p>
+                                            </div>
+                                            <a href="resources/MSTG_6th_Edition_2023.pdf"
+                                                class="btn btn-primary rounded-pill w-100 fw-bold py-2 mt-auto"
+                                                target="_blank">
+                                                <i class="bi bi-download me-2"></i>Download MSTG 2023
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div
+                                            class="p-4 border rounded-4 bg-light h-100 d-flex flex-column justify-content-between">
+                                            <div>
+                                                <h6 class="fw-bold mb-2">HIV/AIDS Guidelines</h6>
+                                                <p class="small text-muted mb-3">Official Integrated Clinical HIV
+                                                    Guidelines
+                                                    (2022 Edition).</p>
+                                            </div>
+                                            <a href="resources/malawi-intergrated-clinical-hiv-guidelines-1st-edition-2022.pdf"
+                                                class="btn btn-primary rounded-pill w-100 fw-bold py-2 mt-auto"
+                                                target="_blank">
+                                                <i class="bi bi-download me-2"></i>Download HIV Guidelines
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="alert alert-warning border-0 bg-warning-subtle py-3 px-4 rounded-4 mb-0">
+                                    <div class="d-flex align-items-center text-dark">
+                                        <i class="bi bi-wifi-off fs-4 me-3"></i>
+                                        <div>
+                                            <h6 class="mb-0 fw-bold">Maintain Offline Access</h6>
+                                            <p class="small mb-0 opacity-75">Download these files to your device before
+                                                landing in Malawi. 3G/WiFi is inconsistent.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Language -->
+                            <div id="language" class="manual-section">
+                                <h2 class="manual-title"><i class="bi bi-chat-quote section-header-icon"></i>Language:
+                                    Tumbuka</h2>
+
+                                <!-- Featured Full Guide -->
+                                <div class="mb-4">
+                                    <a href="language-guide.html" class="text-decoration-none">
+                                        <div class="p-4 rounded-4 text-white hover-shadow transition-all d-flex align-items-center justify-content-between"
+                                            style="background: linear-gradient(135deg, #00592d 0%, #1e824c 100%);">
+                                            <div class="d-flex align-items-center">
+                                                <div class="rounded-3 p-3 me-4 d-flex align-items-center justify-content-center"
+                                                    style="background: rgba(255, 255, 255, 0.15); width: 64px; height: 64px;">
+                                                    <i class="bi bi-journal-text fs-2 text-white"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="fw-bold mb-1">Complete Tumbuka Guide</h4>
+                                                    <p class="mb-0 opacity-90">Access the full 300+ word dictionary and
+                                                        grammar guide by Thomas Mosman.</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-none d-md-block">
+                                                <span class="btn btn-light rounded-pill px-4 fw-bold">Open Guide <i
+                                                        class="bi bi-chevron-right ms-2"></i></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <a href="https://glosbe.com/tum/en" target="_blank"
+                                            class="text-decoration-none">
+                                            <div
+                                                class="p-4 border rounded-4 bg-white shadow-sm hover-shadow transition-all d-flex align-items-center">
+                                                <div class="bg-primary-subtle text-primary rounded-3 p-3 me-3">
+                                                    <i class="bi bi-translate fs-4"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold text-dark">Glosbe Dictionary</h6>
+                                                    <small class="text-muted">English to Tumbuka</small>
+                                                </div>
+                                                <i class="bi bi-box-arrow-up-right ms-auto text-muted"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="https://utalk.com/en/store/tumbuka" target="_blank"
+                                            class="text-decoration-none">
+                                            <div
+                                                class="p-4 border rounded-4 bg-white shadow-sm hover-shadow transition-all d-flex align-items-center">
+                                                <div class="bg-success-subtle text-success rounded-3 p-3 me-3">
+                                                    <i class="bi bi-mic fs-4"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold text-dark">uTalk Audio Lessons</h6>
+                                                    <small class="text-muted">Phrases & Pronunciation</small>
+                                                </div>
+                                                <i class="bi bi-box-arrow-up-right ms-auto text-muted"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Promotional Materials -->
+                            <div id="flyers" class="manual-section">
+                                <h2 class="manual-title"><i
+                                        class="bi bi-file-earmark-richtext section-header-icon"></i>Promotional
+                                    Materials</h2>
+
+                                <div class="p-4 p-md-5 bg-white border rounded-4 shadow-sm" id="resource-library">
+                                    <div class="d-flex align-items-center mb-5">
+                                        <div class="icon-box bg-primary text-white rounded-3 p-3 me-3">
+                                            <i class="bi bi-printer fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="fw-bold mb-1">Printable Resource Library</h4>
+                                            <p class="text-muted mb-0">High-resolution flyers and table tents for
+                                                physical
+                                                promotion.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Full Page Flyers -->
+                                    <h6
+                                        class="text-uppercase small fw-bold mb-3 text-muted letter-spacing-1 d-flex align-items-center">
+                                        <i class="bi bi-file-pdf me-2"></i>Full-Page Flyers (8.5" x 11")
+                                    </h6>
+                                    <div class="row g-4 mb-5">
+                                        <div class="col-md-4">
+                                            <a href="flyer-impact.html" target="_blank"
+                                                class="text-decoration-none h-100 d-block">
+                                                <div
+                                                    class="p-4 border rounded-4 hover-shadow transition-all bg-light text-center h-100">
+                                                    <div class="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center mx-auto mb-3"
+                                                        style="width: 50px; height: 50px;">
+                                                        <span class="fw-bold text-primary">01</span>
+                                                    </div>
+                                                    <h6 class="fw-bold mb-2 text-dark">Impact First</h6>
+                                                    <p class="small text-muted mb-0">Story-driven design focusing on
+                                                        mission
+                                                        outcomes</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="flyer-clinical.html" target="_blank"
+                                                class="text-decoration-none h-100 d-block">
+                                                <div
+                                                    class="p-4 border rounded-4 hover-shadow transition-all bg-light text-center h-100">
+                                                    <div class="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center mx-auto mb-3"
+                                                        style="width: 50px; height: 50px;">
+                                                        <span class="fw-bold text-secondary">02</span>
+                                                    </div>
+                                                    <h6 class="fw-bold mb-2 text-dark">Clinical Focus</h6>
+                                                    <p class="small text-muted mb-0">Emphasis on medical training and
+                                                        student impact</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="flyer-minimal.html" target="_blank"
+                                                class="text-decoration-none h-100 d-block">
+                                                <div
+                                                    class="p-4 border rounded-4 hover-shadow transition-all bg-light text-center h-100">
+                                                    <div class="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center mx-auto mb-3"
+                                                        style="width: 50px; height: 50px;">
+                                                        <span class="fw-bold text-dark">03</span>
+                                                    </div>
+                                                    <h6 class="fw-bold mb-2 text-dark">Modern Minimal</h6>
+                                                    <p class="small text-muted mb-0">Clean aesthetic for professional
+                                                        environments</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Table Tents -->
+                                    <h6
+                                        class="text-uppercase small fw-bold mb-3 text-muted letter-spacing-1 d-flex align-items-center">
+                                        <i class="bi bi-aspect-ratio me-2"></i>Table Tents (11" x 8.5" Landscape)
+                                    </h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <a href="tent-stable.html" target="_blank" class="text-decoration-none">
+                                                <div
+                                                    class="p-3 border rounded-4 hover-shadow transition-all bg-white border-primary border-2 text-center">
+                                                    <i class="bi bi-aspect-ratio text-primary fs-3 mb-2 d-block"></i>
+                                                    <h6 class="fw-bold mb-0 text-dark">Default Stable</h6>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="tent-stable-identical.html" target="_blank"
+                                                class="text-decoration-none">
+                                                <div
+                                                    class="p-3 border rounded-4 hover-shadow transition-all bg-white text-center">
+                                                    <i class="bi bi-arrow-repeat text-info fs-3 mb-2 d-block"></i>
+                                                    <h6 class="fw-bold mb-0 text-dark">360° Identical</h6>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="tent-stable-info.html" target="_blank"
+                                                class="text-decoration-none">
+                                                <div
+                                                    class="p-3 border rounded-4 hover-shadow transition-all bg-white text-center">
+                                                    <i class="bi bi-info-circle text-primary fs-3 mb-2 d-block"></i>
+                                                    <h6 class="fw-bold mb-0 text-dark">Info-Rich</h6>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="tent-stable-artistic.html" target="_blank"
+                                                class="text-decoration-none">
+                                                <div
+                                                    class="p-3 border rounded-4 hover-shadow transition-all bg-white text-center">
+                                                    <i class="bi bi-palette text-secondary fs-3 mb-2 d-block"></i>
+                                                    <h6 class="fw-bold mb-0 text-dark">Vivid Artistic</h6>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Red Flag Rules -->
+                            <div id="red-flags"
+                                class="manual-section border-danger border-2 mt-5 bg-white shadow-lg overflow-hidden"
+                                style="border-radius: 2rem;">
+                                <div class="bg-danger px-4 py-3 d-flex align-items-center justify-content-between">
+                                    <h2 class="text-white fw-bold mb-0 d-flex align-items-center"><i
+                                            class="bi bi-exclamation-triangle-fill fs-3 me-3"></i>Red Flag Rules</h2>
+                                    <span
+                                        class="badge bg-white text-danger fw-bold text-uppercase px-3 py-2 rounded-pill shadow-sm">Non-Negotiable</span>
+                                </div>
+
+                                <div class="p-4 p-md-5">
+                                    <p class="fst-italic mb-5 text-muted border-start border-danger border-4 ps-4">
+                                        These guidelines exist to protect your safety, the integrity of our partnership,
+                                        and
+                                        the mission of
+                                        Ekwendeni Hospital and SFHC. Failure to comply may result in immediate dismissal
+                                        from the program.
+                                    </p>
+
+                                    <div class="row g-4">
+                                        <!-- 1. Transportation -->
+
+                                        <div class="col-md-6 col-lg-4">
+                                            <div
+                                                class="p-4 rounded-4 bg-danger-subtle border border-danger border-opacity-25 h-100">
+                                                <h6 class="fw-bold text-danger mb-3 d-flex align-items-center">
+                                                    <i class="bi bi-car-front-fill me-2 fs-5"></i> 01. Transportation
+                                                </h6>
+                                                <ul class="list-unstyled small mb-0 text-dark opacity-85">
+                                                    <li class="mb-2"><strong>NO</strong> motorcycles or informal taxis.
+                                                    </li>
+                                                    <li class="mb-2"><strong>NO</strong> travel without a local
+                                                        chaperone.
+                                                    </li>
+                                                    <li>Stay within supervised routes only.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <div
+                                                class="p-4 rounded-4 bg-danger-subtle border border-danger border-opacity-25 h-100">
+                                                <h6 class="fw-bold text-danger mb-3 d-flex align-items-center">
+                                                    <i class="bi bi-people-fill me-2 fs-5"></i> 02. Buddy System
+                                                </h6>
+                                                <ul class="list-unstyled small mb-0 text-dark opacity-85">
+                                                    <li class="mb-2"><strong>NEVER</strong> leave the compound alone.
+                                                    </li>
+                                                    <li class="mb-2">Minimum 1 buddy for all excursions.</li>
+                                                    <li>Check-in with program leads via SMS.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <div
+                                                class="p-4 rounded-4 bg-danger-subtle border border-danger border-opacity-25 h-100">
+                                                <h6 class="fw-bold text-danger mb-3 d-flex align-items-center">
+                                                    <i class="bi bi-cup-straw me-2 fs-5"></i> 03. Substance Use
+                                                </h6>
+                                                <ul class="list-unstyled small mb-0 text-dark opacity-85">
+                                                    <li class="mb-2">Moderation and respect are required.</li>
+                                                    <li class="mb-2">Never interfere with safety or role.</li>
+                                                    <li>Zero tolerance for illicit substances.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <div
+                                                class="p-4 rounded-4 bg-danger-subtle border border-danger border-opacity-25 h-100">
+                                                <h6 class="fw-bold text-danger mb-3 d-flex align-items-center">
+                                                    <i class="bi bi-thermometer-high me-2 fs-5"></i> 04. Health
+                                                    Reporting
+                                                </h6>
+                                                <ul class="list-unstyled small mb-0 text-dark opacity-85">
+                                                    <li class="mb-2">Report fever or flu symptoms immediately.</li>
+                                                    <li class="mb-2">Early triage is critical for malaria.</li>
+                                                    <li>Do not "wait it out" under any case.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <div
+                                                class="p-4 rounded-4 bg-danger-subtle border border-danger border-opacity-25 h-100">
+                                                <h6 class="fw-bold text-danger mb-3 d-flex align-items-center">
+                                                    <i class="bi bi-camera-fill me-2 fs-5"></i> 05. Privacy & Media
+                                                </h6>
+                                                <ul class="list-unstyled small mb-0 text-dark opacity-85">
+                                                    <li class="mb-2">NO photos of faces without permission.</li>
+                                                    <li class="mb-2">Total compliance with patient laws.</li>
+                                                    <li>When in doubt: do not post online.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <div
+                                                class="p-4 rounded-4 bg-danger-subtle border border-danger border-opacity-25 h-100">
+                                                <h6 class="fw-bold text-danger mb-3 d-flex align-items-center">
+                                                    <i class="bi bi-gift-fill me-2 fs-5"></i> 06. Gift Giving
+                                                </h6>
+                                                <ul class="list-unstyled small mb-0 text-dark opacity-85">
+                                                    <li class="mb-2">NO direct gifts to local individuals.</li>
+                                                    <li class="mb-2">Gratitude is handled as a collective.</li>
+                                                    <li>Follow lead clinician's guidance.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Situational Awareness Section -->
+                                    <div class="mt-5 border-top pt-5">
+                                        <h4 class="fw-bold mb-4 d-flex align-items-center"><i
+                                                class="bi bi-eye text-primary me-3"></i>Situational Awareness Tips</h4>
+                                        <div class="row g-4">
+                                            <div class="col-md-6">
+                                                <div class="p-4 bg-light rounded-4 h-100">
+                                                    <h6 class="fw-bold mb-3"><i class="bi bi-safe me-2"></i>The Basics
+                                                    </h6>
+                                                    <ul class="small ps-3 mb-0">
+                                                        <li class="mb-2"><strong>Follow Red Flags</strong>: No
+                                                            exceptions.</li>
+                                                        <li class="mb-2"><strong>Safe Water</strong>: Drink BOTTLED
+                                                            only. Use it for brushing teeth too.</li>
+                                                        <li class="mb-2"><strong>Passport Safety</strong>: Keep real
+                                                            passport at the compound. Carry a printed copy on you.</li>
+                                                        <li><strong>Valuables</strong>: Leave laptops/iPads at the
+                                                            compound. No safe storage at the hospital.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="p-4 bg-light rounded-4 h-100">
+                                                    <h6 class="fw-bold mb-3"><i class="bi bi-shield-lock me-2"></i>Money
+                                                        & Location</h6>
+                                                    <ul class="small ps-3 mb-0">
+                                                        <li class="mb-2"><strong>Body Storage</strong>: Use body-hugging
+                                                            fanny packs/bags for phone/cards/cash.</li>
+                                                        <li class="mb-2"><strong>Backpacks</strong>: Not safe to leave
+                                                            unless they are on your person at all times.</li>
+                                                        <li class="mb-2"><strong>Location Sharing</strong>: Share
+                                                            location with family and student leaders via smartphone.
+                                                        </li>
+                                                        <li><strong>Offline Maps</strong>: Always have the Malawi area
+                                                            downloaded.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5 p-3 bg-light rounded-3 text-center small text-muted">
+                                        <i class="bi bi-info-circle me-1 text-primary"></i> By participating, you agree
+                                        to follow these guidelines in the spirit of humility and responsibility.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+            </main>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="mt-5">
