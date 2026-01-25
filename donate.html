@@ -133,49 +133,72 @@
                                 <div class="mb-4">
                                     <label class="form-label fw-bold small text-muted text-uppercase mb-3">Donation
                                         For</label>
-                                    <select class="form-select" id="donationCause">
-                                        <option value="General Support" selected>General Support (Area of Greatest Need)
-                                        </option>
-                                        <optgroup label="Community Projects">
-                                            <option value="Surgical Center Renovation">Surgical Center Renovation
-                                            </option>
-                                            <option value="Portable Ultrasound Machine">Portable Ultrasound Machine
-                                            </option>
-                                            <option value="Pediatric Ward Paint & Renovation">Pediatric Ward Paint &
-                                                Renovation
-                                            </option>
-                                            <option value="Mosquito Bed Nets & Malaria Education">Mosquito Bed Nets &
-                                                Malaria
-                                                Education
-                                            </option>
-                                            <option value="School for the Blind Support">School for the Blind, Deaf, &
-                                                Albinism
-                                                Support
-                                            </option>
-                                            <option value="Sports Equipment & School Supplies">Sports Equipment & School
-                                                Supplies
-                                            </option>
-                                            <option value="Medical Supplies">Medical Supplies (BP cuffs, oximeters,
-                                                etc.)
-                                            </option>
-                                            <option value="Porridge Business / Nutrition Support">Porridge Business /
-                                                Nutrition
-                                                Support
-                                            </option>
-                                        </optgroup>
-                                        <optgroup label="Student Support">
-                                            <option value="Student trip sponsorship">Student trip sponsorship</option>
-                                            <option value="In-Country Transportation">In-Country Transportation (Rental
-                                                &
-                                                Fuel)
-                                            </option>
-                                            <option value="Required Student Vaccines">Required Student Vaccines</option>
-                                            <option value="Group Dinners & Reflection Meals">Group Dinners & Reflection
-                                                Meals
-                                            </option>
-                                        </optgroup>
-                                        <option value="Other">Other (please specify below)</option>
-                                    </select>
+                                    <div class="dropdown">
+                                        <button class="dropdown-custom-toggle dropdown-toggle" type="button"
+                                            id="donationCauseBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                            General Support (Area of Greatest Need)
+                                        </button>
+                                        <input type="hidden" name="entry.1036226002" id="donationCause"
+                                            value="General Support">
+                                        <ul class="dropdown-menu dropdown-menu-custom"
+                                            aria-labelledby="donationCauseBtn">
+                                            <li><a class="dropdown-item dropdown-item-custom active" href="#"
+                                                    data-value="General Support">General Support (Area of Greatest
+                                                    Need)</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li class="dropdown-header-custom text-uppercase small fw-bold">Community
+                                                Projects</li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Surgical Center Renovation">Surgical Center
+                                                    Renovation</a></li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Portable Ultrasound Machine">Portable Ultrasound
+                                                    Machine</a></li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Pediatric Ward Paint & Renovation">Pediatric Ward Paint
+                                                    & Renovation</a></li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Mosquito Bed Nets & Malaria Education">Mosquito Bed Nets
+                                                    & Malaria Education</a></li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Ekwendeni School for the Blind">Ekwendeni School for the
+                                                    Blind</a></li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Sports Equipment & School Supplies">Sports Equipment &
+                                                    School Supplies</a></li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Medical Supplies">Medical Supplies (BP cuffs, oximeters,
+                                                    etc.)</a></li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Porridge Business / Nutrition Support">Porridge Business
+                                                    / Nutrition Support</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li class="dropdown-header-custom text-uppercase small fw-bold">Student
+                                                Support</li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Student trip sponsorship">Student trip sponsorship</a>
+                                            </li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="In-Country Transportation">In-Country Transportation
+                                                    (Rental & Fuel)</a></li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Required Student Vaccines">Required Student
+                                                    Vaccinations</a>
+                                            </li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Group Dinners & Reflection Meals">Group Dinners &
+                                                    Reflection Meals</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item dropdown-item-custom" href="#"
+                                                    data-value="Other">Other (please specify below)</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                                 <!-- Custom Cause Field (Hidden by default) -->
@@ -409,9 +432,9 @@
                                     </button>
                                     <button
                                         class="list-group-item list-group-item-action bg-transparent px-0 py-3 border-bottom btn-sponsorship"
-                                        data-amount="1000" data-cause="School for the Blind Support">
+                                        data-amount="1000" data-cause="Ekwendeni School for the Blind">
                                         <div class="d-flex justify-content-between align-items-center mb-1">
-                                            <h6 class="fw-bold mb-0 text-primary">School for the Blind, Deaf & Albinism
+                                            <h6 class="fw-bold mb-0 text-primary">Ekwendeni School for the Blind
                                             </h6>
                                             <span class="badge bg-primary">$1,000</span>
                                         </div>
@@ -578,7 +601,9 @@
         document.addEventListener('DOMContentLoaded', function () {
             const amountPills = document.querySelectorAll('.btn-amount');
             const customAmountInput = document.getElementById('customAmount');
-            const causeSelect = document.getElementById('donationCause');
+            const causeInput = document.getElementById('donationCause');
+            const causeBtn = document.getElementById('donationCauseBtn');
+            const causeItems = document.querySelectorAll('.dropdown-item-custom');
             const customCauseInput = document.getElementById('customCauseInput');
             const customCauseContainer = document.getElementById('customCauseContainer');
             const venmoButton = document.getElementById('venmoButton');
@@ -607,7 +632,7 @@
                 });
 
                 // Determine active cause
-                let cause = causeSelect.value;
+                let cause = causeInput.value;
                 if (cause === 'Other') {
                     cause = customCauseInput.value || 'Other';
                 }
@@ -675,14 +700,30 @@
             });
 
             // Cause Selection
-            causeSelect.addEventListener('change', function () {
-                if (this.value === 'Other') {
-                    customCauseContainer.classList.remove('d-none');
-                    customCauseInput.focus();
-                } else {
-                    customCauseContainer.classList.add('d-none');
-                }
-                updateHiddenFormFields();
+            causeItems.forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const value = this.getAttribute('data-value');
+                    const text = this.innerText;
+
+                    // Update State
+                    causeInput.value = value;
+                    causeBtn.innerText = text;
+
+                    // Update Active Class
+                    causeItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Handle "Other"
+                    if (value === 'Other') {
+                        customCauseContainer.classList.remove('d-none');
+                        customCauseInput.focus();
+                    } else {
+                        customCauseContainer.classList.add('d-none');
+                    }
+
+                    updateHiddenFormFields();
+                });
             });
 
             customCauseInput.addEventListener('input', updateHiddenFormFields);
@@ -705,15 +746,23 @@
 
                     // Set Cause
                     let optionFound = false;
-                    Array.from(causeSelect.options).forEach(opt => {
-                        if (opt.value === cause) {
-                            causeSelect.value = cause;
+                    causeItems.forEach(item => {
+                        if (item.getAttribute('data-value') === cause) {
+                            causeInput.value = cause;
+                            causeBtn.innerText = item.innerText;
+                            causeItems.forEach(i => i.classList.remove('active'));
+                            item.classList.add('active');
                             optionFound = true;
                         }
                     });
 
                     if (!optionFound) {
-                        causeSelect.value = 'Other';
+                        causeInput.value = 'Other';
+                        causeBtn.innerText = 'Other (please specify below)';
+                        causeItems.forEach(i => {
+                            if (i.getAttribute('data-value') === 'Other') i.classList.add('active');
+                            else i.classList.remove('active');
+                        });
                         customCauseContainer.classList.remove('d-none');
                         customCauseInput.value = cause;
                     } else {
