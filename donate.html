@@ -334,7 +334,12 @@
                         <div class="col-lg-5 order-1 order-lg-2">
                             <div class="bg-light p-4 rounded-4 shadow-sm border" id="sponsorships">
                                 <h4 class="fw-bold mb-4 text-center">Funding Goals</h4>
-
+                                <div class="text-center mt-4">
+                                    <p class="small text-muted mb-0"><em>Click an objective to auto-fill the donation
+                                            form.</em>
+                                    </p>
+                                </div>
+                                <br>
                                 <h6 class="text-uppercase small fw-bold text-muted mb-3">Community Projects</h6>
                                 <div class="list-group list-group-flush bg-transparent mb-4">
                                     <button
@@ -474,12 +479,6 @@
                                         </p>
                                     </button>
                                 </div>
-
-                                <div class="text-center mt-4">
-                                    <p class="small text-muted mb-0"><em>Click an objective to auto-fill the donation
-                                            form.</em>
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -599,10 +598,16 @@
             }
 
             function updatePaymentLinks(amount, cause) {
-                // Venmo Universal Link
+                // Venmo Link
                 const VENMO_USER = 'GlobalMedEdFoundation';
                 const noteEncoded = encodeURIComponent(`Donation for ${cause} - Marshall for Malawi`);
-                let venmoUrl = `https://venmo.com/?txn=pay&recipients=${VENMO_USER}&note=${noteEncoded}`;
+
+                // Use deep link on mobile to avoid the %20 -> + redirect bug in Venmo's universal link handler
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                let venmoUrl = isMobile
+                    ? `venmo://paycharge?txn=pay&recipients=${VENMO_USER}&note=${noteEncoded}`
+                    : `https://venmo.com/?txn=pay&recipients=${VENMO_USER}&note=${noteEncoded}`;
+
                 if (amount) {
                     venmoUrl += `&amount=${amount}`;
                 }
