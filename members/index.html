@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Access | Marshall for Malawi</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo/favicon-16x16.png">
+    <link rel="shortcut icon" href="../assets/logo/favicon.ico">
+    <link rel="manifest" href="../assets/logo/site.webmanifest">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .login-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .login-logo {
+            width: 80px;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            border-radius: 50px;
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            transition: var(--transition-base);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem var(--primary-subtle);
+        }
+
+        .error-message {
+            color: var(--accent-color);
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <a href="../index.html">
+            <img src="../assets/logo_transp.png" alt="Logo" class="login-logo">
+        </a>
+        <h4 class="fw-bold mb-2">Member Access</h4>
+        <p class="text-muted small mb-4">Please enter the access code provided to your team to view trip details.</p>
+
+        <form id="loginForm">
+            <div class="mb-3">
+                <input type="password" id="accessCode" class="form-control" placeholder="Enter Access Code" required>
+            </div>
+            <button type="submit" class="btn btn-custom-primary w-100 py-3 fw-bold">Access Members Area</button>
+            <div id="errorMessage" class="error-message">
+                <i class="bi bi-exclamation-circle me-1"></i> Incorrect access code. Please try again.
+            </div>
+        </form>
+
+        <div class="mt-4">
+            <a href="../index.html" class="text-decoration-none text-muted small">
+                <i class="bi bi-arrow-left me-1"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const code = document.getElementById('accessCode').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (code === 'thomas') {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'members.html';
+            } else {
+                errorMessage.style.display = 'block';
+                document.getElementById('accessCode').value = '';
+                document.getElementById('accessCode').focus();
+            }
+        });
+    </script>
+</body>
+
+</html>

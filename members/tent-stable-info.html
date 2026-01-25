@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stable Info Tent | Marshall for Malawi</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #00592D;
+            --secondary-color: #1E824C;
+            --accent-color: #CE1126;
+            --text-dark: #2D3436;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* 11" x 8.5" Landscape Setup */
+        .page {
+            width: 11in;
+            height: 8.5in;
+            margin: 0.5in auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+
+            body {
+                background: none;
+                margin: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 11in;
+                height: 8.5in;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        .no-print {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+        }
+
+        /* Horizontal Panels (2.83in tall each) */
+        .panel {
+            height: 2.833in;
+            width: 100%;
+            padding: 0.3in 0.6in;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        /* Upside down panel for folding */
+        .panel-upside-down {
+            transform: rotate(180deg);
+        }
+
+        .panel-base {
+            height: 2.833in;
+            background-color: white;
+            border-bottom: none;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .logo-img {
+            width: 60px;
+        }
+
+        .side-text {
+            flex: 1;
+            padding: 0 25px;
+        }
+
+        .panel h2 {
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        .project-tag {
+            background: #f0f7f4;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .project-tag i {
+            font-size: 0.7rem;
+        }
+
+        .project-tag.more {
+            background: #fff;
+            border-style: dashed;
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .qr-section {
+            text-align: center;
+            min-width: 1.5in;
+            border-left: 1px solid #eee;
+            padding-left: 20px;
+        }
+
+        .qr-code {
+            width: 1in;
+            margin-bottom: 4px;
+        }
+
+        .qr-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 0;
+        }
+
+        .fold-guide-text {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.5rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .panel-upside-down .fold-guide-text {
+            top: 5px;
+            bottom: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="no-print">
+        <p><strong>Stable Info Tent:</strong> High-stability horizontal trifold with detailed mission goals. <br>
+            Landscape orientation. Press <code>Cmd + P</code> to print. <br>
+            Ensures "Background Graphics" is ON.</p>
+        <button onclick="window.print()" class="btn btn-primary btn-sm">Print Stable Info Tent</button>
+        <a href="members.html" class="btn btn-outline-light btn-sm ms-2">Back to Members</a>
+    </div>
+
+    <div class="page">
+        <!-- Face A (Upside Down): Why Support? -->
+        <div class="panel panel-upside-down">
+            <span class="fold-guide-text">Fold Here</span>
+            <div class="side-text">
+                <h2>Why Support the Initiative?</h2>
+                <div class="project-tags">
+                    <div class="project-tag"><i class="bi bi-hospital"></i> Surgical Center</div>
+                    <div class="project-tag"><i class="bi bi-droplet"></i> Malaria Research</div>
+                    <div class="project-tag"><i class="bi bi-eye"></i> School for Blind</div>
+                    <div class="project-tag"><i class="bi bi-people"></i> Pediatric Ward</div>
+                    <div class="project-tag"><i class="bi bi-basket"></i> Nutrition Care</div>
+                    <div class="project-tag"><i class="bi bi-capsule"></i> Medical Supplies</div>
+                    <div class="project-tag"><i class="bi bi-bus-front"></i> Student Travel</div>
+                    <div class="project-tag"><i class="bi bi-patch-check"></i> Vaccines</div>
+                    <div class="project-tag more">...and much more</div>
+                </div>
+            </div>
+            <div class="qr-section">
+                <img src="../assets/qr_code_marshallmalawi.png" alt="QR" class="qr-code">
+                <p class="qr-label">Scan to Support</p>
+            </div>
+        </div>
+
+        <!-- Face B (Right side up): Front Face -->
+        <div class="panel">
+            <span class="fold-guide-text">Fold Here</span>
+            <img src="../assets/logo_transp.png" alt="Logo" class="logo-img">
+            <div class="side-text">
+                <h2>Marshall for Malawi</h2>
+                <p class="small text-muted mb-2">Sustainable Healthcare Partnerships • Ekwendeni, Malawi • April 2026
+                    Trip
+                </p>
+                <p class="mb-0" style="font-size: 0.8rem; line-height: 1.3;">A team of 17 Marshall medical students
+                    partnering with Malawian clinicians to strengthen rural healthcare through collaborative learning
+                    and service.</p>
+            </div>
+            <div class="qr-section">
+                <p class="fw-bold mb-1" style="font-size: 0.8rem; color: var(--primary-color);">marshallformalawi.org
+                </p>
+                <img src="../assets/qr_code_marshallmalawi.png" alt="QR" class="qr-code" style="width: 0.8in;">
+            </div>
+        </div>
+
+        <!-- Base -->
+        <div class="panel panel-base">
+            <div class="text-muted small mb-1 text-uppercase letter-spacing-1">Tent Base</div>
+            <div class="d-flex justify-content-center align-items-center gap-4">
+                <div class="text-center">
+                    <div class="fw-bold" style="font-size: 1.2rem; color: var(--primary-color);">17</div>
+                    <div class="small text-muted text-uppercase" style="font-size: 0.6rem;">Students</div>
+                </div>
+                <div class="text-center">
+                    <div class="fw-bold" style="font-size: 1.2rem; color: var(--primary-color);">3.5</div>
+                    <div class="small text-muted text-uppercase" style="font-size: 0.6rem;">Weeks</div>
+                </div>
+                <div class="text-center">
+                    <div class="fw-bold" style="font-size: 1.2rem; color: var(--primary-color);">April 2026</div>
+                    <div class="small text-muted text-uppercase" style="font-size: 0.6rem;">Trip Timeline</div>
+                </div>
+            </div>
+            <div class="mt-2" style="font-size: 0.55rem; color: #ddd;">
+                Global Medical Education Foundation 501(c)(3)
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
