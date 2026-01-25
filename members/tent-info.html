@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info Tent | Marshall for Malawi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #00592D;
+            --secondary: #1E824C;
+            --accent: #CE1126;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            margin: 0;
+            background: #eee;
+        }
+
+        .page {
+            width: 11in;
+            height: 8.5in;
+            margin: 0.5in auto;
+            background: white;
+            display: flex;
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+
+            body {
+                background: none;
+            }
+
+            .page {
+                margin: 0;
+                width: 11in;
+                height: 8.5in;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        .no-print {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: white;
+        }
+
+        .panel {
+            width: 3.66in;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0.6in 0.3in;
+            border-right: 1px dashed #ccc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .panel-3 {
+            border-right: none;
+        }
+
+        h3 {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .p-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .list-item {
+            font-size: 0.85rem;
+            text-align: left;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            color: #444;
+        }
+
+        .list-item i {
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .qr-hero {
+            width: 1.6in;
+            height: 1.6in;
+            margin: 0 auto 15px;
+            border: 4px solid var(--primary);
+            padding: 5px;
+        }
+
+        .btn-fake {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="no-print">
+        <button onclick="window.print()" class="btn btn-primary btn-sm">Print Info Tent</button>
+        <a href="members.html" class="btn btn-outline-light btn-sm">Back</a>
+    </div>
+    <div class="page">
+        <!-- Panel 1: Our Mission -->
+        <div class="panel">
+            <i class="bi bi-heart-pulse p-icon"></i>
+            <h2>Support the Initiative</h2>
+            <p class="small text-muted">Building sustainable healthcare partnerships through service and learning.</p>
+            <div class="mt-4">
+                <div class="list-item"><i class="bi bi-check2-circle"></i> Clinical Training</div>
+                <div class="list-item"><i class="bi bi-check2-circle"></i> Service Projects</div>
+                <div class="list-item"><i class="bi bi-check2-circle"></i> Resource Support</div>
+            </div>
+        </div>
+
+        <!-- Panel 2: Impact -->
+        <div class="panel" style="background: #f8fcf9;">
+            <i class="bi bi-people p-icon"></i>
+            <h3>The Impact</h3>
+            <div class="h4 fw-bold text-primary mb-1">17 STUDENTS</div>
+            <p class="small text-muted mb-4 text-uppercase fw-bold letter-spacing-1">Serving in Ekwendeni</p>
+            <div class="list-item"><i class="bi bi-hospital"></i> Medical Supply Transport</div>
+            <div class="list-item"><i class="bi bi-tools"></i> School Renovations</div>
+            <div class="list-item"><i class="bi bi-journal-check"></i> Sustainable Research</div>
+        </div>
+
+        <!-- Panel 3: Give -->
+        <div class="panel">
+            <h3>Support Us</h3>
+            <img src="../assets/qr_code_marshallmalawi.png" class="qr-hero" alt="QR">
+            <p class="small fw-bold mb-0">SCAN TO DONATE</p>
+            <div class="btn-fake">marshallformalawi.org</div>
+            <p class="mt-4" style="font-size: 0.6rem; color: #999;">GMEF 501(c)(3) Program</p>
+        </div>
+    </div>
+</body>
+
+</html>

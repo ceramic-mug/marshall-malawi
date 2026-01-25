@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Flyer | Marshall for Malawi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #00592D;
+            --secondary: #1E824C;
+            --accent: #CE1126;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            margin: 0;
+            background: #eee;
+        }
+
+        .page {
+            width: 8.5in;
+            height: 11in;
+            padding: 0.5in;
+            margin: 0.5in auto;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        .no-print {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: white;
+        }
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-box img {
+            height: 60px;
+        }
+
+        .logo-box span {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .hero {
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .project-tag {
+            background: #f0f7f4;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-tag i {
+            font-size: 0.9rem;
+        }
+
+        .project-tag.more {
+            background: #fff;
+            border-style: dashed;
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .student-impact {
+            background: #f8fcf9;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #e0ede4;
+            margin-bottom: 40px;
+        }
+
+        .footer {
+            margin-top: auto;
+            display: flex;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .qr-side {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .qr-side img {
+            height: 1.2in;
+            border: 1px solid #eee;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="no-print">
+        <button onclick="window.print()" class="btn btn-primary btn-sm">Print Clinical Flyer</button>
+        <a href="members.html" class="btn btn-outline-light btn-sm">Back</a>
+    </div>
+    <div class="page">
+        <div class="top-nav">
+            <div class="logo-box">
+                <img src="../assets/logo_transp.png" alt="Logo">
+                <span>Marshall<br>for Malawi</span>
+                <div class="ms-3 small text-muted border-start ps-3">Ekwendeni, Malawi</div>
+            </div>
+            <div class="text-end">
+                <div class="fw-bold text-primary">APRIL 2026</div>
+                <div class="small text-muted">LEARNING-SERVICE TRIP</div>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div class="hero-text">
+                <h1>Sustainable Global Health</h1>
+                <p>17 Marshall medical students partnering with Malawian clinicians to serve rural communities.</p>
+            </div>
+        </div>
+
+        <h3 class="section-title">Support Our 2026 Endeavors</h3>
+        <div class="project-tags">
+            <div class="project-tag"><i class="bi bi-hospital"></i> Surgical Center</div>
+            <div class="project-tag"><i class="bi bi-droplet"></i> Malaria Research</div>
+            <div class="project-tag"><i class="bi bi-eye"></i> School for the Blind</div>
+            <div class="project-tag"><i class="bi bi-people"></i> Pediatric Ward</div>
+            <div class="project-tag"><i class="bi bi-basket"></i> Nutritional Care</div>
+            <div class="project-tag"><i class="bi bi-capsule"></i> Medical Supplies</div>
+            <div class="project-tag"><i class="bi bi-bus-front"></i> Clinical Transport</div>
+            <div class="project-tag"><i class="bi bi-patch-check"></i> Student Vaccines</div>
+            <div class="project-tag"><i class="bi bi-house-heart"></i> Community Outreach</div>
+            <div class="project-tag more">...and much more</div>
+        </div>
+
+        <div class="student-impact">
+            <h3 class="section-title">Student Growth & Transparency</h3>
+            <p class="mb-3">"Learning in Malawi equips us with adaptability and problem-solving skills that directly
+                strengthen our ability to serve underserved communities in West Virginia."</p>
+            <p class="small text-muted mb-0">Our medical students cover the majority of their personal travel costs
+                (approx. $3,500 each). Your donations directly fund hospital projects, medical supplies, and local
+                program support.</p>
+        </div>
+
+        <div class="footer">
+            <div class="info">
+                <p class="mb-1 fw-bold">Support the Marshall For Malawi 2026 Trip</p>
+                <p class="small text-muted mb-0">Donations through Global Medical Education Foundation (501c3)</p>
+                <p class="fw-bold text-primary mt-2">marshallformalawi.org</p>
+            </div>
+            <div class="qr-side">
+                <img src="../assets/qr_code_marshallmalawi.png" alt="QR Code">
+                <div class="small text-muted" style="max-width: 130px;">Scan to learn more & donate</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
