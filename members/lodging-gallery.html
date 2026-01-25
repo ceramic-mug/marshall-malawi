@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food and Lodging Photos | Marshall for Malawi</title>
+    <!-- Authentication Check -->
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+
+        .masonry-item:hover {
+            transform: scale(1.02);
+            z-index: 2;
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            padding-top: 76px;
+            background-color: #f0f2f5;
+        }
+
+        .navbar.fixed-top {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            height: 76px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="members.html">
+                <img src="../assets/logo_transp.png" alt="Marshall for Malawi logo" width="40" height="auto"
+                    class="me-2">
+                <span class="fs-6 fw-bold lh-1">Members Portal</span>
+            </a>
+            <div class="ms-auto">
+                <a href="members.html" class="btn btn-sm btn-outline-primary rounded-pill me-2">Back to Portal</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="section-padding text-center bg-white border-bottom" style="margin-top: 20px;">
+        <div class="container">
+            <h1 class="fw-bold">Food and Lodging Photos</h1>
+            <p class="text-muted lead">A look at the SFHC compound where we will be staying.</p>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="masonry-grid" id="galleryGrid">
+                <div class="masonry-item"><img src="resources/sfhc/IMG_0676.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_0686.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_0781.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_0796.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_0945.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4917.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4918.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4919.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4920.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4921.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4922.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4923.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4924.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4925.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4926.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4928.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4931.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4932.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4933.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_4934.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_5061.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_5221.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_5222.jpg" alt="Lodging Photo"></div>
+                <div class="masonry-item"><img src="resources/sfhc/IMG_5244.jpg" alt="Lodging Photo"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen modal-dialog-centered bg-black">
+            <div class="modal-content bg-transparent border-0">
+                <button type="button" class="btn-close btn-close-white fs-4 position-absolute top-0 end-0 m-4 z-3"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body p-0 d-flex align-items-center justify-content-center">
+                    <img src="" id="lightboxImg" class="img-fluid"
+                        style="max-height: 100vh; max-width: 100vw; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Lightbox Logic
+        const lightboxModal = new bootstrap.Modal(document.getElementById('lightboxModal'));
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        document.querySelectorAll('.masonry-item img').forEach(img => {
+            img.addEventListener('click', function () {
+                lightboxImg.src = this.src;
+                lightboxModal.show();
+            });
+        });
+    </script>
+</body>
+
+</html>
