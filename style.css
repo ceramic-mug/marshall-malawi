@@ -182,7 +182,12 @@ a:hover {
 
 /* Hero Section */
 .hero-section {
-    padding: 120px 0 60px;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 76px; /* Offset for fixed navbar height */
+    padding-bottom: 0;
     background: linear-gradient(135deg, rgba(0, 89, 45, 0.85) 0%, rgba(30, 130, 76, 0.8) 100%), url('assets/compressed/malawi_sunset.jpg');
     background-size: cover;
     background-position: center;
@@ -193,14 +198,7 @@ a:hover {
 }
 
 .hero-section::after {
-    content: '';
-    position: absolute;
-    bottom: -50px;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: var(--bg-color);
-    transform: skewY(-2deg);
+    display: none;
 }
 
 .hero-title {
@@ -675,7 +673,9 @@ footer {
 
     /* Condense vertical space for mobile */
     .hero-section {
-        padding: 100px 0 80px;
+        padding-top: 80px; /* Specific mobile header offset */
+        padding-bottom: 20px; /* Small buffer */
+        min-height: 500px;
     }
 
     .hero-title {
