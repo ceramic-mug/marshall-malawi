@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraising Dinner Poster — Vivid | Malawi Med</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #3a3a3a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── Toolbar ── */
+        .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 11px 22px;
+            background: #111;
+            color: white;
+            font-size: 0.78rem;
+            font-family: 'Inter', sans-serif;
+            border-bottom: 1px solid #222;
+        }
+        .toolbar button {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            transition: opacity 0.15s;
+        }
+        .toolbar button:hover { opacity: 0.82; }
+        .toolbar .btn-print { background: #00592D; color: white; }
+        .toolbar .btn-dl { background: #252525; color: #ccc; border: 1px solid #444; }
+        .toolbar a { color: #888; text-decoration: none; }
+        .toolbar a:hover { color: #ccc; }
+        .toolbar .sep { color: #444; }
+        .toolbar .info { color: #555; margin-left: auto; font-size: 0.75rem; }
+
+        /* ── Screen wrapper ── */
+        .poster-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 3rem 2rem 4rem;
+        }
+
+        /* ── The Poster ── */
+        .poster {
+            width: 8in;
+            height: 12in;
+            background: #FDF8F0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        /* ── Top green section ── */
+        .top-section {
+            background: #00592D;
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.55in 0.65in 0.78in;
+            /* Diagonal clip at bottom */
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+            /* Extra bottom padding to account for clip */
+            padding-bottom: 1.0in;
+        }
+
+        /* Radial depth on green section */
+        .top-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 75% 55% at 80% 20%, rgba(30,130,76,0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 55% 40% at 15% 75%, rgba(0,28,14,0.4) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Red left-edge stripe */
+        .top-section::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 0.13in;
+            height: 100%;
+            background: #CE1126;
+        }
+
+        /* ── Logo row ── */
+        .top-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 0.18in;
+            z-index: 2;
+            align-self: center;
+        }
+
+        .logo {
+            width: 0.65in;
+            height: auto;
+        }
+
+        .top-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 22pt;
+            font-weight: 800;
+            color: rgba(238,232,220,0.9);
+            line-height: 1;
+        }
+
+        .top-divider {
+            width: 0.5in;
+            height: 2px;
+            background: rgba(238,232,220,0.22);
+            margin: 0.28in 0 0.22in;
+            z-index: 2;
+        }
+
+        /* ── Big headline in top green ── */
+        .top-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 31pt;
+            font-weight: 900;
+            color: #EEE8DC;
+            line-height: 1.15;
+            text-align: center;
+            letter-spacing: -0.5px;
+            z-index: 2;
+            max-width: 7in;
+        }
+
+        .top-gap { height: 0.32in; z-index: 2; flex-shrink: 0; }
+
+        /* ── Top stats ── */
+        .top-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3in;
+            z-index: 2;
+        }
+
+        .top-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 20pt;
+            font-weight: 800;
+            color: #EEE8DC;
+            line-height: 1;
+        }
+
+        .top-stat-lbl {
+            font-size: 7pt;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(238,232,220,0.45);
+            line-height: 1.3;
+            margin-top: 7px;
+        }
+
+        .top-stat-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #CE1126;
+            flex-shrink: 0;
+        }
+
+        /* ── Bottom cream section ── */
+        .bottom-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.28in 0.65in 0.45in;
+            margin-top: -0.15in;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── 10% big number ── */
+        .pct-block {
+            text-align: center;
+        }
+
+        .pct-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 118pt;
+            font-weight: 900;
+            color: #00592D;
+            line-height: 0.82;
+            letter-spacing: -4px;
+        }
+
+        .pct-sub {
+            font-size: 11.5pt;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(0,89,45,0.5);
+            margin-top: 16px;
+        }
+
+        .pct-desc {
+            font-size: 14.5pt;
+            font-weight: 400;
+            color: #4A5A4D;
+            margin-top: 14px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .pct-desc strong {
+            color: #00592D;
+            font-weight: 700;
+        }
+
+        /* ── Bottom divider ── */
+        .bottom-rule {
+            width: 100%;
+            height: 1px;
+            background: rgba(0,89,45,0.12);
+        }
+
+        /* ── QR row ── */
+        .qr-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45in;
+            width: 100%;
+        }
+
+        .qr-img {
+            width: 2.1in;
+            height: 2.1in;
+            background: white;
+            padding: 13px;
+            border-radius: 6px;
+            box-shadow: 0 6px 24px rgba(0,89,45,0.16);
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .qr-text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .qr-cta {
+            font-size: 9pt;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(0,89,45,0.5);
+        }
+
+        .qr-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 22pt;
+            font-weight: 700;
+            color: #00592D;
+            line-height: 1.2;
+        }
+
+        .qr-url {
+            font-size: 12pt;
+            font-weight: 500;
+            color: rgba(0,89,45,0.42);
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Red bottom bar ── */
+        .bottom-bar {
+            padding-top: 0.2in;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            border-top: 3px solid #CE1126;
+        }
+
+        .bottom-bar-text {
+            font-size: 7pt;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(0,89,45,0.38);
+        }
+
+        .bottom-bar-brand {
+            font-size: 7pt;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #00592D;
+        }
+
+        /* ── Print ── */
+        @media print {
+            body { background: none; }
+            .toolbar { display: none; }
+            .poster-wrap { padding: 0; }
+            .poster { box-shadow: none; }
+            @page {
+                size: 8in 12in portrait;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toolbar">
+        <button class="btn-print" onclick="window.print()">⬡ Print Poster</button>
+        <button class="btn-dl" onclick="downloadPDF()">↓ Download PDF</button>
+        <span class="sep">|</span>
+        <a href="members.html">← Back to Members</a>
+        <span class="sep">|</span>
+        <span style="color:#666;">Portrait · 8×10 &amp; 20×30 compatible</span>
+        <span class="info">Design 3 of 3 — Vivid Split</span>
+    </div>
+
+    <div class="poster-wrap">
+        <div class="poster" id="poster">
+
+            <!-- Top green section with diagonal clip -->
+            <div class="top-section">
+                <div class="top-logo-row">
+                    <img src="../assets/malawi-med-logo-small.png" alt="Malawi Med" class="logo">
+                    <div class="top-brand">Malawi Med</div>
+                </div>
+
+                <div class="top-divider"></div>
+
+                <div class="top-headline">
+                    Connecting Appalachia<br>to the Warm Heart of Africa
+                </div>
+
+                <div class="top-gap"></div>
+
+                <div class="top-stats">
+                    <div class="top-stat-item">
+                        <div>
+                            <div class="top-stat-num">16</div>
+                            <div class="top-stat-lbl">Medical<br>Students</div>
+                        </div>
+                    </div>
+                    <div class="top-stat-dot"></div>
+                    <div class="top-stat-item">
+                        <div>
+                            <div class="top-stat-num">3 Wks</div>
+                            <div class="top-stat-lbl">Duration<br>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="top-stat-dot"></div>
+                    <div class="top-stat-item">
+                        <div>
+                            <div class="top-stat-num">April</div>
+                            <div class="top-stat-lbl">2026</div>
+                        </div>
+                    </div>
+                    <div class="top-stat-dot"></div>
+                    <div class="top-stat-item">
+                        <div>
+                            <div class="top-stat-num">Ekwendeni</div>
+                            <div class="top-stat-lbl">Malawi<br>&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom cream section -->
+            <div class="bottom-section">
+
+                <div class="pct-block">
+                    <div class="pct-num">10%</div>
+                    <div class="pct-sub">of all proceeds today</div>
+                    <div class="pct-desc">
+                        goes toward supporting <strong>16 local medical students</strong><br>
+                        on a global health trip to Malawi this April.
+                    </div>
+                </div>
+
+                <div class="bottom-rule"></div>
+
+                <div class="qr-row">
+                    <img src="../assets/malawi-med-qr-FINAL.png" alt="QR Code" class="qr-img">
+                    <div class="qr-text">
+                        <div class="qr-cta">Scan to Learn More &amp; Give</div>
+                        <div class="qr-main">Support the trip.<br>Scan to donate.</div>
+                        <div class="qr-url">malawi-med.org</div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="bottom-bar-text">Global Medical Education Foundation 501(c)(3)</div>
+                    <div class="bottom-bar-brand">Malawi Med · 2026</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            const poster = document.getElementById('poster');
+            html2pdf().set({
+                margin: 0,
+                filename: 'malawi-med-poster-vivid.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 3, useCORS: true, logging: false },
+                jsPDF: { unit: 'in', format: [8, 12], orientation: 'portrait' }
+            }).from(poster).save();
+        }
+    </script>
+</body>
+</html>

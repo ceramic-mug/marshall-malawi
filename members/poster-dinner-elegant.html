@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraising Dinner Poster — Elegant | Malawi Med</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #3a3a3a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── Toolbar ── */
+        .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 11px 22px;
+            background: #111;
+            color: white;
+            font-size: 0.78rem;
+            font-family: 'Inter', sans-serif;
+            border-bottom: 1px solid #222;
+        }
+        .toolbar button {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            transition: opacity 0.15s;
+        }
+        .toolbar button:hover { opacity: 0.82; }
+        .toolbar .btn-print { background: #00592D; color: white; }
+        .toolbar .btn-dl { background: #252525; color: #ccc; border: 1px solid #444; }
+        .toolbar a { color: #888; text-decoration: none; }
+        .toolbar a:hover { color: #ccc; }
+        .toolbar .sep { color: #444; }
+        .toolbar .info { color: #555; margin-left: auto; font-size: 0.75rem; }
+
+        /* ── Screen wrapper ── */
+        .poster-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 3rem 2rem 4rem;
+        }
+
+        /* ── The Poster ── */
+        .poster {
+            width: 8in;
+            height: 12in;
+            background: #FDFAF5;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        /* ── Green Header Band ── */
+        .header-band {
+            background: #00592D;
+            padding: 0.32in 0.55in 0.3in;
+            display: flex;
+            align-items: center;
+            gap: 0.22in;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .header-band::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+            background: #CE1126;
+        }
+
+        .logo {
+            width: 0.65in;
+            height: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.95;
+        }
+
+        .header-text { display: flex; flex-direction: column; }
+
+        .header-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 22pt;
+            font-weight: 800;
+            color: white;
+            line-height: 1;
+        }
+
+        .header-event {
+            font-size: 7pt;
+            font-weight: 600;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.52);
+            margin-top: 5px;
+        }
+
+        .header-right {
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .header-date-label {
+            font-size: 6pt;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .header-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 17pt;
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            margin-top: 3px;
+        }
+
+        /* ── Body ── */
+        .body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0.5in 0.55in 0.45in;
+        }
+
+        /* ── Headline ── */
+        .headline-wrap {
+            margin-bottom: 0.18in;
+        }
+
+        .eyebrow {
+            font-size: 6.5pt;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #CE1126;
+            margin-bottom: 0.12in;
+        }
+
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 28pt;
+            font-weight: 800;
+            color: #0D1A12;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .headline-rule {
+            width: 0.6in;
+            height: 3px;
+            background: #CE1126;
+            margin-top: 0.18in;
+        }
+
+        /* ── Two column section ── */
+        .two-col {
+            display: flex;
+            gap: 0.35in;
+            flex: 1;
+            margin-top: 0.3in;
+        }
+
+        /* left column — mission text */
+        .col-left {
+            flex: 1.15;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mission-body {
+            font-size: 10.5pt;
+            font-weight: 400;
+            color: #3D4A3F;
+            line-height: 1.7;
+            margin-bottom: 0.22in;
+        }
+
+        .mission-body strong { color: #00592D; font-weight: 700; }
+
+        .detail-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.12in;
+        }
+
+        .detail-list li {
+            font-size: 9.5pt;
+            color: #4A5A4D;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.45;
+        }
+
+        .detail-list li::before {
+            content: '—';
+            color: #CE1126;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* right column — 10% callout */
+        .col-right {
+            flex: 0.85;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .proceeds-box {
+            background: #00592D;
+            border-radius: 4px;
+            padding: 0.3in 0.25in;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .proceeds-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: #CE1126;
+        }
+
+        .proceeds-box::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(30,130,76,0.35) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .proceeds-eyebrow {
+            font-size: 6pt;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.15in;
+            position: relative;
+            z-index: 1;
+        }
+
+        .proceeds-pct {
+            font-family: 'Playfair Display', serif;
+            font-size: 78pt;
+            font-weight: 900;
+            color: #EEE8DC;
+            line-height: 0.85;
+            letter-spacing: -3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .proceeds-of {
+            font-size: 7.5pt;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(238,232,220,0.55);
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .proceeds-desc {
+            font-size: 9.5pt;
+            font-weight: 400;
+            color: rgba(238,232,220,0.82);
+            margin-top: 12px;
+            line-height: 1.55;
+            position: relative;
+            z-index: 1;
+        }
+
+        .proceeds-desc strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        .proceeds-divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(238,232,220,0.15);
+            margin: 0.18in 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .proceeds-qr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .qr-img {
+            width: 1.05in;
+            height: 1.05in;
+            background: white;
+            padding: 7px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .qr-label {
+            font-size: 6.5pt;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(238,232,220,0.6);
+        }
+
+        .qr-url {
+            font-size: 8.5pt;
+            font-weight: 500;
+            color: rgba(238,232,220,0.4);
+        }
+
+        /* ── Stats row ── */
+        .stats-section {
+            margin-top: 0.32in;
+            padding-top: 0.25in;
+            border-top: 1px solid rgba(0,89,45,0.15);
+        }
+
+        .stats-eyebrow {
+            font-size: 6pt;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(0,89,45,0.38);
+            margin-bottom: 0.18in;
+        }
+
+        .stats-row {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+        }
+
+        .stat {
+            flex: 1;
+            text-align: center;
+            padding: 0 0.1in;
+        }
+
+        .stat + .stat {
+            border-left: 1px solid rgba(0,89,45,0.12);
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 21pt;
+            font-weight: 800;
+            color: #00592D;
+            line-height: 1;
+        }
+
+        .stat-lbl {
+            font-size: 6.5pt;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #8A9B8C;
+            margin-top: 6px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 0.2in 0.55in;
+            border-top: 1px solid rgba(0,89,45,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FDFAF5;
+            flex-shrink: 0;
+        }
+
+        .footer-left {
+            font-size: 7pt;
+            color: #B0BDB1;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-url {
+            font-size: 8pt;
+            font-weight: 700;
+            color: #00592D;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Print ── */
+        @media print {
+            body { background: none; }
+            .toolbar { display: none; }
+            .poster-wrap { padding: 0; }
+            .poster { box-shadow: none; }
+            @page {
+                size: 8in 12in portrait;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toolbar">
+        <button class="btn-print" onclick="window.print()">⬡ Print Poster</button>
+        <button class="btn-dl" onclick="downloadPDF()">↓ Download PDF</button>
+        <span class="sep">|</span>
+        <a href="members.html">← Back to Members</a>
+        <span class="sep">|</span>
+        <span style="color:#666;">Portrait · 8×10 &amp; 20×30 compatible</span>
+        <span class="info">Design 2 of 3 — Elegant White</span>
+    </div>
+
+    <div class="poster-wrap">
+        <div class="poster" id="poster">
+
+            <!-- Green header band -->
+            <div class="header-band">
+                <img src="../assets/malawi-med-logo-small.png" alt="Malawi Med" class="logo">
+                <div class="header-text">
+                    <div class="header-brand">Malawi Med</div>
+                    <div class="header-event">Fundraising Dinner &nbsp;·&nbsp; Tonight</div>
+                </div>
+                <div class="header-right">
+                    <div class="header-date-label">Next Trip</div>
+                    <div class="header-date">April 2026</div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="body">
+
+                <!-- Headline -->
+                <div class="headline-wrap">
+                    <div class="eyebrow">Global Health Initiative</div>
+                    <div class="headline">
+                        Connecting<br>Appalachia to the<br>Warm Heart of Africa
+                    </div>
+                    <div class="headline-rule"></div>
+                </div>
+
+                <!-- Two column -->
+                <div class="two-col">
+                    <div class="col-left">
+                        <p class="mission-body">
+                            This April, <strong>16 medical students</strong> from Huntington,
+                            West Virginia will travel to <strong>Ekwendeni, Malawi</strong> for
+                            three weeks of clinical learning and community partnership.
+                        </p>
+                        <p class="mission-body">
+                            These students are funding their own travel to participate in
+                            this service-learning experience. Your support tonight helps
+                            fund community-identified projects at Ekwendeni Mission Hospital
+                            and beyond.
+                        </p>
+                        <ul class="detail-list">
+                            <li>Dr. Chirwa's Surgical Center</li>
+                            <li>Pediatric Ward Renovation</li>
+                            <li>Ekwendeni School for the Blind</li>
+                            <li>Malaria Education &amp; Research</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-right">
+                        <div class="proceeds-box">
+                            <div class="proceeds-eyebrow">Your Meal Gives Back</div>
+                            <div class="proceeds-pct">10%</div>
+                            <div class="proceeds-of">of all dining proceeds</div>
+                            <div class="proceeds-desc">
+                                goes toward supporting<br>
+                                <strong>16 local students</strong><br>
+                                on this global health trip.
+                            </div>
+                            <div class="proceeds-divider"></div>
+                            <div class="proceeds-qr">
+                                <img src="../assets/malawi-med-qr-FINAL.png" alt="QR Code" class="qr-img">
+                                <div class="qr-label">Scan to Give</div>
+                                <div class="qr-url">malawi-med.org</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-section">
+                    <div class="stats-eyebrow">The Trip at a Glance</div>
+                    <div class="stats-row">
+                        <div class="stat">
+                            <div class="stat-num">16</div>
+                            <div class="stat-lbl">Medical Students</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-num">3</div>
+                            <div class="stat-lbl">Weeks in Malawi</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-num">April</div>
+                            <div class="stat-lbl">2026 Departure</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-num">1</div>
+                            <div class="stat-lbl">Warm Heart of Africa</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-left">
+                    A program of the Global Medical Education Foundation 501(c)(3)
+                </div>
+                <div class="footer-url">malawi-med.org</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            const poster = document.getElementById('poster');
+            html2pdf().set({
+                margin: 0,
+                filename: 'malawi-med-poster-elegant.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 3, useCORS: true, logging: false },
+                jsPDF: { unit: 'in', format: [8, 12], orientation: 'portrait' }
+            }).from(poster).save();
+        }
+    </script>
+</body>
+</html>

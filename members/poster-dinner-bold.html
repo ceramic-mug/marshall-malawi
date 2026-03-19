@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraising Dinner Poster — Bold | Malawi Med</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #3a3a3a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── Toolbar ── */
+        .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 11px 22px;
+            background: #111;
+            color: white;
+            font-size: 0.78rem;
+            font-family: 'Inter', sans-serif;
+            border-bottom: 1px solid #222;
+        }
+        .toolbar button {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            transition: opacity 0.15s;
+        }
+        .toolbar button:hover { opacity: 0.82; }
+        .toolbar .btn-print { background: #00592D; color: white; }
+        .toolbar .btn-dl { background: #252525; color: #ccc; border: 1px solid #444; }
+        .toolbar a { color: #888; text-decoration: none; font-size: 0.78rem; }
+        .toolbar a:hover { color: #ccc; }
+        .toolbar .sep { color: #444; }
+        .toolbar .info { color: #555; margin-left: auto; font-size: 0.75rem; letter-spacing: 0.3px; }
+
+        /* ── Screen wrapper ── */
+        .poster-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 3rem 2rem 4rem;
+        }
+
+        /* ── The Poster ── */
+        .poster {
+            width: 8in;
+            height: 12in;
+            background: #00592D;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.65in 0.7in 0.55in;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        /* Subtle radial depth */
+        .poster::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 85% 15%, rgba(30,130,76,0.5) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 45% at 10% 85%, rgba(0,30,15,0.5) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        /* Red right-edge accent stripe */
+        .poster::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 0.14in;
+            height: 100%;
+            background: #CE1126;
+        }
+
+        /* ── Header ── */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 0.2in;
+            z-index: 2;
+            align-self: flex-start;
+        }
+
+        .logo {
+            width: 0.65in;
+            height: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.92;
+        }
+
+        .brand-text { display: flex; flex-direction: column; }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 24pt;
+            font-weight: 800;
+            color: #EEE8DC;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-sub {
+            font-size: 6.5pt;
+            font-weight: 600;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: rgba(238,232,220,0.45);
+            margin-top: 5px;
+        }
+
+        /* ── Thin rule ── */
+        .rule {
+            width: 100%;
+            height: 1px;
+            background: rgba(238,232,220,0.15);
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        .rule-thick {
+            width: 0.5in;
+            height: 3px;
+            background: #CE1126;
+            z-index: 2;
+            align-self: flex-start;
+            flex-shrink: 0;
+        }
+
+        /* ── Spacers ── */
+        .gap-sm { flex-shrink: 0; height: 0.28in; }
+        .gap-md { flex-shrink: 0; height: 0.45in; }
+        .gap-lg { flex-shrink: 0; height: 0.6in; }
+
+        /* ── Hero stat ── */
+        .hero-stat {
+            text-align: center;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pct {
+            font-family: 'Playfair Display', serif;
+            font-size: 132pt;
+            font-weight: 900;
+            color: #EEE8DC;
+            line-height: 0.82;
+            letter-spacing: -6px;
+        }
+
+        .pct-of {
+            font-size: 8.5pt;
+            font-weight: 800;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(238,232,220,0.5);
+            margin-top: 14px;
+        }
+
+        .pct-desc {
+            font-size: 14pt;
+            font-weight: 400;
+            color: rgba(238,232,220,0.88);
+            margin-top: 12px;
+            line-height: 1.55;
+            text-align: center;
+            max-width: 5.6in;
+        }
+
+        .pct-desc strong {
+            color: #EEE8DC;
+            font-weight: 700;
+        }
+
+        /* ── Mission quote ── */
+        .mission-wrap {
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mission-eyebrow {
+            font-size: 6pt;
+            font-weight: 800;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(238,232,220,0.35);
+            margin-bottom: 10px;
+        }
+
+        .mission-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 17pt;
+            font-weight: 700;
+            font-style: italic;
+            color: rgba(238,232,220,0.82);
+            line-height: 1.45;
+            max-width: 5.8in;
+        }
+
+        /* ── Stats row ── */
+        .stats-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .stat {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 22pt;
+            font-weight: 800;
+            color: #EEE8DC;
+            line-height: 1;
+        }
+
+        .stat-lbl {
+            font-size: 6.5pt;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(238,232,220,0.42);
+            margin-top: 6px;
+        }
+
+        .vdiv {
+            width: 1px;
+            height: 38px;
+            background: rgba(238,232,220,0.18);
+            flex-shrink: 0;
+        }
+
+        /* ── QR block ── */
+        .qr-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 9px;
+            z-index: 2;
+        }
+
+        .qr-img {
+            width: 1.25in;
+            height: 1.25in;
+            background: white;
+            padding: 9px;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .qr-cta {
+            font-size: 7pt;
+            font-weight: 800;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: rgba(238,232,220,0.65);
+        }
+
+        .qr-url {
+            font-size: 9pt;
+            font-weight: 500;
+            color: rgba(238,232,220,0.38);
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Print ── */
+        @media print {
+            body { background: none; }
+            .toolbar { display: none; }
+            .poster-wrap { padding: 0; }
+            .poster { box-shadow: none; }
+            @page {
+                size: 8in 12in portrait;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toolbar">
+        <button class="btn-print" onclick="window.print()">⬡ Print Poster</button>
+        <button class="btn-dl" onclick="downloadPDF()">↓ Download PDF</button>
+        <span class="sep">|</span>
+        <a href="members.html">← Back to Members</a>
+        <span class="sep">|</span>
+        <span style="color:#666;">Portrait · 8×10 &amp; 20×30 compatible</span>
+        <span class="info">Design 1 of 3 — Bold Green</span>
+    </div>
+
+    <div class="poster-wrap">
+        <div class="poster" id="poster">
+
+            <div class="header">
+                <img src="../assets/malawi-med-logo-small.png" alt="Malawi Med" class="logo">
+                <div class="brand-text">
+                    <div class="brand-name">Malawi Med</div>
+                    <div class="brand-sub">Global Health Initiative · 2026</div>
+                </div>
+            </div>
+
+            <div class="gap-sm"></div>
+            <div class="rule-thick"></div>
+            <div class="gap-lg"></div>
+
+            <div class="hero-stat">
+                <div class="pct">10%</div>
+                <div class="pct-of">of all dining proceeds</div>
+                <div class="pct-desc">
+                    supports <strong>16 local medical students</strong>
+                    on a 3-week global health trip<br>to Ekwendeni, Malawi — this April.
+                </div>
+            </div>
+
+            <div class="gap-lg"></div>
+            <div class="rule"></div>
+            <div class="gap-md"></div>
+
+            <div class="mission-wrap">
+                <div class="mission-eyebrow">Our Mission</div>
+                <div class="mission-quote">
+                    "Connecting Appalachia to<br>the Warm Heart of Africa"
+                </div>
+            </div>
+
+            <div class="gap-md"></div>
+            <div class="rule"></div>
+            <div class="gap-md"></div>
+
+            <div class="stats-row">
+                <div class="stat">
+                    <div class="stat-num">16</div>
+                    <div class="stat-lbl">Students</div>
+                </div>
+                <div class="vdiv"></div>
+                <div class="stat">
+                    <div class="stat-num">3 Wks</div>
+                    <div class="stat-lbl">Duration</div>
+                </div>
+                <div class="vdiv"></div>
+                <div class="stat">
+                    <div class="stat-num">April</div>
+                    <div class="stat-lbl">2026</div>
+                </div>
+                <div class="vdiv"></div>
+                <div class="stat">
+                    <div class="stat-num">Malawi</div>
+                    <div class="stat-lbl">Ekwendeni</div>
+                </div>
+            </div>
+
+            <div class="gap-md"></div>
+            <div class="rule"></div>
+            <div class="gap-md"></div>
+
+            <div class="qr-block">
+                <img src="../assets/malawi-med-qr-FINAL.png" alt="QR Code" class="qr-img">
+                <div class="qr-cta">Scan to Learn More &amp; Give</div>
+                <div class="qr-url">malawi-med.org</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            const poster = document.getElementById('poster');
+            html2pdf().set({
+                margin: 0,
+                filename: 'malawi-med-poster-bold.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 3, useCORS: true, logging: false },
+                jsPDF: { unit: 'in', format: [8, 12], orientation: 'portrait' }
+            }).from(poster).save();
+        }
+    </script>
+</body>
+</html>
