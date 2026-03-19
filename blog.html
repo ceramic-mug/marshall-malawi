@@ -368,8 +368,11 @@
                 grid.style.display = '';
 
                 posts.forEach(post => {
-                    const thumb = post.header_photo
-                        ? `<img src="${post.header_photo}" alt="" class="post-card-thumb" loading="lazy">`
+                    const thumbSrc = post.header_photo
+                        ? (post.header_photo.includes('/') ? post.header_photo : `posts/photos/${post.header_photo}`)
+                        : null;
+                    const thumb = thumbSrc
+                        ? `<img src="${thumbSrc}" alt="" class="post-card-thumb" loading="lazy">`
                         : `<div class="post-card-thumb-placeholder">
                                <img src="assets/malawi-med-logo-small.png" alt="" style="height:44px; opacity:0.35; filter:brightness(0) invert(1);">
                            </div>`;

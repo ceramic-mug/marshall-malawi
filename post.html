@@ -431,8 +431,9 @@
             </div>`;
 
             if (hasPhoto) {
+                const photoPath = meta.header_photo.includes('/') ? meta.header_photo : `posts/photos/${meta.header_photo}`;
                 header.innerHTML = `
-                    <div class="post-hero" style="background-image: url('${meta.header_photo}')">
+                    <div class="post-hero" style="background-image: url('${photoPath}')">
                         <div class="post-hero-text">
                             ${kicker}${title}${metaRow}
                         </div>
