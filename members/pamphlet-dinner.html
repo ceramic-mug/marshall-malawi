@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinner Pamphlet | Malawi Med</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            background: #bbb;
+        }
+
+        /* ── Screen wrapper ── */
+        .screen-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            gap: 0.75rem;
+        }
+
+        .no-print {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 10px 18px;
+            background: #222;
+            color: white;
+            border-radius: 8px;
+            font-size: 0.82rem;
+        }
+        .no-print button {
+            background: #00592D;
+            color: white;
+            border: none;
+            padding: 7px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+        .no-print a { color: #bbb; text-decoration: none; }
+        .no-print span { color: #666; }
+        .no-print button.dl {
+            background: #1a1a1a;
+            border: 1px solid #555;
+        }
+        .no-print button.dl:hover { background: #333; }
+
+        /* ── Print sheet: landscape 8.5" × 11" ── */
+        .sheet {
+            width: 11in;
+            height: 8.5in;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4in;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.3);
+        }
+
+        @media print {
+            body { background: none; }
+            .screen-wrap { padding: 0; gap: 0; }
+            .no-print { display: none; }
+            .sheet { box-shadow: none; }
+            @page {
+                size: 11in 8.5in landscape;
+                margin: 0;
+            }
+        }
+
+        /* ── Card ── */
+        .card {
+            width: 4in;
+            height: 6in;
+            background: white;
+            border: 1px solid #111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.3in 0.32in 0.28in;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* Top accent line */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: #00592D;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+        }
+
+        .logo {
+            width: 0.55in;
+            margin-bottom: 0.09in;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 27pt;
+            font-weight: 800;
+            color: #00592D;
+            line-height: 1;
+        }
+
+        .tagline {
+            font-size: 7pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        /* Divider */
+        .rule {
+            width: 100%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        /* 10% block — hero */
+        .proceeds {
+            text-align: center;
+        }
+
+        .pct {
+            font-family: 'Playfair Display', serif;
+            font-size: 70pt;
+            font-weight: 800;
+            color: #00592D;
+            line-height: 0.9;
+        }
+
+        .proceeds-label {
+            font-size: 8pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: #444;
+            margin-top: 7px;
+        }
+
+        .proceeds-detail {
+            font-size: 9.5pt;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.55;
+        }
+
+        /* QR */
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .qr-img {
+            width: 1.2in;
+            height: 1.2in;
+        }
+
+        .scan-text {
+            font-size: 8pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00592D;
+        }
+
+        .url {
+            font-size: 7pt;
+            color: #aaa;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen-wrap">
+        <div class="no-print">
+            <button onclick="window.print()">Print Pamphlet</button>
+            <button class="dl" onclick="downloadPDF()">Download PDF</button>
+            <a href="members.html">← Back to Members</a>
+            <span>Print landscape · fold &amp; cut to separate cards</span>
+        </div>
+
+        <div class="sheet">
+
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="header">
+                    <img src="../assets/malawi-med-logo-small.png" alt="Malawi Med" class="logo">
+                    <div class="brand">Malawi Med</div>
+                    <div class="tagline">16 Students &nbsp;·&nbsp; 3 Weeks &nbsp;·&nbsp; April 2026</div>
+                </div>
+
+                <div class="rule"></div>
+
+                <div class="qr-section">
+                    <img src="../assets/malawi-med-qr-FINAL.png" class="qr-img" alt="QR Code">
+                    <div class="scan-text">Scan to Learn More &amp; Give</div>
+                    <div class="url">malawi-med.org</div>
+                </div>
+
+                <div class="rule"></div>
+
+                <div class="proceeds">
+                    <div class="pct">10%</div>
+                    <div class="proceeds-label">of all proceeds today</div>
+                    <div class="proceeds-detail">goes toward supporting 16 local medical students<br>on a global health trip to Malawi this April.</div>
+                </div>
+            </div>
+
+            <!-- Card 2 (identical) -->
+            <div class="card">
+                <div class="header">
+                    <img src="../assets/malawi-med-logo-small.png" alt="Malawi Med" class="logo">
+                    <div class="brand">Malawi Med</div>
+                    <div class="tagline">16 Students &nbsp;·&nbsp; 3 Weeks &nbsp;·&nbsp; April 2026</div>
+                </div>
+
+                <div class="rule"></div>
+
+                <div class="qr-section">
+                    <img src="../assets/malawi-med-qr-FINAL.png" class="qr-img" alt="QR Code">
+                    <div class="scan-text">Scan to Learn More &amp; Give</div>
+                    <div class="url">malawi-med.org</div>
+                </div>
+
+                <div class="rule"></div>
+
+                <div class="proceeds">
+                    <div class="pct">10%</div>
+                    <div class="proceeds-label">of all proceeds today</div>
+                    <div class="proceeds-detail">goes toward supporting 16 local medical students<br>on a global health trip to Malawi this April.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function downloadPDF() {
+            const sheet = document.querySelector('.sheet');
+            html2pdf().set({
+                margin: 0,
+                filename: 'malawi-med-dinner-pamphlet.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 3, useCORS: true },
+                jsPDF: { unit: 'in', format: [11, 8.5], orientation: 'landscape' }
+            }).from(sheet).save();
+        }
+    </script>
+</body>
+
+</html>
