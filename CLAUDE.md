@@ -183,6 +183,43 @@
 
 ---
 
+## Blog System
+
+**How it works:** JS-based, no build step. `marked.js` (CDN) parses markdown client-side.
+
+**To publish a new post:**
+1. Write `posts/YYYY-MM-DD-slug.md` with frontmatter (see below)
+2. Add one entry to `posts/manifest.json` (newest first)
+3. Drop any photos in `posts/photos/`
+4. `git push` — that's it
+
+**Frontmatter format:**
+```
+---
+title: Post Title Here
+date: April 15, 2026
+author: Malawi Med Team
+header_photo: posts/photos/filename.jpg
+excerpt: One or two sentence summary shown on the blog listing card.
+---
+
+Post body in markdown...
+```
+- `header_photo` is optional — omit or leave blank for a plain text header
+- Photo alt text becomes the caption: `![Caption here](posts/photos/photo.jpg)`
+- No caption: `![](posts/photos/photo.jpg)`
+
+**Photo sizing rules (baked into post.html CSS):**
+- Inline photos: `max-width: 100%`, `max-height: min(520px, 65vh)` — portrait shots are capped in height, landscape at full column width (680px) renders at ~510px tall
+- Header photo: `height: 55vh`, `object-fit: cover` — any aspect ratio works
+- Photos live in `posts/photos/`; reference them as `posts/photos/filename.jpg`
+
+**Key files:**
+- `post.html` — single post template (reads `?post=SLUG` from URL)
+- `posts/manifest.json` — post index array, newest first
+- `posts/SLUG.md` — post content
+- `posts/photos/` — post photos
+
 ## Deployment
 - Push to `main` branch → GitHub Pages auto-deploys
 - No build step required

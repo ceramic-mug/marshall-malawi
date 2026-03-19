@@ -75,6 +75,87 @@
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        /* ── Post cards ── */
+        .post-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            background: white;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,89,45,0.1);
+            color: inherit;
+        }
+
+        .post-card-thumb {
+            width: 100%;
+            /* Fixed height thumbnail — crops to fill, any AR works */
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-card-thumb-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .post-card-body {
+            padding: 1.25rem 1.25rem 1.5rem;
+        }
+
+        .post-card-date {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .post-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .post-card-excerpt {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 0;
+            /* Clamp to 3 lines */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .post-card-read {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
     </style>
 </head>
 
@@ -111,16 +192,46 @@
     <!-- Page Header -->
     <header class="section-padding text-center bg-white border-bottom" style="margin-top: 80px;">
         <div class="container">
-            <h1 class="fw-bold">Gallery & Updates</h1>
-            <p class="text-muted lead">Visual journey of our past moments in Malawi.</p>
+            <h1 class="fw-bold">Blog & Photos</h1>
+            <p class="text-muted lead">Field notes from Malawi and a visual journey of past moments.</p>
         </div>
     </header>
+
+    <!-- Field Notes / Blog Posts -->
+    <section class="section-padding border-bottom" id="field-notes">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">Field Notes</h2>
+                    <p class="text-muted small mb-0">Daily dispatches from the team in Malawi</p>
+                </div>
+            </div>
+
+            <!-- Loading state -->
+            <div id="posts-loading" class="text-center py-5">
+                <div class="spinner-border" style="color: var(--primary-color); width:1.75rem; height:1.75rem;" role="status"></div>
+                <p class="text-muted small mt-3">Loading posts…</p>
+            </div>
+
+            <!-- No posts state -->
+            <div id="posts-empty" style="display:none;" class="py-4">
+                <div class="p-4 bg-light rounded-4 text-center" style="max-width:500px; margin:0 auto;">
+                    <i class="bi bi-journal-text text-muted" style="font-size:2rem;"></i>
+                    <p class="mt-3 mb-0 text-muted">No field notes yet — check back when the team departs for Malawi in April 2026.</p>
+                </div>
+            </div>
+
+            <!-- Post cards injected here -->
+            <div id="posts-grid" class="row g-4" style="display:none;"></div>
+        </div>
+    </section>
 
     <!-- Gallery Section -->
     <section class="section-padding">
         <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Moments from 2023 and 2024</h2>
+            <div class="mb-5">
+                <h2 class="fw-bold mb-1">Photo Gallery</h2>
+                <p class="text-muted small mb-0">Moments from 2023 and 2024</p>
             </div>
             <div class="masonry-grid" id="galleryGrid">
                 <!-- Images using compressed thumbnails and data-full for lightbox -->
@@ -228,7 +339,7 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Smooth scroll
+        // Navbar scroll
         window.addEventListener('scroll', function () {
             if (window.scrollY > 50) {
                 document.querySelector('.navbar').style.padding = '0.5rem 0';
@@ -238,6 +349,53 @@
                 document.querySelector('.navbar').style.boxShadow = 'none';
             }
         });
+
+        // ── Load blog posts from manifest ──
+        async function loadPosts() {
+            try {
+                const res = await fetch('posts/manifest.json');
+                if (!res.ok) throw new Error();
+                const posts = await res.json();
+
+                document.getElementById('posts-loading').style.display = 'none';
+
+                if (!posts || posts.length === 0) {
+                    document.getElementById('posts-empty').style.display = 'block';
+                    return;
+                }
+
+                const grid = document.getElementById('posts-grid');
+                grid.style.display = '';
+
+                posts.forEach(post => {
+                    const thumb = post.header_photo
+                        ? `<img src="${post.header_photo}" alt="" class="post-card-thumb" loading="lazy">`
+                        : `<div class="post-card-thumb-placeholder">
+                               <img src="assets/malawi-med-logo-small.png" alt="" style="height:44px; opacity:0.35; filter:brightness(0) invert(1);">
+                           </div>`;
+
+                    const col = document.createElement('div');
+                    col.className = 'col-12 col-sm-6 col-lg-4';
+                    col.innerHTML = `
+                        <a href="post.html?post=${post.slug}" class="post-card">
+                            ${thumb}
+                            <div class="post-card-body">
+                                <div class="post-card-date">${post.date}</div>
+                                <div class="post-card-title">${post.title}</div>
+                                <p class="post-card-excerpt">${post.excerpt}</p>
+                                <span class="post-card-read">Read more <i class="bi bi-arrow-right"></i></span>
+                            </div>
+                        </a>`;
+                    grid.appendChild(col);
+                });
+
+            } catch (e) {
+                document.getElementById('posts-loading').style.display = 'none';
+                document.getElementById('posts-empty').style.display = 'block';
+            }
+        }
+
+        loadPosts();
 
         // Lightbox Logic
         const lightboxModal = new bootstrap.Modal(document.getElementById('lightboxModal'));
