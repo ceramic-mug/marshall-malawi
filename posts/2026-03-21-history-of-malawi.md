@@ -6,7 +6,7 @@ excerpt: From the ancient Maravi Confederation to independence and modern-day gl
 header_photo: lake_malawi_wikimedia.jpg
 ---
 
-Malawi is one of sub-Saharan Africa's most densely populated countries, a landlocked nation shaped by ancient kingdoms, the violence of the slave trade, Scottish missionary ambition, and a long struggle for self-determination. Understanding this history is essential context for anyone traveling there — including our team heading to Ekwendeni this April.
+Malawi is a country of extraordinary beauty and remarkable people — a nation that has navigated ancient kingdoms, the violence of the slave trade, colonial rule, and a long struggle for self-determination, and emerged from each chapter with a culture defined by warmth, resilience, and community. The Chichewa word *moni* — hello — is offered to strangers as freely as it is to friends. Understanding this history is essential context for anyone traveling there.
 
 ---
 
@@ -114,15 +114,15 @@ The terrain ranges from the lakeshore lowlands to the **Shire Highlands** in the
 
 **Population:** approximately **21 million** (2024 est.), making Malawi one of the most densely populated countries in sub-Saharan Africa. The population is predominantly rural — only about 18% live in urban areas.
 
-**Capital and largest city:** Lilongwe (~1.3 million), relocated from Zomba in 1975.
-**Second city:** Blantyre (~1.1 million metro), the commercial hub in the southern region.
-**Other major cities:** Mzuzu (northern region hub, ~220,000); Zomba (former capital, ~120,000).
+**Capital and largest city:** Lilongwe (≈1.3 million), relocated from Zomba in 1975.
+**Second city:** Blantyre (≈1.1 million metro), the commercial hub in the southern region.
+**Other major cities:** Mzuzu (northern region hub, ≈220,000); Zomba (former capital, ≈120,000).
 
 **Languages:** Chichewa (Chewa) is the national language, spoken across the central and southern regions. **Tumbuka** is the dominant language of the northern region — including Ekwendeni and Mzimba District. English is the official language of government and education. Approximately a dozen other languages are spoken by smaller communities.
 
-**Religion:** Predominantly Christian (~87%), with a significant Muslim minority (~12%), concentrated largely in the southern and central regions among Yao communities.
+**Religion:** Predominantly Christian (≈87%), with a significant Muslim minority (≈12%), concentrated largely in the southern and central regions among Yao communities.
 
-**Ethnic groups:** Chewa (~34%), Lomwe (~19%), Yao (~13%), Ngoni (~10%), Tumbuka (~9%), and others (CIA World Factbook, 2018 census).
+**Ethnic groups:** Chewa (≈34%), Lomwe (≈19%), Yao (≈13%), Ngoni (≈10%), Tumbuka (≈9%), and others (CIA World Factbook, 2018 census).
 
 ### Economy
 
@@ -140,29 +140,29 @@ Malawi carries a significant burden of communicable disease. The following figur
 
 **HIV/AIDS**
 - Adult HIV prevalence: **8.9%** (ages 15–49; Malawi PHIA, 2020–21)
-- Sub-Saharan Africa average: ~3.1% | Global average: ~0.7%
+- Sub-Saharan Africa average: ≈3.1% | Global average: ≈0.7%
 - Approximately 980,000–1.0 million people living with HIV in Malawi (UNAIDS/NAC, 2022)
-- Antiretroviral therapy coverage has expanded substantially; approximately 88% of people living with HIV know their status, and of those, ~98% are on treatment
+- Antiretroviral therapy coverage has expanded substantially; approximately 88% of people living with HIV know their status, and of those, ≈98% are on treatment
 
 **Maternal Mortality**
 - Maternal mortality ratio: **381 per 100,000 live births** (WHO, 2020)
-- Sub-Saharan Africa average: ~486 | Global average: ~223
+- Sub-Saharan Africa average: ≈486 | Global average: ≈223
 - Under-5 mortality rate: **42 per 1,000 live births**
-- Global average: ~37 | Sub-Saharan Africa average: ~74
+- Global average: ≈37 | Sub-Saharan Africa average: ≈74
 
 **Malaria**
 - Malaria incidence: approximately **208 per 1,000 population** at risk (WHO/World Bank, 2022)
-- Sub-Saharan Africa average: ~230 | Global average: ~57
+- Sub-Saharan Africa average: ≈230 | Global average: ≈57
 - Malaria accounts for roughly 30% of all outpatient visits in Malawi
 
 **Tuberculosis**
 - TB incidence: approximately **146 per 100,000 population** (WHO, 2022)
-- Global average: ~133 | High-burden African countries average significantly higher
+- Global average: ≈133 | High-burden African countries average significantly higher
 - TB/HIV co-infection is a major clinical challenge
 
 **Nutrition**
-- Stunting prevalence in children under 5: **37%** (Malawi DHS, 2015–16); more recent estimates ~35%
-- Sub-Saharan Africa average: ~31% | Global average: ~22%
+- Stunting prevalence in children under 5: **37%** (Malawi DHS, 2015–16); more recent estimates ≈35%
+- Sub-Saharan Africa average: ≈31% | Global average: ≈22%
 
 ### Climate and Recent Events
 
