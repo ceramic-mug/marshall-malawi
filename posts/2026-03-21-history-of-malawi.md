@@ -108,25 +108,25 @@ His vice president, **Joyce Banda**, succeeded him — becoming **Malawi's first
 
 ### Geography and Demographics
 
-Malawi is a landlocked country in southeastern Africa, bordered by Zambia to the northwest, Tanzania to the northeast, and Mozambique on the east, south, and west. The country covers **118,484 km²** (about the size of Pennsylvania) and is dominated geographically by the **Great Rift Valley**, which runs north to south and contains **Lake Malawi** — the third-largest lake in Africa and ninth-largest in the world, covering roughly 20% of the country's total surface area.
+Malawi is a landlocked country in southeastern Africa, bordered by Zambia to the northwest, Tanzania to the northeast, and Mozambique on the east, south, and west. The country covers **118,484 km²** (about the size of Pennsylvania) and is dominated geographically by the **Great Rift Valley**, which runs north to south and contains **Lake Malawi** — the third-largest lake in Africa and ninth-largest in the world, covering roughly 25% of the country's total surface area.
 
 The terrain ranges from the lakeshore lowlands to the **Shire Highlands** in the south and the **Northern Highlands** around Mzimba and Rumphi, where elevations exceed 2,000 meters. **Mount Mulanje** in the southeast (3,002 m) is the highest peak in south-central Africa.
 
 **Population:** approximately **21 million** (2024 est.), making Malawi one of the most densely populated countries in sub-Saharan Africa. The population is predominantly rural — only about 18% live in urban areas.
 
-**Capital:** Lilongwe (population ~1.1 million), relocated from Zomba in 1975.
-**Largest city:** Blantyre (~800,000), the commercial hub in the southern region.
-**Other major cities:** Mzuzu (northern region hub, ~220,000); Zomba (former capital, ~100,000).
+**Capital and largest city:** Lilongwe (~1.3 million), relocated from Zomba in 1975.
+**Second city:** Blantyre (~1.1 million metro), the commercial hub in the southern region.
+**Other major cities:** Mzuzu (northern region hub, ~220,000); Zomba (former capital, ~120,000).
 
 **Languages:** Chichewa (Chewa) is the national language, spoken across the central and southern regions. **Tumbuka** is the dominant language of the northern region — including Ekwendeni and Mzimba District. English is the official language of government and education. Approximately a dozen other languages are spoken by smaller communities.
 
-**Religion:** Predominantly Christian (~80%), with a significant Muslim minority (~13%), concentrated largely in the southern and central regions among Yao communities.
+**Religion:** Predominantly Christian (~87%), with a significant Muslim minority (~12%), concentrated largely in the southern and central regions among Yao communities.
 
-**Ethnic groups:** Chewa (~34%), Lomwe (~18%), Yao (~14%), Ngoni (~12%), Tumbuka (~9%), and others.
+**Ethnic groups:** Chewa (~34%), Lomwe (~19%), Yao (~13%), Ngoni (~10%), Tumbuka (~9%), and others (CIA World Factbook, 2018 census).
 
 ### Economy
 
-Malawi is one of the least urbanized and most agriculture-dependent economies in the world. **Agriculture** accounts for roughly 80% of the workforce and 30% of GDP. **Tobacco** remains the single largest export commodity, accounting for roughly 50–60% of export earnings, though this share has been declining as the government pursues diversification. Other significant exports include **tea**, **sugar**, **coffee**, and **groundnuts**.
+Malawi is one of the least urbanized and most agriculture-dependent economies in the world. **Agriculture** accounts for roughly 60–65% of the workforce and 30% of GDP. **Tobacco** remains the single largest export commodity, accounting for roughly 50–60% of export earnings, though this share has been declining as the government pursues diversification. Other significant exports include **tea**, **sugar**, **coffee**, and **groundnuts**.
 
 **GDP per capita** (PPP): approximately $1,600 (World Bank, 2023) — among the lowest globally.
 
@@ -139,19 +139,19 @@ The country has significant **mineral resources** including uranium (mined at Ka
 Malawi carries a significant burden of communicable disease. The following figures are drawn from WHO, UNAIDS, and World Bank data (2022–2024):
 
 **HIV/AIDS**
-- Adult HIV prevalence: **8.1%** (ages 15–49)
-- Sub-Saharan Africa average: ~3.2% | Global average: ~0.7%
-- Approximately 1.1 million people living with HIV in Malawi
-- Antiretroviral therapy coverage has expanded substantially; approximately 88% of people living with HIV are on treatment
+- Adult HIV prevalence: **8.9%** (ages 15–49; Malawi PHIA, 2020–21)
+- Sub-Saharan Africa average: ~3.1% | Global average: ~0.7%
+- Approximately 980,000–1.0 million people living with HIV in Malawi (UNAIDS/NAC, 2022)
+- Antiretroviral therapy coverage has expanded substantially; approximately 88% of people living with HIV know their status, and of those, ~98% are on treatment
 
 **Maternal Mortality**
 - Maternal mortality ratio: **381 per 100,000 live births** (WHO, 2020)
-- Sub-Saharan Africa average: ~535 | Global average: ~223
+- Sub-Saharan Africa average: ~486 | Global average: ~223
 - Under-5 mortality rate: **42 per 1,000 live births**
 - Global average: ~37 | Sub-Saharan Africa average: ~74
 
 **Malaria**
-- Malaria incidence: approximately **362 per 1,000 population** at risk (WHO, 2022)
+- Malaria incidence: approximately **208 per 1,000 population** at risk (WHO/World Bank, 2022)
 - Sub-Saharan Africa average: ~230 | Global average: ~57
 - Malaria accounts for roughly 30% of all outpatient visits in Malawi
 
@@ -161,12 +161,12 @@ Malawi carries a significant burden of communicable disease. The following figur
 - TB/HIV co-infection is a major clinical challenge
 
 **Nutrition**
-- Stunting prevalence in children under 5: **37%** (DHS, 2021)
+- Stunting prevalence in children under 5: **37%** (Malawi DHS, 2015–16); more recent estimates ~35%
 - Sub-Saharan Africa average: ~31% | Global average: ~22%
 
 ### Climate and Recent Events
 
-Malawi has a subtropical climate with a rainy season from November through April. The country is increasingly affected by climate variability. **Cyclone Idai** (2019) and **Cyclone Freddy** (2023) — one of the longest-lived and most energetic tropical cyclones ever recorded — caused catastrophic flooding in the southern region, with Freddy alone killing over 500 people in Malawi and displacing hundreds of thousands.
+Malawi has a subtropical climate with a rainy season from November through April. The country is increasingly affected by climate variability. **Cyclone Idai** (2019) and **Cyclone Freddy** (2023) — one of the longest-lived and most energetic tropical cyclones ever recorded — caused catastrophic flooding in the southern region, with Freddy alone killing over 1,000 people in Malawi and displacing over 500,000.
 
 ---
 
