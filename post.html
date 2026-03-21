@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading... | Malawi Med</title>
+    <title>Malawi Med Blog</title>
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type"        content="article">
+    <meta property="og:site_name"   content="Malawi Med">
+    <meta property="og:title"       content="Malawi Med Blog">
+    <meta property="og:description" content="Field notes and updates from the Malawi Med team.">
+    <meta property="og:image"       content="https://www.malawi-med.org/assets/malawi-med-logo.png">
+    <meta property="og:url"         content="https://www.malawi-med.org/post.html">
+    <meta name="twitter:card"       content="summary_large_image">
+    <meta name="twitter:title"      content="Malawi Med Blog">
+    <meta name="twitter:description" content="Field notes and updates from the Malawi Med team.">
+    <meta name="twitter:image"      content="https://www.malawi-med.org/assets/malawi-med-logo.png">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/apple-touch-icon.png">
@@ -402,7 +414,24 @@
                 const { meta, body } = parseFrontmatter(raw);
 
                 // Set page title
-                document.title = `${meta.title || 'Field Notes'} | Malawi Med`;
+                const postTitle = meta.title || 'Field Notes';
+                document.title = `${postTitle} | Malawi Med`;
+
+                // Update Open Graph / social meta tags
+                const base = 'https://www.malawi-med.org/';
+                const ogImage = meta.header_photo
+                    ? base + (meta.header_photo.includes('/') ? meta.header_photo : `posts/photos/${meta.header_photo}`)
+                    : base + 'assets/malawi-med-logo.png';
+                const ogDesc = meta.excerpt || 'Field notes and updates from the Malawi Med team.';
+                const ogUrl  = base + `post.html?post=${params.get('post')}`;
+                const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
+                setMeta('meta[property="og:title"]',        postTitle);
+                setMeta('meta[property="og:description"]',  ogDesc);
+                setMeta('meta[property="og:image"]',        ogImage);
+                setMeta('meta[property="og:url"]',          ogUrl);
+                setMeta('meta[name="twitter:title"]',       postTitle);
+                setMeta('meta[name="twitter:description"]', ogDesc);
+                setMeta('meta[name="twitter:image"]',       ogImage);
 
                 // Build header
                 renderHeader(meta);
