@@ -171,3 +171,7 @@ Malawi has a subtropical climate with a rainy season from November through April
 ---
 
 Our team is excited to visit Malawi soon and learn from the local healthcare community in Ekwendeni. This trip is an incredible opportunity to encounter the historical context and modern health challenges of another place in the world. In turn, we can learn to have open eyes and ears to our own local history, context, and challenges. We are so grateful for the opportunity to learn from our brothers and sisters in Malawi!
+
+---
+
+*This history produced with the help of Claude under the editorial oversignt of the Malawi Med team*
