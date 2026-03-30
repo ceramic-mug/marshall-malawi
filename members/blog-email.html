@@ -662,21 +662,32 @@
             }
         });
 
-        // ── Copy to clipboard ──────────────────────────────────────────────────
+        // ── Copy to clipboard as text/html so email clients paste rich HTML ──────
         document.getElementById('copy-btn').addEventListener('click', async () => {
             if (!currentEmailHtml) return;
             const status = document.getElementById('copy-status');
             try {
-                await navigator.clipboard.writeText(currentEmailHtml);
+                await navigator.clipboard.write([
+                    new ClipboardItem({
+                        'text/html':  new Blob([currentEmailHtml], { type: 'text/html' }),
+                        'text/plain': new Blob([currentEmailHtml], { type: 'text/plain' })
+                    })
+                ]);
             } catch (_) {
-                // Fallback for older browsers
-                const ta = document.createElement('textarea');
-                ta.value = currentEmailHtml;
-                ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
-                document.body.appendChild(ta);
-                ta.select();
+                // Fallback: select HTML from a hidden contenteditable element
+                const el = document.createElement('div');
+                el.setAttribute('contenteditable', 'true');
+                el.innerHTML = currentEmailHtml;
+                el.style.cssText = 'position:fixed;opacity:0;top:0;left:0;pointer-events:none;';
+                document.body.appendChild(el);
+                const range = document.createRange();
+                range.selectNodeContents(el);
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
                 document.execCommand('copy');
-                document.body.removeChild(ta);
+                sel.removeAllRanges();
+                document.body.removeChild(el);
             }
             status.style.opacity = '1';
             setTimeout(() => { status.style.opacity = '0'; }, 2500);
