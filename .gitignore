@@ -1,1 +1,5 @@
 app_password.key
+new_post.py
+sync.sh
+.DS_Store
+.claude/
