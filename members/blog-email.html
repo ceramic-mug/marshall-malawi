@@ -351,9 +351,17 @@
                             <p class="text-muted mb-4">Select a blog post to generate a formatted email ready to send.
                                 Preview it below, then copy the HTML and paste it directly into Gmail or Apple Mail.</p>
                             <label for="post-select" class="form-label fw-semibold mb-2">Select Post</label>
-                            <select id="post-select" class="post-select">
-                                <option value="">Loading posts…</option>
-                            </select>
+                            <div class="d-flex gap-3 align-items-center">
+                                <select id="post-select" class="post-select">
+                                    <option value="">Loading posts…</option>
+                                </select>
+                                <button id="copy-btn" class="btn btn-custom-primary px-4 flex-shrink-0">
+                                    <i class="bi bi-clipboard me-2"></i>Copy Email HTML
+                                </button>
+                            </div>
+                            <div class="mt-2">
+                                <span id="copy-status"><i class="bi bi-check-circle me-1"></i>Copied!</span>
+                            </div>
                         </div>
 
                         <!-- Preview + Copy -->
@@ -368,12 +376,6 @@
                                         aria-hidden="true"></div>
                                     <span>Loading preview…</span>
                                 </div>
-                            </div>
-                            <div class="copy-row">
-                                <button id="copy-btn" class="btn btn-custom-primary px-4">
-                                    <i class="bi bi-clipboard me-2"></i>Copy Email HTML
-                                </button>
-                                <span id="copy-status"><i class="bi bi-check-circle me-1"></i>Copied!</span>
                             </div>
                             <div class="usage-tip">
                                 <strong>Gmail:</strong> Open Compose &rarr; paste with <kbd>Cmd+V</kbd> (Mac) or
@@ -522,12 +524,8 @@
 
             const metaLine = [date, author].filter(Boolean).join(' &nbsp;&middot;&nbsp; ');
 
-            return `<div style="margin:0;padding:0;background-color:#f0f2f5;">
-<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f0f2f5" style="background-color:#f0f2f5;">
-    <tr>
-        <td align="center" style="padding:40px 20px;">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                   style="width:100%;max-width:600px;border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+            return `<div style="margin:0;padding:0;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;">
 
                 ${headerPhotoRow}
 
@@ -590,9 +588,6 @@
                 </tr>
 
             </table>
-        </td>
-    </tr>
-</table>
 </div>`;
         }
 
