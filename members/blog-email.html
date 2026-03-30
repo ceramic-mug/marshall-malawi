@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Email Generator | Malawi Med</title>
+    <!-- Authentication Check -->
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- marked.js for markdown parsing (same version as post.html) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo/favicon-16x16.png">
+    <link rel="shortcut icon" href="../assets/logo/favicon.ico">
+    <link rel="manifest" href="../assets/logo/site.webmanifest">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --hover-shadow: 0 20px 40px -10px rgba(0, 89, 45, 0.1);
+        }
+
+        body {
+            padding-top: 76px;
+            background-color: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .navbar.fixed-top {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            height: 76px;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 76px;
+            bottom: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            z-index: 1000;
+            padding: 2rem 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-sticky {
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+            padding: 0 1.5rem;
+        }
+
+        .sidebar .nav-link {
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 12px;
+            font-size: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            color: var(--primary-color);
+            background: var(--primary-subtle);
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link.active {
+            color: white;
+            background: var(--primary-color);
+            box-shadow: 0 8px 20px -5px rgba(0, 89, 45, 0.3);
+        }
+
+        .sidebar .nav-link.active i {
+            color: white !important;
+        }
+
+        .manual-section {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .manual-section:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .manual-title {
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.02em;
+        }
+
+        .manual-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-subtle), transparent);
+            margin-left: 1.5rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .sidebar-sticky {
+                height: auto;
+                padding: 1rem;
+            }
+
+            body {
+                padding-top: 0;
+            }
+
+            .navbar {
+                position: relative !important;
+                top: 0 !important;
+            }
+
+            main {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+
+        /* Page-specific */
+        .post-select {
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            padding: 0.75rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            background: #f8f9fa;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .post-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 89, 45, 0.1);
+        }
+
+        .email-preview-wrap {
+            position: relative;
+        }
+
+        #email-preview {
+            width: 100%;
+            height: 640px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            background: #f5f5f5;
+            display: block;
+        }
+
+        #preview-loading {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .copy-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 1.5rem;
+        }
+
+        #copy-status {
+            color: #00592D;
+            font-weight: 600;
+            font-size: 0.95rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .usage-tip {
+            background: #f8fafe;
+            border: 1px solid rgba(0, 89, 45, 0.1);
+            border-left: 4px solid #00592D;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .usage-tip strong {
+            color: var(--text-dark);
+        }
+
+        kbd {
+            background: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 1px 5px;
+            font-size: 0.85em;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid px-4">
+            <button class="navbar-toggler p-0 border-0 me-3 d-md-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="bi bi-list fs-2"></i>
+            </button>
+            <a class="navbar-brand d-flex align-items-center" href="members.html">
+                <img src="../assets/malawi-med-logo-small.png" alt="Malawi Med logo" height="32" width="auto"
+                    class="me-2">
+                <span class="fs-6 fw-bold lh-1">Members Portal</span>
+            </a>
+            <div class="ms-auto">
+                <button onclick="logout()" class="btn btn-sm btn-outline-primary rounded-pill">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3 sidebar-sticky">
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted text-uppercase fs-7 fw-bold">
+                        <span>Sections</span>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="members.html#timeline">
+                                <i class="bi bi-calendar-check text-primary"></i>
+                                Timeline
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="members.html#packing">
+                                <i class="bi bi-bag-check text-primary"></i>
+                                Packing
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="members.html#logistics">
+                                <i class="bi bi-geo-alt text-primary"></i>
+                                Logistics
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="members.html#clinical">
+                                <i class="bi bi-hospital text-primary"></i>
+                                Clinical Resources
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="members.html#language">
+                                <i class="bi bi-chat-dots text-primary"></i>
+                                Language
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="members.html#flyers">
+                                <i class="bi bi-file-earmark-richtext text-primary"></i>
+                                Promotional Materials
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="blog-email.html">
+                                <i class="bi bi-envelope-paper"></i>
+                                Blog Email
+                            </a>
+                        </li>
+                        <li class="nav-item border-top mt-2 pt-2">
+                            <a class="nav-link text-danger fw-bold" href="members.html#red-flags">
+                                <i class="bi bi-exclamation-triangle-fill"></i>
+                                Red Flags
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-11">
+
+                        <!-- Post Selector -->
+                        <div class="manual-section">
+                            <h2 class="manual-title">
+                                <i class="bi bi-envelope-paper me-3"></i>Blog Email Generator
+                            </h2>
+                            <p class="text-muted mb-4">Select a blog post to generate a formatted email ready to send.
+                                Preview it below, then copy the HTML and paste it directly into Gmail or Apple Mail.</p>
+                            <label for="post-select" class="form-label fw-semibold mb-2">Select Post</label>
+                            <select id="post-select" class="post-select">
+                                <option value="">Loading posts…</option>
+                            </select>
+                        </div>
+
+                        <!-- Preview + Copy -->
+                        <div class="manual-section">
+                            <h2 class="manual-title">
+                                <i class="bi bi-eye me-3"></i>Email Preview
+                            </h2>
+                            <div class="email-preview-wrap">
+                                <iframe id="email-preview" title="Email Preview"></iframe>
+                                <div id="preview-loading">
+                                    <div class="spinner-border spinner-border-sm text-success" role="status"
+                                        aria-hidden="true"></div>
+                                    <span>Loading preview…</span>
+                                </div>
+                            </div>
+                            <div class="copy-row">
+                                <button id="copy-btn" class="btn btn-custom-primary px-4">
+                                    <i class="bi bi-clipboard me-2"></i>Copy Email HTML
+                                </button>
+                                <span id="copy-status"><i class="bi bi-check-circle me-1"></i>Copied!</span>
+                            </div>
+                            <div class="usage-tip">
+                                <strong>Gmail:</strong> Open Compose &rarr; paste with <kbd>Cmd+V</kbd> (Mac) or
+                                <kbd>Ctrl+V</kbd> (Windows) while in rich text mode (not plain text). &nbsp;
+                                <strong>Apple Mail:</strong> Use <strong>Edit &rarr; Paste</strong> — do
+                                <em>not</em> use Paste and Match Style. Images load from the live website so all
+                                recipients will see them correctly.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="mt-5">
+        <div class="container text-center py-4">
+            <p class="text-muted small mb-0">&copy; 2026 Malawi Med | Internal Member Document</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'index.html';
+        }
+
+        // ── State ──────────────────────────────────────────────────────────────
+        let currentEmailHtml = '';
+
+        // ── Parse frontmatter — copied verbatim from post.html ─────────────────
+        function parseFrontmatter(raw) {
+            const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+            const meta = {};
+            let body = raw;
+
+            if (match) {
+                body = raw.slice(match[0].length).trim();
+                match[1].split('\n').forEach(line => {
+                    const colon = line.indexOf(':');
+                    if (colon === -1) return;
+                    const key = line.slice(0, colon).trim();
+                    const val = line.slice(colon + 1).trim();
+                    meta[key] = val;
+                });
+            }
+
+            return { meta, body };
+        }
+
+        // ── Email-safe marked renderer: inline styles, absolute URLs ───────────
+        // In marked v9, image() receives href as an object {href, title, text}.
+        // Other methods receive the rendered inner HTML as a plain string.
+        const emailRenderer = new marked.Renderer();
+
+        emailRenderer.paragraph = function (text) {
+            return `<p style="margin:0 0 18px 0;font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.75;color:#2D3436;">${text}</p>`;
+        };
+
+        emailRenderer.heading = function (text, level) {
+            const sizes = { 1: '26px', 2: '22px', 3: '19px', 4: '17px', 5: '16px', 6: '15px' };
+            return `<h${level} style="margin:28px 0 10px 0;font-family:Georgia,'Times New Roman',serif;font-size:${sizes[level] || '16px'};font-weight:700;color:#2D3436;line-height:1.25;">${text}</h${level}>`;
+        };
+
+        emailRenderer.strong = function (text) {
+            return `<strong style="font-weight:700;color:#2D3436;">${text}</strong>`;
+        };
+
+        emailRenderer.em = function (text) {
+            return `<em style="font-style:italic;">${text}</em>`;
+        };
+
+        emailRenderer.list = function (body, ordered) {
+            const tag = ordered ? 'ol' : 'ul';
+            return `<${tag} style="margin:0 0 18px 0;padding-left:24px;font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.75;color:#2D3436;">${body}</${tag}>`;
+        };
+
+        emailRenderer.listitem = function (text) {
+            return `<li style="margin-bottom:6px;">${text}</li>`;
+        };
+
+        emailRenderer.blockquote = function (quote) {
+            return `<blockquote style="margin:24px 0;padding:12px 20px;border-left:4px solid #00592D;background:#f4faf7;color:#636E72;font-style:italic;font-family:Georgia,'Times New Roman',serif;">${quote}</blockquote>`;
+        };
+
+        emailRenderer.hr = function () {
+            return `<hr style="border:none;border-top:1px solid #e0e0e0;margin:28px 0;">`;
+        };
+
+        emailRenderer.link = function (href, title, text) {
+            // href may be a token object in marked v9+
+            const h = typeof href === 'object' ? href.href : href;
+            const t = typeof href === 'object' ? (href.text || text) : text;
+            const abs = h && h.startsWith('http') ? h : 'https://www.malawi-med.org/' + (h || '').replace(/^\//, '');
+            return `<a href="${abs}" style="color:#00592D;text-decoration:underline;">${t}</a>`;
+        };
+
+        emailRenderer.image = function (href, title, text) {
+            // href is a token object in marked v9: { href, title, text }
+            const src = typeof href === 'object' ? href.href : href;
+            const alt = typeof href === 'object' ? (href.text || text || '') : (text || '');
+            // Rewrite relative paths to absolute — images live at posts/photos/
+            const abs = src && src.startsWith('http') ? src : `https://www.malawi-med.org/posts/photos/${src}`;
+            const caption = alt
+                ? `<p style="text-align:center;font-family:Georgia,serif;font-size:13px;color:#636E72;margin:4px 0 20px;font-style:italic;">${alt}</p>`
+                : '<p style="margin:0 0 20px;"></p>';
+            return `<img src="${abs}" alt="${alt}" style="max-width:100%;height:auto;display:block;margin:20px auto 4px;border-radius:6px;">${caption}`;
+        };
+
+        emailRenderer.codespan = function (code) {
+            return `<code style="background:#f0f0f0;padding:2px 5px;border-radius:3px;font-family:monospace;font-size:14px;">${code}</code>`;
+        };
+
+        emailRenderer.code = function (code) {
+            return `<pre style="background:#f0f0f0;padding:12px;border-radius:6px;font-family:monospace;font-size:13px;overflow:auto;margin:0 0 18px 0;"><code>${code}</code></pre>`;
+        };
+
+        marked.setOptions({ renderer: emailRenderer, breaks: true, gfm: true });
+
+        // ── Build the email HTML wrapper (table-based, inline styles, email-safe) ──
+        function buildEmailHtml(meta, bodyHtml) {
+            const title   = meta.title  || 'Malawi Med Update';
+            const date    = meta.date   || '';
+            const author  = meta.author || 'Malawi Med Team';
+            const excerpt = meta.excerpt || '';
+            const slug    = meta.slug   || '';
+            const postUrl = `https://www.malawi-med.org/post.html?post=${slug}`;
+
+            const headerPhotoRow = (meta.header_photo && meta.header_photo.trim()) ? `
+                <tr>
+                    <td style="padding:0;font-size:0;line-height:0;">
+                        <img src="https://www.malawi-med.org/posts/photos/${meta.header_photo}"
+                             alt="${title}" width="600"
+                             style="display:block;width:100%;height:200px;object-fit:cover;">
+                    </td>
+                </tr>` : '';
+
+            const excerptRow = excerpt.trim() ? `
+                <tr>
+                    <td bgcolor="#ffffff" style="background-color:#ffffff;padding:0 40px 24px;">
+                        <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.7;color:#636E72;border-left:4px solid #00592D;padding-left:16px;font-style:italic;">${excerpt}</p>
+                    </td>
+                </tr>` : '';
+
+            const metaLine = [date, author].filter(Boolean).join(' &nbsp;&middot;&nbsp; ');
+
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>${title}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f0f2f5;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f0f2f5" style="background-color:#f0f2f5;">
+    <tr>
+        <td align="center" style="padding:40px 20px;">
+            <table width="600" cellpadding="0" cellspacing="0" border="0"
+                   style="width:600px;max-width:100%;border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+
+                ${headerPhotoRow}
+
+                <!-- Brand bar -->
+                <tr>
+                    <td bgcolor="#00592D" style="background-color:#00592D;padding:16px 40px;">
+                        <span style="color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">
+                            MALAWI MED &middot; FIELD NOTES
+                        </span>
+                    </td>
+                </tr>
+
+                <!-- Title + meta -->
+                <tr>
+                    <td bgcolor="#ffffff" style="background-color:#ffffff;padding:36px 40px 16px;">
+                        <h1 style="margin:0 0 12px 0;font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:800;color:#2D3436;line-height:1.2;">${title}</h1>
+                        <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#636E72;">${metaLine}</p>
+                    </td>
+                </tr>
+
+                ${excerptRow}
+
+                <!-- Divider -->
+                <tr>
+                    <td bgcolor="#ffffff" style="background-color:#ffffff;padding:0 40px;">
+                        <hr style="border:none;border-top:1px solid #eeeeee;margin:8px 0 24px 0;">
+                    </td>
+                </tr>
+
+                <!-- Body -->
+                <tr>
+                    <td bgcolor="#ffffff" style="background-color:#ffffff;padding:0 40px 32px;">
+                        ${bodyHtml}
+                    </td>
+                </tr>
+
+                <!-- CTA button -->
+                <tr>
+                    <td bgcolor="#ffffff" style="background-color:#ffffff;padding:0 40px 40px;text-align:center;">
+                        <a href="${postUrl}"
+                           style="display:inline-block;background-color:#00592D;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:6px;">
+                            Read the full post &rarr;
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td bgcolor="#2D3436" style="background-color:#2D3436;padding:24px 40px;text-align:center;">
+                        <p style="margin:0 0 6px 0;">
+                            <a href="https://www.malawi-med.org"
+                               style="color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;text-decoration:none;">
+                                www.malawi-med.org
+                            </a>
+                        </p>
+                        <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,0.5);">
+                            &copy; 2026 Malawi Med &nbsp;&middot;&nbsp; A program of Global Medical Education Foundation 501(c)(3)
+                        </p>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>`;
+        }
+
+        // ── Load and render a post ──────────────────────────────────────────────
+        async function loadPost(slug) {
+            const loading = document.getElementById('preview-loading');
+            loading.style.display = 'flex';
+
+            try {
+                const res = await fetch(`../posts/${slug}.md`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const raw = await res.text();
+                const { meta, body } = parseFrontmatter(raw);
+                meta.slug = slug;
+
+                const bodyHtml = marked.parse(body);
+                const html = buildEmailHtml(meta, bodyHtml);
+                currentEmailHtml = html;
+
+                const iframe = document.getElementById('email-preview');
+                iframe.contentDocument.open();
+                iframe.contentDocument.write(html);
+                iframe.contentDocument.close();
+            } catch (err) {
+                const iframe = document.getElementById('email-preview');
+                iframe.contentDocument.open();
+                iframe.contentDocument.write(
+                    `<body style="font-family:sans-serif;padding:2rem;color:#636E72;">
+                     <p>Could not load post: ${err.message}</p></body>`
+                );
+                iframe.contentDocument.close();
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        // ── Init: populate selector from manifest ──────────────────────────────
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('../posts/manifest.json');
+                const posts = await res.json();
+                const select = document.getElementById('post-select');
+
+                select.innerHTML = posts
+                    .map(p => `<option value="${p.slug}">${p.title} — ${p.date}</option>`)
+                    .join('');
+
+                if (posts.length > 0) {
+                    await loadPost(posts[0].slug);
+                }
+
+                select.addEventListener('change', () => {
+                    if (select.value) loadPost(select.value);
+                });
+            } catch (err) {
+                document.getElementById('post-select').innerHTML =
+                    '<option value="">Error loading posts</option>';
+            }
+        });
+
+        // ── Copy to clipboard ──────────────────────────────────────────────────
+        document.getElementById('copy-btn').addEventListener('click', async () => {
+            if (!currentEmailHtml) return;
+            const status = document.getElementById('copy-status');
+            try {
+                await navigator.clipboard.writeText(currentEmailHtml);
+            } catch (_) {
+                // Fallback for older browsers
+                const ta = document.createElement('textarea');
+                ta.value = currentEmailHtml;
+                ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }
+            status.style.opacity = '1';
+            setTimeout(() => { status.style.opacity = '0'; }, 2500);
+        });
+    </script>
+</body>
+
+</html>
