@@ -503,7 +503,7 @@
             const author  = meta.author || 'Malawi Med Team';
             const excerpt = meta.excerpt || '';
             const slug    = meta.slug   || '';
-            const postUrl = `https://www.malawi-med.org/post.html?post=${slug}`;
+            const blogUrl = 'https://www.malawi-med.org/blog.html';
 
             const headerPhotoRow = (meta.header_photo && meta.header_photo.trim()) ? `
                 <tr>
@@ -575,9 +575,9 @@
                 <!-- CTA button -->
                 <tr>
                     <td bgcolor="#ffffff" style="background-color:#ffffff;padding:0 40px 40px;text-align:center;">
-                        <a href="${postUrl}"
+                        <a href="${blogUrl}"
                            style="display:inline-block;background-color:#00592D;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:6px;">
-                            Read the full post &rarr;
+                            View all posts &rarr;
                         </a>
                     </td>
                 </tr>
