@@ -12,7 +12,7 @@ Landing in Lilongwe, we were welcomed by a lush, vibrant landscape dotted with p
 
 Arriving at the compound, we were greeted with open arms, laughter, and genuine excitement. This joyous welcome lifted our spirits and offered a glimpse into the atmosphere that would surround us during our stay. A delicious meal prepared by Jeremiah and the opportunity to meet Esther, the director of Soils Food and Health, was the perfect conclusion to our first night in Malawi.
 
-The following morning, we were introduced to the legendary Dr. Glandson Chirwa, a local surgeon with a reputation for his intelligence and warmth. He easily lived up to this reputation. During our hospital tour, every staff member we met offered a sincere “Welcome to Malawi” and expressed gratitude for our presence. Seeing the staff remember and warmly greet Josh, Anna, and Kara reflected the lasting impact of their original trip and the deep bonds formed here.
+The following morning, we were introduced to the legendary Dr. Glandson Chirwa, a local surgeon with a reputation for his intelligence and warmth. He easily lived up to this reputation. During our hospital tour, every staff member we met offered a sincere “Welcome to Malawi” and expressed gratitude for our presence. Seeing the staff remember and warmly greet Thomas, Anna, and Kara reflected the lasting impact of their original trip and the deep bonds formed here.
 
 Collectively, these moments and people have washed away any nerves or doubts I had towards what may lay ahead.
 
