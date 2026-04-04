@@ -2,7 +2,7 @@
 title: Stop and Smell the Corn
 date: April 04, 2026
 author: Alex Pribanich
-header_photo: first-impressions.JPG
+header_photo: first-impressions-good.jpeg
 excerpt: Student Alex Pribanich shares his first impressions of Malawi.
 ---
 
