@@ -83,6 +83,57 @@ def format_date(dt: datetime) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Perceptual hashing (duplicate detection)
+# ---------------------------------------------------------------------------
+
+HASH_THRESHOLD = 10  # max Hamming distance (out of 64 bits) to call two photos identical
+
+
+def _dhash(path: Path, hash_size: int = 8) -> int | None:
+    """Difference hash: robust to compression and minor edits. Requires Pillow."""
+    try:
+        from PIL import Image
+        img = Image.open(path).convert("L").resize(
+            (hash_size + 1, hash_size), Image.LANCZOS
+        )
+        pixels = list(img.getdata())
+        bits = 0
+        for row in range(hash_size):
+            for col in range(hash_size):
+                left = pixels[row * (hash_size + 1) + col]
+                right = pixels[row * (hash_size + 1) + col + 1]
+                bits = (bits << 1) | (1 if left > right else 0)
+        return bits
+    except Exception:
+        return None
+
+
+def _hamming(h1: int, h2: int) -> int:
+    return bin(h1 ^ h2).count("1")
+
+
+def build_hash_index(manifest: list) -> dict[int, str]:
+    """Hash every already-compressed image. Returns {hash: src} map."""
+    index: dict[int, str] = {}
+    for entry in manifest:
+        compressed = SCRIPT_DIR / entry["src"]
+        if not compressed.exists():
+            continue
+        h = _dhash(compressed)
+        if h is not None:
+            index[h] = entry["src"]
+    return index
+
+
+def find_duplicate(h: int, index: dict[int, str]) -> str | None:
+    """Return existing src if a perceptually identical photo is already indexed."""
+    for existing_hash, src in index.items():
+        if _hamming(h, existing_hash) <= HASH_THRESHOLD:
+            return src
+    return None
+
+
+# ---------------------------------------------------------------------------
 # Manifest helpers
 # ---------------------------------------------------------------------------
 
@@ -157,6 +208,11 @@ def main() -> None:
     manifest = load_manifest()
     already_indexed = indexed_srcs(manifest)
 
+    print("Building duplicate index from existing photos...")
+    hash_index = build_hash_index(manifest)
+    if not hash_index:
+        print("  (no existing compressed photos found — skipping duplicate check)")
+
     new_entries = []
     skipped = 0
 
@@ -165,11 +221,23 @@ def main() -> None:
         stem = src.stem
         rel_src = f"assets/compressed/{stem}.jpg"
 
+        # Skip if already indexed by filename
         if rel_src in already_indexed:
             skipped += 1
             continue
 
         print(f"\n── {src.name} ──────────────────────────────")
+
+        # Check for perceptual duplicate before processing
+        incoming_hash = _dhash(src)
+        if incoming_hash is not None:
+            dup = find_duplicate(incoming_hash, hash_index)
+            if dup:
+                print(f"  SKIP — duplicate of {dup}")
+                skipped += 1
+                continue
+        elif hash_index:
+            print("  (Pillow unavailable — duplicate check skipped)")
 
         # Compress / convert
         try:
@@ -178,11 +246,9 @@ def main() -> None:
             print(f"  ERROR processing {src.name}: {e}")
             continue
 
-        # Date from EXIF — auto-use if found, prompt only if not
+        # Date from EXIF — auto-use if found, fall back to today
         dt, from_exif = get_photo_date(src)
-        suggested_date = format_date(dt)
-
-        date_str = suggested_date
+        date_str = format_date(dt)
         source = "EXIF" if from_exif else "today (no EXIF)"
         print(f"  Date: {date_str} ({source})")
 
@@ -191,6 +257,10 @@ def main() -> None:
             "caption": "",
             "date": date_str,
         })
+
+        # Add to in-memory index so duplicates within this batch are also caught
+        if incoming_hash is not None:
+            hash_index[incoming_hash] = rel_src
 
     if not new_entries:
         print(f"\nNo new photos to index ({skipped} already in manifest).")
