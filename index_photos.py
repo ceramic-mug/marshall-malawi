@@ -69,10 +69,12 @@ def _exif_date_mdls(path: Path) -> datetime | None:
     return None
 
 
-def get_photo_date(path: Path) -> datetime:
-    """Try Pillow EXIF, then mdls, then today."""
+def get_photo_date(path: Path) -> tuple[datetime, bool]:
+    """Try Pillow EXIF, then mdls. Returns (datetime, from_exif)."""
     dt = _exif_date_pillow(path) or _exif_date_mdls(path)
-    return dt or datetime.today()
+    if dt:
+        return dt, True
+    return datetime.today(), False
 
 
 def format_date(dt: datetime) -> str:
@@ -176,20 +178,17 @@ def main() -> None:
             print(f"  ERROR processing {src.name}: {e}")
             continue
 
-        # Suggest date from EXIF
-        dt = get_photo_date(src)
+        # Date from EXIF — auto-use if found, prompt only if not
+        dt, from_exif = get_photo_date(src)
         suggested_date = format_date(dt)
 
-        # Prompt: date
-        raw_date = input(f"  Date [{suggested_date}]: ").strip()
-        date_str = raw_date if raw_date else suggested_date
-
-        # Prompt: caption
-        caption = input("  Caption (optional): ").strip()
+        date_str = suggested_date
+        source = "EXIF" if from_exif else "today (no EXIF)"
+        print(f"  Date: {date_str} ({source})")
 
         new_entries.append({
             "src": rel_src,
-            "caption": caption,
+            "caption": "",
             "date": date_str,
         })
 
