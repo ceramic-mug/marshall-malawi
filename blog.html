@@ -76,6 +76,18 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
+        .gallery-date-heading {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.75rem;
+            margin: 2rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
         /* ── Post cards ── */
         .post-card {
             display: block;
@@ -233,51 +245,11 @@
                 <h2 class="fw-bold mb-1">Photo Gallery</h2>
                 <p class="text-muted small mb-0">Moments from 2023 and 2024</p>
             </div>
-            <div class="masonry-grid" id="galleryGrid">
-                <!-- Images using compressed thumbnails and data-full for lightbox -->
-                <div class="masonry-item"><img src="assets/compressed/surrgical_getup.jpg"
-                        data-full="assets/surrgical_getup.jpg" alt="Gallery Photo"></div>
-                <!-- Note: The thumbnails are now loading from compressed/ folder for speed -->
-                <div class="masonry-item"><img src="assets/compressed/IMG_0944.jpg"
-                        data-full="assets/photos_for_gallery/IMG_0944.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_5069.jpg"
-                        data-full="assets/photos_for_gallery/IMG_5069.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_1020.jpg"
-                        data-full="assets/photos_for_gallery/IMG_1020.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_0781.jpg"
-                        data-full="assets/photos_for_gallery/IMG_0781.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_5147.jpg"
-                        data-full="assets/photos_for_gallery/IMG_5147.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/57dd67d3-7cd7-4e99-8925-272ae8d386fb.jpg"
-                        data-full="assets/photos_for_gallery/57dd67d3-7cd7-4e99-8925-272ae8d386fb.jpg"
-                        alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/Facetune_09-07-2023-17-05-40.jpg"
-                        data-full="assets/photos_for_gallery/Facetune_09-07-2023-17-05-40.jpg" alt="Gallery Photo">
+            <div id="gallery-container">
+                <div class="text-center py-4" id="gallery-loading">
+                    <div class="spinner-border text-success" role="status"></div>
                 </div>
-                <div class="masonry-item"><img src="assets/compressed/Facetune_13-07-2023-21-58-34.jpg"
-                        data-full="assets/photos_for_gallery/Facetune_13-07-2023-21-58-34.jpg" alt="Gallery Photo">
-                </div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_1424.jpg"
-                        data-full="assets/photos_for_gallery/IMG_1424.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_1480.jpg"
-                        data-full="assets/photos_for_gallery/IMG_1480.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_1881.jpg"
-                        data-full="assets/photos_for_gallery/IMG_1881.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_4902.jpg"
-                        data-full="assets/photos_for_gallery/IMG_4902.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_4912.jpg"
-                        data-full="assets/photos_for_gallery/IMG_4912.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_5143.jpg"
-                        data-full="assets/photos_for_gallery/IMG_5143.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_5167.jpg"
-                        data-full="assets/photos_for_gallery/IMG_5167.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_5221.jpg"
-                        data-full="assets/photos_for_gallery/IMG_5221.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/IMG_5244.jpg"
-                        data-full="assets/photos_for_gallery/IMG_5244.jpg" alt="Gallery Photo"></div>
-                <div class="masonry-item"><img src="assets/compressed/bbfc67c9-4198-4875-b74e-9b6f8bbcf301.jpg"
-                        data-full="assets/photos_for_gallery/bbfc67c9-4198-4875-b74e-9b6f8bbcf301.jpg"
-                        alt="Gallery Photo"></div>
+                <p class="text-muted" id="gallery-empty" style="display:none;">No photos yet — check back soon.</p>
             </div>
         </div>
     </section>
@@ -398,16 +370,76 @@
 
         loadPosts();
 
-        // Lightbox Logic
+        // ── Lightbox ──
         const lightboxModal = new bootstrap.Modal(document.getElementById('lightboxModal'));
         const lightboxImg = document.getElementById('lightboxImg');
 
-        document.querySelectorAll('.masonry-item img').forEach(img => {
-            img.addEventListener('click', function () {
-                lightboxImg.src = this.getAttribute('data-full') || this.src;
-                lightboxModal.show();
+        function attachLightbox() {
+            document.querySelectorAll('.masonry-item img').forEach(img => {
+                img.addEventListener('click', function () {
+                    lightboxImg.src = this.getAttribute('data-full') || this.src;
+                    lightboxModal.show();
+                });
             });
-        });
+        }
+
+        // ── Load photo gallery from manifest ──
+        async function loadGallery() {
+            try {
+                const res = await fetch('photos/manifest.json');
+                if (!res.ok) throw new Error();
+                const photos = await res.json();
+
+                document.getElementById('gallery-loading').style.display = 'none';
+
+                if (!photos || photos.length === 0) {
+                    document.getElementById('gallery-empty').style.display = 'block';
+                    return;
+                }
+
+                // Group by date (preserving manifest order)
+                const groups = [];
+                const seen = new Map();
+                photos.forEach(photo => {
+                    if (!seen.has(photo.date)) {
+                        seen.set(photo.date, []);
+                        groups.push({ date: photo.date, photos: seen.get(photo.date) });
+                    }
+                    seen.get(photo.date).push(photo);
+                });
+
+                const container = document.getElementById('gallery-container');
+                groups.forEach(group => {
+                    const heading = document.createElement('h6');
+                    heading.className = 'gallery-date-heading';
+                    heading.textContent = group.date;
+                    container.appendChild(heading);
+
+                    const grid = document.createElement('div');
+                    grid.className = 'masonry-grid';
+                    group.photos.forEach(photo => {
+                        const item = document.createElement('div');
+                        item.className = 'masonry-item';
+                        const img = document.createElement('img');
+                        img.src = photo.src;
+                        img.loading = 'lazy';
+                        img.alt = photo.caption || '';
+                        if (photo.full) img.setAttribute('data-full', photo.full);
+                        item.appendChild(img);
+                        grid.appendChild(item);
+                    });
+                    container.appendChild(grid);
+                });
+
+                attachLightbox();
+
+            } catch (e) {
+                document.getElementById('gallery-loading').style.display = 'none';
+                document.getElementById('gallery-empty').style.display = 'block';
+            }
+        }
+
+        loadGallery();
     </script>
 </body>
 
