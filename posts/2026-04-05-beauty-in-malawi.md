@@ -1,7 +1,7 @@
 ---
 title: Beauty in Malawi
 date: April 05, 2026
-author: Cassandra Looschen-Pribanich
+author: Kassandra Looschen-Pribanich
 header_photo: kassie-hanging.JPG
 excerpt: Student Kassie Looschen-Pribanich writes about the beauty she has experienced so far in Malawi
 ---
@@ -12,6 +12,6 @@ Easter looked different this year. We went to a church service and I couldn’t 
 
 It’s these small moments of joy, stillness, and connection that I’ve felt here that are different from other travel experiences I’ve had. How lucky are we to be here, and be welcomed into beautiful Malawi with so much love. I already know when I return home I will remember to smile more.
 
-Cassandra Looschen-Pribanich
+Kassandra Looschen-Pribanich
 Third Year Medical Student
 From Crossville, Tennessee 
