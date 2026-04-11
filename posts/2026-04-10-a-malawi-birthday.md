@@ -1,8 +1,8 @@
 ---
 title: A Malawi Birthday
-date: April 11, 2026
+date: April 10, 2026
 author: Mckensie Spencer
-header_photo: 2026-04-11-a-malawi-birthday.jpg
+header_photo: 2026-04-10-a-malawi-birthday.jpg
 excerpt: Student Mckensie Spencer reflects on having her birthday in Malawi.
 ---
 
