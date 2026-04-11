@@ -159,8 +159,28 @@ def _exif_date_mdls(path: Path) -> datetime | None:
     return None
 
 
+def _date_from_filename(path: Path) -> datetime | None:
+    """Extract date from common filename patterns, e.g. WhatsApp Image 2026-04-07 at 19.44.17"""
+    name = path.stem
+    # WhatsApp: "WhatsApp Image 2026-04-07 at 19.44.17"
+    m = re.search(r"(\d{4})-(\d{2})-(\d{2})", name)
+    if m:
+        try:
+            return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            pass
+    # Android/WhatsApp: "20260407_152730"
+    m = re.match(r"(\d{4})(\d{2})(\d{2})_\d{6}", name)
+    if m:
+        try:
+            return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            pass
+    return None
+
+
 def get_photo_date(path: Path, pil_img=None) -> tuple[datetime, bool]:
-    dt = _exif_date_pillow(pil_img) or _exif_date_mdls(path)
+    dt = _exif_date_pillow(pil_img) or _date_from_filename(path) or _exif_date_mdls(path)
     return (dt, True) if dt else (datetime.today(), False)
 
 
@@ -650,15 +670,17 @@ class App:
         # Bottom bar
         bot = ttk.Frame(parent, padding=(12, 6, 12, 12))
         bot.grid(row=1, column=0, sticky="ew")
-        bot.columnconfigure(2, weight=1)
+        bot.columnconfigure(3, weight=1)
 
         ttk.Button(bot, text="Save Changes",
                    command=self._save_gallery).grid(row=0, column=0, padx=(0, 8))
         ttk.Button(bot, text="Reload Gallery",
-                   command=self._reload_gallery).grid(row=0, column=1, padx=(0, 12))
+                   command=self._reload_gallery).grid(row=0, column=1, padx=(0, 8))
+        ttk.Button(bot, text="Fix Dates from Filenames",
+                   command=self._fix_dates_from_filenames).grid(row=0, column=2, padx=(0, 12))
         self._edit_status = tk.StringVar(value="")
         ttk.Label(bot, textvariable=self._edit_status, foreground="gray").grid(
-            row=0, column=2, sticky="w")
+            row=0, column=3, sticky="w")
 
     def _load_gallery_tab(self):
         """Populate Edit tab from self._manifest. Clears any existing cards."""
@@ -818,6 +840,26 @@ class App:
         self._update_add_status()
 
     # ── Edit Gallery — save ───────────────────────────────────────────────────
+
+    def _fix_dates_from_filenames(self):
+        """Re-extract dates from filenames for all gallery cards. Updates date fields in-place."""
+        if not self._gallery_cards:
+            messagebox.showinfo("No photos", "Load the gallery first.")
+            return
+
+        updated = 0
+        for card in self._gallery_cards:
+            dt = _date_from_filename(card.src)
+            if dt:
+                new_date = format_date(dt)
+                if new_date != card.v_date.get():
+                    card.v_date.set(new_date)
+                    updated += 1
+
+        if updated:
+            self._edit_status.set(f"{updated} date{'s' if updated != 1 else ''} updated — click Save Changes to persist")
+        else:
+            messagebox.showinfo("No changes", "No filename-recognizable dates found\n(or all dates already match).")
 
     def _save_gallery(self):
         if not self._gallery_cards:
