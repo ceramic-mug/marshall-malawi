@@ -3,7 +3,7 @@ title: Walking Beyond the Clinic: Lessons from a Village in Malawi
 date: April 13, 2026
 author: Claire Soucier
 header_photo: 2026-04-13-walking-beyond-the-clinic-lessons-from-a-village-in-malawi.jpg
-excerpt: Student Claire Soucier
+excerpt: Student Claire Soucier describes the experience of community medicine in a rural village.
 ---
 
 Stepping into a rural village in Malawi, I was reminded that healthcare begins long before a patient ever reaches a clinic. As a group of sixteen medical students, we joined local nursing students for an outreach experience that brought us face to face with the realities shaping health at the household level. We spoke with families about who lives in their homes, how they earn money, what they eat, and how far they travel for water, school, and care. Many households shared a single toilet across multiple homes, cooked in outdoor kitchens, and relied on limited, distant resources. These conversations made clear that health is deeply tied to environment, access, and daily living conditions.
