@@ -20,4 +20,4 @@ It has been a fascinating and humbling experience all around to be here. Now mor
 Vincent Coleman
 Fourth Year Medical Student
 Future Family Medicine Physician
-From Braxton, West Virginia
+From Rosedale, West Virginia
